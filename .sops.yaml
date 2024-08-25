@@ -1,0 +1,14 @@
+keys:
+  # Users
+  - &users:
+    - &christoph 47D61FEBCD86F3ECD2E3D68A83D074F348B2FD9D
+  # Hosts
+  - &hosts:
+    - &phantasia age1kdmc7uwtgnghwyn4uzswdkc4ya3wvgk3egquejthvx99wyd2fpdqg9pkzp
+creation_rules:
+  - path_regex: hosts/common/secrets.ya?ml$
+    key_groups:
+    - age:
+      - *phantasia
+      pgp:
+      - *christoph
