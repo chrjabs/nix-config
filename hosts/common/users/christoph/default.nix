@@ -18,6 +18,7 @@ in {
       "wheel"
     ];
 
+    openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/christoph/ssh.pub);
     hashedPasswordFile = config.sops.secrets.christoph-password.path;
     packages = [pkgs.home-manager];
   };
