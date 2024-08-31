@@ -23,6 +23,10 @@ in {
       ls = mkIf hasEza "eza";
       cat = mkIf hasBat "bat";
 
+      vim = mkIf hasNeovim "nvim";
+      vi = vim;
+      v = vim;
+
       diff = "diffsitter";
     };
 

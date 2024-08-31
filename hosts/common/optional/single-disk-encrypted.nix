@@ -1,12 +1,21 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   hostname = config.networking.hostName;
 in {
+  imports = [
+    inputs.disko.nixosModules.disko
+  ];
+
   disko.devices = {
     disk = {
       "${hostname}" = {
         type = "disk";
-        # Note: this will be overwritten when using disko-install
-        device = "/dev/sda";
+        # Note: this can be overwritten when using disko-install
+        device = lib.mkDefault "/dev/sda";
         content = {
           type = "gpt";
           partitions = {

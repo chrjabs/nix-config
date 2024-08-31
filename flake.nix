@@ -49,6 +49,7 @@
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forEachSystem (pkgs: pkgs.alejandra);
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};

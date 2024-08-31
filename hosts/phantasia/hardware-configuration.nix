@@ -13,7 +13,7 @@
     ../common/optional/ephemeral-btrfs.nix
   ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod"];
+  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
@@ -25,11 +25,12 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.virtualbox.guest.enable = true;
+  disko.devices.disk.${config.networking.hostName}.device = lib.mkForce "/dev/vda";
 
-  fileSystems."/home/christoph/Documents/nix-config" = {
-    fsType = "vboxsf";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  fileSystems."/persist/home/christoph/Documents/nix-config" = {
+    fsType = "virtiofs";
     device = "nix-config";
     options = ["rw" "nofail" "uid=christoph" "gid=users"];
   };

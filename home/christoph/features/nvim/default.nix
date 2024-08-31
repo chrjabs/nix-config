@@ -8,15 +8,10 @@
     # ./lsp.nix
   ];
 
-  programs.neovim = {
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-  };
-
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    vimdiffAlias = true;
 
     clipboard.register = "unnamedplus";
 

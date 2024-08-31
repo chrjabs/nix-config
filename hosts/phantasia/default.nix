@@ -17,13 +17,10 @@
 
   # Systemd boot
   boot.loader.systemd-boot.enable = true;
-  # VirtualBox
-  boot.initrd.checkJournalingFS = false;
 
-  virtualisation.virtualbox.guest = {
-    enable = true;
-    # draganddrop = true;
-  };
+  # Virtual machine
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 
   networking.hostName = "phantasia"; # Define your hostname.
 
