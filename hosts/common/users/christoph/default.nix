@@ -29,4 +29,8 @@ in {
   };
 
   home-manager.users.christoph = let full = !config.options.minimal; in lib.mkIf full import ../../../../home/christoph/${config.networking.hostName}.nix;
+
+  security.pam.services = {
+    swaylock = {};
+  };
 }
