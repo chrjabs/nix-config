@@ -20,7 +20,7 @@ in {
 
     openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/christoph/ssh.pub);
     hashedPasswordFile = config.sops.secrets.christoph-password.path;
-    packages = [pkgs.home-manager];
+    packages = with pkgs; [home-manager] ++ lib.mkIf config.options.minimal [vim git];
   };
 
   sops.secrets.christoph-password = {
@@ -28,5 +28,5 @@ in {
     neededForUsers = true;
   };
 
-  home-manager.users.christoph = import ../../../../home/christoph/${config.networking.hostName}.nix;
+  home-manager.users.christoph = let full = !config.options.minimal; in lib.mkIf full import ../../../../home/christoph/${config.networking.hostName}.nix;
 }

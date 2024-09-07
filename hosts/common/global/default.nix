@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  lib,
   ...
 }: {
   imports =
@@ -15,6 +16,8 @@
       ./sops.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
+
+  options.minimal = lib.mkEnableOption "create a minimal system, useful to instal with limited resources";
 
   home-manager = {
     useGlobalPkgs = true;
