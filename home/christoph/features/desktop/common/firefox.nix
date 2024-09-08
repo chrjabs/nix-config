@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  config,
+  inputs,
   ...
 }: {
   programs.browserpass.enable = true;
@@ -9,6 +11,7 @@
 
     profiles = {
       christoph = {
+        id = 0;
         search = {
           force = true;
           default = "DuckDuckGo";
@@ -18,10 +21,11 @@
             "Bing".metaData.hidden = true;
           };
         };
-        extensions = with pkgs.inputs.firefox-addons; [
-          ublock-origin
-          browserpass
-        ];
+        # FIXME: figure out NUR to make this work
+        # extensions = with pkgs.inputs.firefox-addons; [
+        #   ublock-origin
+        #   browserpass
+        # ];
         bookmarks = [
           {
             name = "Search Wikipedia";
@@ -151,6 +155,7 @@
       };
 
       whatsapp = {
+        id = 1;
         settings = {
           "browser.startup.homepage" = "https://web.whatsapp.com";
 
@@ -228,7 +233,7 @@
           "privacy.trackingprotection.enabled" = true;
           "dom.security.https_only_mode" = true;
         };
-      }
+      };
     };
   };
 

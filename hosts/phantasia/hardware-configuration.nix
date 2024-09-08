@@ -29,6 +29,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+  hardware.graphics.enable = true;
+
   fileSystems."/persist/home/christoph/Documents/nix-config" = {
     fsType = "virtiofs";
     device = "nix-config";

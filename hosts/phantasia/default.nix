@@ -13,6 +13,10 @@
 
     ../common/global
     ../common/users/christoph
+
+    ../common/optional/greetd.nix
+    ../common/optional/pipewire.nix
+    ../common/optional/stylix.nix
   ];
 
   # Systemd boot

@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./firefox.nix
+    # FIXME: get this to work
     ./kitty.nix
     ./mako.nix
     ./swayidle.nix
