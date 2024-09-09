@@ -237,6 +237,8 @@
     };
   };
 
+  stylix.targets.firefox.profileNames = ["christoph"];
+
   home = {
     persistence = {
       "/persist/${config.home.homeDirectory}".directories = [".mozilla/firefox"];
