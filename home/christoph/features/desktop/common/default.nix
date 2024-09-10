@@ -1,9 +1,12 @@
 {pkgs, ...}: {
   imports = [
     ./firefox.nix
-    # FIXME: get this to work
+    ./gtk.nix
     ./kitty.nix
     ./mako.nix
+    ./pavucontrol.nix
+    ./playerctl.nix
+    ./spotify.nix
     ./swayidle.nix
     ./swaylock.nix
     ./waypipe.nix

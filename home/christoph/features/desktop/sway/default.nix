@@ -14,6 +14,7 @@
 
     config = {
       modifier = "Mod4";
+
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;
         kitty = lib.getExe config.programs.kitty.package;
@@ -24,5 +25,13 @@
           "${modifier}+d" = "exec ${wofi} -S run";
         };
     };
+
+    extraConfig = lib.concatMapStringsSep "\n" (
+      m: "output ${m.name} ${
+        if m.enabled
+        then "enable res ${toString m.width}x${toString m.height}"
+        else "disable"
+      }"
+    ) (config.monitors);
   };
 }
