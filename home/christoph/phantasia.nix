@@ -2,6 +2,7 @@
   imports = [
     ./global
     ./features/desktop/sway
+    ./features/productivity
   ];
 
   monitors = [

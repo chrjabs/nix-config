@@ -28,4 +28,7 @@
   networking.hostName = "phantasia"; # Define your hostname.
 
   system.stateVersion = "24.05";
+
+  # Needed for GTK
+  programs.dconf.enable = true;
 }

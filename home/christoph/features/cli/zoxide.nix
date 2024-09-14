@@ -4,5 +4,5 @@
     options = ["--cmd cd"];
   };
 
-  home.persistence."/persist/${config.home.homeDirectory}".files = [".local/share/zoxide/db.zo"];
+  home.persistence."/persist/${config.home.homeDirectory}".directories = [".local/share/zoxide"];
 }

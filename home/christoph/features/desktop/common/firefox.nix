@@ -21,11 +21,10 @@
             "Bing".metaData.hidden = true;
           };
         };
-        # FIXME: figure out NUR to make this work
-        # extensions = with pkgs.inputs.firefox-addons; [
-        #   ublock-origin
-        #   browserpass
-        # ];
+        extensions = with pkgs.inputs.firefox-addons; [
+          ublock-origin
+          browserpass
+        ];
         bookmarks = [
           {
             name = "Search Wikipedia";

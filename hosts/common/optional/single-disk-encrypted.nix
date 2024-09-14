@@ -14,8 +14,8 @@ in {
     disk = {
       "${hostname}" = {
         type = "disk";
-        # Note: this can be overwritten when using disko-install
-        device = lib.mkDefault "/dev/sda";
+        # Note: this needs to be set for each host
+        # device = lib.mkDefault "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
