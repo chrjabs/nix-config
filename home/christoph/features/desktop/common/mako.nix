@@ -8,8 +8,10 @@
     borderSize = 2;
     defaultTimeout = 12000;
     layer = "overlay";
+    maxHistory = 50;
     extraConfig = ''
-      max-history=50
+      [mode=do-not-disturb]
+      invisible=1
     '';
   };
 }

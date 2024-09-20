@@ -18,7 +18,7 @@ in {
     accounts = {
       nextcloud = {
         primary = true;
-        primaryCollection = "personal";
+        primaryCollection = "Christoph";
         local = {
           fileExt = ".ics";
           type = "filesystem";
@@ -40,15 +40,6 @@ in {
           type = "discover";
         };
       };
-    };
-  };
-
-  programs.khal = {
-    enable = true;
-    locale = {
-      timeformat = "%H:%M";
-      dateformat = "%d/%m/%Y";
-      weeknumbers = "left";
     };
   };
 
@@ -74,22 +65,6 @@ in {
       };
     };
   };
-
-  # Need to manually configure khard because home manager does not support
-  # specifying a subcollection for khard
-  home.packages = with pkgs; [khard];
-  xdg.configFile."khard/khard.conf".text =
-    /*
-    toml
-    */
-    ''
-      [addressbooks]
-      [[contacts]]
-      path = ~/Contacts/nextcloud/contacts
-
-      [general]
-      default_action=list
-    '';
 
   systemd.user.services.vdirsyncer = {
     Unit = {

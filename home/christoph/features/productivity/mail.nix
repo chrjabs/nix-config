@@ -103,7 +103,6 @@ in {
             expunge = "both";
             extraConfig.account = {
               AuthMechs = "XOAUTH2";
-              SSLType = "IMAPS";
             };
           };
           folders = {
@@ -163,7 +162,6 @@ in {
       #       expunge = "both";
       #       extraConfig.account = {
       #         AuthMechs = "XOAUTH2";
-      #         SSLType = "IMAPS";
       #       };
       #     };
       #     folders = {

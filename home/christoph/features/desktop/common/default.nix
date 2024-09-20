@@ -1,7 +1,9 @@
 {pkgs, ...}: {
   imports = [
     ./firefox.nix
+    ./gamma-step.nix
     ./gtk.nix
+    ./imv.nix
     ./kitty.nix
     ./mako.nix
     ./pavucontrol.nix
