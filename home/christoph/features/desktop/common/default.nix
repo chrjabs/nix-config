@@ -11,6 +11,7 @@
     ./spotify.nix
     ./swayidle.nix
     ./swaylock.nix
+    ./waybar.nix
     ./waypipe.nix
     ./zathura.nix
   ];

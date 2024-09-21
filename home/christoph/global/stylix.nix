@@ -9,10 +9,7 @@
 
   stylix = {
     enable = true;
-    image = pkgs.fetchurl {
-      url = "https://wallpaperaccess.com/full/1261646.jpg";
-      sha256 = "b046c673f23477e7b13220a431c26039701d8b9c7e979a684965cdc1dc2c338f";
-    };
+    image = pkgs.wallpapers.bebek;
     polarity = "dark";
     fonts = {
       serif = {

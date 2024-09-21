@@ -12,6 +12,8 @@
   wayland.windowManager.sway = {
     enable = true;
 
+    systemd.enable = true;
+
     config = {
       modifier = "Mod4";
 
@@ -24,6 +26,12 @@
           "${modifier}+Return" = "exec ${kitty}";
           "${modifier}+d" = "exec ${wofi} -S run";
         };
+
+      bars = [];
+
+      defaultWorkspace = "workspace number 1";
+
+      window.titlebar = false;
     };
 
     extraConfig = lib.concatMapStringsSep "\n" (
