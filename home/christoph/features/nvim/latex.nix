@@ -1,13 +1,17 @@
 {
-  config,
   lib,
+  config,
   ...
 }: {
-  programs.nixvim.plugins.lsp = {
-    enable = true;
-    inlayHints = true;
-    servers = {
-      clangd.enable = true;
+  programs.nixvim.plugins = {
+    # Vimtex
+    vimtex = lib.mkIf config.programs.texlive.enable {
+      enable = true;
+      texlivePackage = null;
+      settings.view_method = "zathura";
+    };
+    # Language server / spell checking
+    lsp.servers = {
       ltex = lib.mkIf config.programs.texlive.enable {
         enable = true;
         settings = {

@@ -5,7 +5,15 @@
   ...
 }: {
   imports = [
-    # ./lsp.nix
+    ./browsing.nix
+    ./completion.nix
+    ./cpp.nix
+    ./formatting.nix
+    ./highlighting.nix
+    ./latex.nix
+    ./rust.nix
+    ./tmux.nix
+    ./ui.nix
   ];
 
   programs.nixvim = {
@@ -16,100 +24,12 @@
     clipboard.register = "unnamedplus";
 
     plugins = {
-      # File tree
-      nvim-tree.enable = true;
-
-      # Fuzzy finder
-      telescope = {
+      # Language server
+      lsp = {
         enable = true;
-        extensions = {
-          fzf-native.enable = true;
-        };
-      };
-
-      # Formatting
-      conform-nvim = {
-        enable = true;
-        settings = {
-          formatter_by_ft = {
-            lua = ["stylua"];
-            python = ["black"];
-            rust = ["rustfmt"];
-            cpp = ["cland_format"];
-            toml = ["taplo"];
-          };
-        };
-      };
-
-      # Git markers
-      gitsigns.enable = true;
-
-      # Completion
-      cmp = {
-        enable = true;
-        settings = {
-          mapping = {
-            "<S-Space>" = "cmp.mapping.complete()";
-            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-            "<C-e>" = "cmp.mapping.close()";
-            "<C-f>" = "cmp.mapping.scroll_docs(4)";
-            "<C-Space>" = "cmp.mapping.confirm({ select = true })";
-            "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-            "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-          };
-        };
-      };
-
-      # Treesitter language parsing
-      treesitter.enable = true;
-      treesitter-textobjects.enable = true;
-
-      # Vimtex
-      vimtex = lib.mkIf config.programs.texlive.enable {
-        enable = true;
-        texlivePackage = null;
-        settings.view_method = "zathura";
-      };
-
-      # Automatic configuration of CMake projects
-      cmake-tools.enable = true;
-
-      # UI
-      airline.enable = true;
-      bufferline.enable = true;
-
-      # TMUX integration
-      tmux-navigator = lib.mkIf config.programs.tmux.enable {
-        enable = true;
-        keymaps = [
-          {
-            action = "left";
-            key = "<C-h>";
-          }
-          {
-            action = "right";
-            key = "<C-l>";
-          }
-          {
-            action = "down";
-            key = "<C-j>";
-          }
-          {
-            action = "up";
-            key = "<C-k>";
-          }
-        ];
+        inlayHints = true;
       };
     };
-
-    extraPackages = with pkgs; [
-      # Formatters
-      stylua
-      black
-      rustfmt
-      clang-tools
-      taplo
-    ];
   };
 
   xdg.desktopEntries = {
