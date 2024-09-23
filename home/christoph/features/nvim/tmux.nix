@@ -1,4 +1,8 @@
 {
+  lib,
+  config,
+  ...
+}: {
   programs.nixvim.plugins.tmux-navigator = lib.mkIf config.programs.tmux.enable {
     # TMUX integration
     enable = true;

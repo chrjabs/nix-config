@@ -20,6 +20,7 @@
       ];
     };
     treesitter-textobjects.enable = true;
+    treesitter-context.enable = true;
     # Highlight TODO comments
     todo-comments.enable = true;
   };

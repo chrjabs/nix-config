@@ -8,9 +8,11 @@
     ./browsing.nix
     ./completion.nix
     ./cpp.nix
+    ./debugging.nix
     ./formatting.nix
     ./highlighting.nix
     ./latex.nix
+    ./lsp.nix
     ./rust.nix
     ./tmux.nix
     ./ui.nix
@@ -23,12 +25,21 @@
 
     clipboard.register = "unnamedplus";
 
-    plugins = {
-      # Language server
-      lsp = {
-        enable = true;
-        inlayHints = true;
-      };
+    globals = {
+      # Leader keys
+      mapleader = " ";
+      maplocalleader = ",";
+    };
+
+    opts = {
+      # Matching case
+      ignorecase = true;
+      smartcase = true;
+      # More intuitive splitting
+      splitbelow = true;
+      splitright = true;
+      # Interval of writing swap file and updating gitsigns
+      updatetime = 250;
     };
   };
 
