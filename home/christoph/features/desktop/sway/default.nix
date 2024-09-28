@@ -21,10 +21,13 @@
         modifier = config.wayland.windowManager.sway.config.modifier;
         kitty = lib.getExe config.programs.kitty.package;
         wofi = lib.getExe config.programs.wofi.package;
+        makoctl = lib.getExe' config.services.mako.package "makoctl";
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
           "${modifier}+d" = "exec ${wofi} -S run";
+          "${modifier}+w" = "exec ${makoctl} dismiss";
+          "${modifier}+Shift+w" = "exec ${makoctl} restore";
         };
 
       bars = [];

@@ -10,7 +10,7 @@
     [
       inputs.impermanence.nixosModules.home-manager.impermanence
       inputs.nixvim.homeManagerModules.nixvim
-      ./stylix.nix
+      ./styling.nix
       ../features/cli
       ../features/nvim
     ]

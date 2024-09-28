@@ -3,21 +3,19 @@
   inputs,
   config,
   ...
-}: let
-  baseColorScheme = config.lib.base16.mkSchemeAttrs "${pkgs.base16-schemes}/share/themes/onedark.yaml";
-in {
+}: {
   imports = [
-    inputs.base16.homeManagerModule
     inputs.stylix.homeManagerModules.stylix
   ];
 
+  recolor-wallpaper = {
+    enable = true;
+    theme = "catppuccin-macchiato";
+    wallpaper = "earth2";
+  };
+
   stylix = {
     enable = true;
-    image = pkgs.wallpapers.deer;
-    # override = {
-    #   base08 = baseColorScheme.base08;
-    #   base0B = baseColorScheme.base0B;
-    # };
     fonts = {
       serif = {
         package = pkgs.dejavu_fonts;

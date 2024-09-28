@@ -3,6 +3,11 @@
 - Based on [Misterio77's standard starter config](https://github.com/Misterio77/nix-starter-configs)
 - Heavily inspired by [Misterio77's nix confi](https://github.com/Misterio77/nix-config)
 
+## Wallpapers
+
+Many cool minimalist wallpapers that work quite well with the recolouring
+process I'm using can be found [here](https://simpledesktops.com/).
+
 ## Bootstrapping
 
 On another machine, do the following to set up an SSH host key for the new
