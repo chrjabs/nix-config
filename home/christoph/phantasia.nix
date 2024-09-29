@@ -5,6 +5,8 @@
     ./features/productivity
   ];
 
+  home.sessionVariables.FLAKE = "/mnt/nix-config";
+
   monitors = [
     {
       name = "Virtual-1";

@@ -36,7 +36,7 @@
     username = lib.mkDefault "christoph";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = lib.mkDefault "24.05";
-    sessionVariables.FLAKE = "$HOME/Documents/nix-config";
+    sessionVariables.FLAKE = lib.mkDefault "$HOME/Documents/nix-config";
 
     persistence = {
       "/persist/${config.home.homeDirectory}" = {

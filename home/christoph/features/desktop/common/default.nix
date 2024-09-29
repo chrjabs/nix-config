@@ -6,6 +6,7 @@
     ./imv.nix
     ./kitty.nix
     ./mako.nix
+    ./nextcloud.nix
     ./obsidian.nix
     ./pavucontrol.nix
     ./playerctl.nix

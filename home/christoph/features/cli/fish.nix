@@ -21,6 +21,8 @@ in {
       nd = "nix develop -c $SHELL";
 
       ls = mkIf hasEza "eza";
+      ll = mkIf hasEza "eza -l";
+      la = mkIf hasEza "eza -la";
       cat = mkIf hasBat "bat";
 
       vim = mkIf hasNeovim "nvim";
