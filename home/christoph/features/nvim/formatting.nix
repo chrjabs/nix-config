@@ -5,12 +5,14 @@
       # Formatting
       enable = true;
       settings = {
-        formatter_by_ft = {
+        formatters_by_ft = {
+          "*" = ["injected"];
           lua = ["stylua"];
           python = ["black"];
           rust = ["rustfmt"];
-          cpp = ["cland_format"];
+          cpp = ["clang_format"];
           toml = ["taplo"];
+          nix = ["alejandra"];
         };
         format_on_save =
           # Lua
@@ -20,28 +22,14 @@
                 return
               end
 
-              if slow_format_filetypes[vim.bo[bufnr].filetype] then
-                return
-              end
-
-              local function on_format(err)
-                if err and err:match("timeout$") then
-                  slow_format_filetypes[vim.bo[bufnr].filetype] = true
-                end
-              end
-
-              return { timeout_ms = 200, lsp_fallback = true }, on_format
-             end
+              return { timeout_ms = 200, lsp_fallback = true }
+            end
           '';
         format_after_save =
           # Lua
           ''
             function(bufnr)
               if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-                return
-              end
-
-              if not slow_format_filetypes[vim.bo[bufnr].filetype] then
                 return
               end
 
@@ -55,7 +43,7 @@
     keymaps = [
       {
         key = "<leader>fm";
-        action = "function() require(\"conform\").format({ async = true, lap_fallback = true }) end";
+        action.__raw = "function() require(\"conform\").format({ async = true, lsp_fallback = true }) end";
         mode = "n";
         options.desc = "Format buffer";
       }
@@ -66,26 +54,26 @@
       FormatDisable = {
         bang = true;
         desc = "Disable format on save (only for this buffer with bang)";
-        command =
+        command.__raw =
           # Lua
           ''
-            if args.bang then
-            	vim.b.disable_autoformat = true
-            else
-            	vim.g.disable_autoformat = true
+            function(args)
+              if args.bang then
+              	vim.b.disable_autoformat = true
+              else
+              	vim.g.disable_autoformat = true
+              end
             end
           '';
       };
       FormatEnable = {
-        bang = true;
-        desc = "Re-enable format on save (only for this buffer with bang)";
-        command =
+        desc = "Re-enable format on save";
+        command.__raw =
           # Lua
           ''
-            if args.bang then
-            	vim.b.disable_autoformat = false
-            else
-            	vim.g.disable_autoformat = false
+            function()
+              vim.b.disable_autoformat = false
+              vim.g.disable_autoformat = false
             end
           '';
       };
@@ -99,6 +87,7 @@
       rustfmt
       clang-tools
       taplo
+      alejandra
     ];
   };
 }

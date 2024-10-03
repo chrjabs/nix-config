@@ -31,7 +31,7 @@
       maplocalleader = ",";
     };
 
-    opts = {
+      opts = {
       # Matching case
       ignorecase = true;
       smartcase = true;
