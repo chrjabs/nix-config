@@ -20,18 +20,18 @@
       fill.symbol = " ";
 
       # Core
-      username.format = "[$user]($style)";
+      username.format = "[$user]($style) ";
       hostname = {
-        format = "[$hostname]($style)";
+        format = "[$hostname]($style) ";
         ssh_only = false;
       };
       shlvl = {
-        format = "[$shlvl]($style)";
+        format = "[$shlvl]($style) ";
         threshold = 2;
         repeat = true;
         disabled = false;
       };
-      cmd_duration.format = "took [$duration]($style)";
+      cmd_duration.format = "took [$duration]($style) ";
 
       directory.format = "[$path]($style)( [$read_only]($read_only_style)) ";
       nix_shell = {
