@@ -27,7 +27,6 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Stylix
-    base16.url = "github:SenchoPens/base16.nix";
     stylix.url = "github:danth/stylix";
 
     # Firefox Addons
