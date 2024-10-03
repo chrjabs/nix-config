@@ -5,7 +5,7 @@
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
 
     # Impermanence
     impermanence.url = "github:Misterio77/impermanence";
