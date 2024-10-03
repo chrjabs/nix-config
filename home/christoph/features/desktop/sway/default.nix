@@ -26,6 +26,7 @@
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
           "${modifier}+d" = "exec ${wofi} -S run";
+          "${modifier}+s" = "exec specialisation $(specialisation | ${wofi} -S dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
         };

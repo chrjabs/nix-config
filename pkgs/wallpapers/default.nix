@@ -2,11 +2,14 @@
 pkgs.lib.listToAttrs (
   map (wallpaper: {
     inherit (wallpaper) name;
-    value = {path = pkgs.fetchurl {
-      inherit (wallpaper) sha256;
-      name = "${wallpaper.name}.png";
-      url = "https://www.jabsserver.net/wallpapers/${wallpaper.name}.png";
-    }; inherit (wallpaper) recolorArgs; };
+    value = {
+      path = pkgs.fetchurl {
+        inherit (wallpaper) sha256;
+        name = "${wallpaper.name}.png";
+        url = "https://www.jabsserver.net/wallpapers/${wallpaper.name}.png";
+      };
+      inherit (wallpaper) recolorArgs;
+    };
   })
   [
     {

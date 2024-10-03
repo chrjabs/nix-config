@@ -1,10 +1,14 @@
-{pkgs,config,...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   services.nextcloud-client = {
     enable = true;
     startInBackground = true;
   };
 
-  xdg.configFile."Nextcloud/sync-exclude.lst".text =''
+  xdg.configFile."Nextcloud/sync-exclude.lst".text = ''
     # This file contains fixed global exclude patterns
 
     *~

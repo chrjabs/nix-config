@@ -319,17 +319,17 @@ in {
         .modules-left {
           padding: 0 0.4em;
           border-radius: 2em;
-          background: alpha(@base00, ${with config.stylix.opacity; builtins.toString desktop});
+          background: alpha(@base01, ${with config.stylix.opacity; builtins.toString desktop});
         }
         .modules-center {
           padding: 0 0.4em;
           border-radius: 2em;
-          background: alpha(@base00, ${with config.stylix.opacity; builtins.toString desktop});
+          background: alpha(@base01, ${with config.stylix.opacity; builtins.toString desktop});
         }
         .modules-right {
           padding: 0 0.4em;
           border-radius: 2em;
-          background: alpha(@base00, ${with config.stylix.opacity; builtins.toString desktop});
+          background: alpha(@base01, ${with config.stylix.opacity; builtins.toString desktop});
         }
 
         #workspaces button {

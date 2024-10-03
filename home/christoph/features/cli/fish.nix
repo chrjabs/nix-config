@@ -12,6 +12,7 @@
   hasBat = config.programs.bat.enable;
   hasNeovim = config.programs.neovim.enable || config.programs.nixvim.enable;
   hasKitty = config.programs.kitty.enable;
+  hasSpecialisationCli = hasPackage "specialisation";
 in {
   programs.fish = {
     enable = true;
@@ -24,6 +25,8 @@ in {
       ll = mkIf hasEza "eza -l";
       la = mkIf hasEza "eza -la";
       cat = mkIf hasBat "bat";
+
+      s = mkIf hasSpecialisationCli "specialisation";
 
       vim = mkIf hasNeovim "nvim";
       vi = vim;

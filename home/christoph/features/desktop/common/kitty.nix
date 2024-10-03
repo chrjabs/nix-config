@@ -21,6 +21,9 @@
 
   programs.kitty = {
     enable = true;
+    keybindings = {
+      "ctrl+enter" = "send_text normal clone-in-kitty --type os-window\\r";
+    };
     settings = {
       editor = config.home.sessionVariables.EDITOR;
       scrollback_lines = 4000;

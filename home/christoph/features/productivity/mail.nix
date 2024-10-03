@@ -42,7 +42,7 @@ in {
     accounts = {
       personal =
         rec {
-          primary = true;
+          primary = lib.mkDefault true;
           address = "christoph@jabs-family.de";
           passwordCommand = "${pass} ${smtp.host}/${address}";
 
@@ -59,28 +59,28 @@ in {
             trash = "Trash";
           };
           neomutt = {
-            enable = true;
-            mailboxName = "Personal - Inbox";
+            enable = lib.mkDefault true;
+            mailboxName = "Inbox";
             extraMailboxes = [
               {
                 mailbox = "Archives";
-                name = "Personal - Archive";
+                name = "Archive";
               }
               {
                 mailbox = "Drafts";
-                name = "Personal - Drafts";
+                name = "Drafts";
               }
               {
                 mailbox = "Spam";
-                name = "Personal - Junk";
+                name = "Junk";
               }
               {
                 mailbox = "Sent";
-                name = "Personal - Sent";
+                name = "Sent";
               }
               {
                 mailbox = "Trash";
-                name = "Personal - Deleted";
+                name = "Deleted";
               }
             ];
           };
@@ -112,28 +112,27 @@ in {
             trash = "Deleted Items";
           };
           neomutt = {
-            enable = true;
-            mailboxName = "Work - Inbox";
+            mailboxName = "Inbox";
             extraMailboxes = [
               {
                 mailbox = "GitHub";
-                name = "Work - GitHub";
+                name = "GitHub";
               }
               {
                 mailbox = "Archive";
-                name = "Work - Archive";
+                name = "Archive";
               }
               {
                 mailbox = "Drafts";
-                name = "Work - Drafts";
+                name = "Drafts";
               }
               {
                 mailbox = "Junk Email";
-                name = "Work - Junk";
+                name = "Junk";
               }
               {
                 mailbox = "Deleted Items";
-                name = "Work - Deleted";
+                name = "Deleted";
               }
               "Publication News"
             ];
@@ -199,6 +198,17 @@ in {
       #     userName = address;
       #   }
       #   // common;
+    };
+  };
+
+  specialisation.work.configuration.accounts.email.accounts = {
+    personal = {
+      primary = false;
+      neomutt.enable = false;
+    };
+    work = {
+      primary = true;
+      neomutt.enable = true;
     };
   };
 

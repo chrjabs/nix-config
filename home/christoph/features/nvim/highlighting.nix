@@ -20,7 +20,13 @@
       ];
     };
     treesitter-textobjects.enable = true;
-    treesitter-context.enable = true;
+    treesitter-context = {
+      enable = true;
+      settings = {
+        max_lines = 3;
+        min_window_height = 25;
+      };
+    };
     # Highlight TODO comments
     todo-comments.enable = true;
   };

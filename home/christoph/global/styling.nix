@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  lib,
   ...
 }: {
   imports = [
@@ -10,8 +11,13 @@
 
   recolor-wallpaper = {
     enable = true;
-    theme = "catppuccin-macchiato";
-    wallpaper = "earth2";
+    theme = lib.mkDefault "gruvbox-material-dark-hard";
+    wallpaper = lib.mkDefault "earth2";
+  };
+
+  specialisation.work.configuration.recolor-wallpaper = {
+    theme = "catppuccin-frappe";
+    wallpaper = "rocket";
   };
 
   stylix = {
