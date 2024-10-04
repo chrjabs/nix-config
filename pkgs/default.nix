@@ -4,4 +4,5 @@
   # example = pkgs.callPackage ./example { };
   wallpapers = pkgs.callPackage ./wallpapers {};
   latex = pkgs.callPackage ./latex {};
+  veripb = pkgs.python3Packages.callPackage ./veripb {};
 }
