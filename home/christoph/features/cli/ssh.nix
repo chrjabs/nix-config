@@ -30,6 +30,44 @@ in {
         setEnv.WAYLAND_DISPLAY = "wayland-waypipe";
         extraOptions.StreamLocalBindUnlink = "yes";
       };
+      "vps.jabsserver" = lib.hm.dag.entryBefore ["jabsserver"] {
+        hostname = "portmapper.jabsserver.net";
+        user = "root";
+      };
+      jabsserver = {
+        hostname = "jabsserver.net";
+        dynamicForwards = [{port = 8080;}];
+        proxyJump = "vps.jabsserver";
+      };
+    };
+  };
+
+  specialisation.work.configuration.programs.ssh.matchBlocks = {
+    uh = lib.hm.dag.entryBefore ["melkki" "melkinkari" "turso" "turso01" "turso02" "turso03"] {
+      host = "*.helsinki.fi melkki melkinkari turso*";
+      user = "chrisjab";
+    };
+    melkki = lib.hm.dag.entryBefore ["turso" "turso01" "turso02" "turso03"] {
+      hostname = "melkki.cs.helsinki.fi";
+    };
+    melkinkari = {
+      hostname = "melkinkari.cs.helsinki.fi";
+    };
+    turso = {
+      hostname = "turso.cs.helsinki.fi";
+      proxyJump = "melkki";
+    };
+    turso01 = {
+      hostname = "turso01.cs.helsinki.fi";
+      proxyJump = "melkki";
+    };
+    turso02 = {
+      hostname = "turso02.cs.helsinki.fi";
+      proxyJump = "melkki";
+    };
+    turso03 = {
+      hostname = "turso03.cs.helsinki.fi";
+      proxyJump = "melkki";
     };
   };
 

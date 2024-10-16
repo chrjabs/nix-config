@@ -3,6 +3,7 @@
     ./global
     ./features/desktop/sway
     ./features/productivity
+    ./features/rust
   ];
 
   home.sessionVariables.FLAKE = "/mnt/nix-config";

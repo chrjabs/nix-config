@@ -2,31 +2,37 @@
   programs.nixvim.plugins = {
     rustaceanvim = {
       enable = true;
-      settings = {
+      settings.server = {
         on_attach =
           # Lua
           ''
             function(client, bufnr)
-              map("n", "<leader>rca", function()
+              local ret = _M.lspOnAttach(client, bufnr)
+              local map = vim.keymap.set
+              map("n", "<leader>ca", function()
                 vim.cmd.RustLsp("codeAction")
-              end, { desc = "Rust-specific code action" })
-              map("n", "<leader>rco", function()
+              end, { desc = "rust-specific code action" })
+              map("n", "<leader>co", function()
                 vim.cmd.RustLsp("openCargo")
-              end, { desc = "Open Cargo.toml" })
-              map("n", "<leader>rcu", function()
+              end, { desc = "open Cargo.toml" })
+              map("n", "<leader>cu", function()
                 require("crates").upgrade_all_crates()
-              end, { desc = "Update crates" })
+              end, { desc = "update crates" })
+              map("n", "<ctrl>wd", function()
+                vim.cmd.RustLsp({'renderDiagnostic', 'current'})
+              end, { desc = "render diagnostic" })
+              return ret
             end
           '';
-        default_settings = {
-          rust-analyzer = {
-            checkOnSave = {
-              allFeatures = false;
-              command = "clippy";
-              extraArgs = ["--no-deps"];
-            };
-          };
-        };
+        #default_settings = {
+        #  rust-analyzer = {
+        #    check = {
+        #      command = "clippy";
+        #      extraArgs = ["--no-deps"];
+        #    };
+        #    checkOnSave = true;
+        #  };
+        #};
       };
     };
     crates-nvim.enable = true;
