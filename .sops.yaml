@@ -5,10 +5,12 @@ keys:
   # Hosts
   - &hosts:
     - &phantasia age1kdmc7uwtgnghwyn4uzswdkc4ya3wvgk3egquejthvx99wyd2fpdqg9pkzp
+    - &gallifrey age148f0u0ytpveuaq8xgeulnrm6l7fslc8gysk2uaf03tt9ejern3ys9vteg7
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
     - age:
       - *phantasia
+      - *gallifrey
       pgp:
       - *christoph
