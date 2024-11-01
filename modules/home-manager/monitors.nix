@@ -25,21 +25,17 @@ in {
             type = types.int;
             example = 1080;
           };
-          refreshRate = mkOption {
-            type = types.int;
-            default = 60;
-          };
           position = mkOption {
-            type = types.str;
-            default = "auto";
+            type = types.nullOr types.str;
+            default = null;
+          };
+          rotation = mkOption {
+            type = types.nullOr types.str;
+            default = null;
           };
           enabled = mkOption {
             type = types.bool;
             default = true;
-          };
-          workspace = mkOption {
-            type = types.nullOr types.str;
-            default = null;
           };
         };
       }

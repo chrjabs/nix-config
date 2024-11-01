@@ -75,6 +75,7 @@
 
     persistence = {
       "/persist/${config.home.homeDirectory}" = {
+        # defaultDirectoryMethod = "symlink";
         directories = [
           "Documents"
           "Downloads"
@@ -85,6 +86,14 @@
         ];
         allowOther = true;
       };
+    };
+  };
+
+  specialisation.work.configuration.home.persistence = {
+    "/persist/${config.home.homeDirectory}" = {
+      directories = [
+        "Work"
+      ];
     };
   };
 }

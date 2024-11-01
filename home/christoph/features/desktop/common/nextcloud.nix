@@ -8,6 +8,9 @@
     startInBackground = true;
   };
 
+  # Ensure that secret service is loaded in order to get stored credentials
+  systemd.user.services.nextcloud-client.Unit.After = ["pass-secret-service.service"];
+
   xdg.configFile."Nextcloud/sync-exclude.lst".text = ''
     # This file contains fixed global exclude patterns
 
@@ -85,5 +88,5 @@
     ].venv/
   '';
 
-  home.persistence."/persist/${config.home.homeDirectory}".directories = [".config/Nextcloud"];
+  home.persistence."/persist/${config.home.homeDirectory}".directories = [".config/Nextcloud" "Cloud"];
 }

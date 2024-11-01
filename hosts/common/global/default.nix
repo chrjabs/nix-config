@@ -18,8 +18,6 @@
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 
-  # options.minimal = lib.mkEnableOption "create a minimal system, useful to instal with limited resources";
-
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = {inherit inputs outputs;};

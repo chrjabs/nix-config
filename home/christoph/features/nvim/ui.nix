@@ -13,6 +13,8 @@
       };
       # Tab line
       bufferline.enable = true;
+      # Dev icons
+      web-devicons.enable = true;
     };
 
     opts = {

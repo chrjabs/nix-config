@@ -74,6 +74,10 @@
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/phantasia];
       };
+      gallifrey = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/gallifrey];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -83,6 +87,11 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/christoph/phantasia.nix ./home/christoph/nixpkgs.nix];
+      };
+      "christoph@gallifrey" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/christoph/gallifrey.nix ./home/christoph/nixpkgs.nix];
       };
     };
   };

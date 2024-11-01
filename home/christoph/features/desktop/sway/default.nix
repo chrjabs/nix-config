@@ -41,7 +41,7 @@
     extraConfig = lib.concatMapStringsSep "\n" (
       m: "output ${m.name} ${
         if m.enabled
-        then "enable res ${toString m.width}x${toString m.height}"
+        then "enable res ${toString m.width}x${toString m.height} ${lib.optionalString (m.position != null) "position ${m.position}"} ${lib.optionalString (m.rotation != null) "transform ${m.rotation}"}"
         else "disable"
       }"
     ) (config.monitors);

@@ -12,6 +12,7 @@
 
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix
+    ../common/optional/peripherals/umc1820.nix
   ];
 
   # Systemd boot
@@ -21,6 +22,24 @@
 
   system.stateVersion = "24.05";
 
+  # Sway on NVidia
+  # environment.sessionVariables.WLR_RENDERER = "vulkan";
+
+  # Greetd output config
+  greetd.custom.outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-1 enable"];
+
   # Needed for GTK
   programs.dconf.enable = true;
+
+  # Nvidia GPU
+  hardware.graphics.enable = true;
+  # services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
 }
