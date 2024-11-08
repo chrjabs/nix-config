@@ -25,13 +25,23 @@
         kitty = lib.getExe config.programs.kitty.package;
         wofi = lib.getExe config.programs.wofi.package;
         makoctl = lib.getExe' config.services.mako.package "makoctl";
+        pactl = lib.getExe' pkgs.pulseaudio "pactl";
+        playerctl = lib.getExe pkgs.playerctl;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
-          "${modifier}+d" = "exec ${wofi} -S run";
+          "${modifier}+d" = "exec ${wofi} -S drun";
+          "${modifier}+Shift+d" = "exec ${wofi} -S drun";
           "${modifier}+s" = "exec specialisation $(specialisation | ${wofi} -S dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
+          # Media keys
+          "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
+          "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";
+          "XF86AudioRaiseVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ +5%";
+          "XF86AudioPlay" = "exec ${playerctl} play-pause";
+          "XF86AudioNext" = "exec ${playerctl} next";
+          "XF86AudioPrev" = "exec ${playerctl} previous";
         };
 
       bars = [];

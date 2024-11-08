@@ -1,12 +1,15 @@
 {pkgs, ...}: {
   imports = [
     ./bat.nix
+    ./btop.nix
+    ./devenv.nix
     ./direnv.nix
     ./fish.nix
     ./fzf.nix
     ./gh.nix
     ./git.nix
     ./gpg.nix
+    ./joshuto.nix
     ./ssh.nix
     ./starship
     ./tmux.nix
@@ -23,6 +26,5 @@
   ];
   programs = {
     bash.enable = true;
-    joshuto.enable = true;
   };
 }

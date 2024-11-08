@@ -1,18 +1,19 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: {
   programs.nixvim.plugins = {
     # Vimtex
-    vimtex = lib.mkIf config.programs.texlive.enable {
+    vimtex = {
       enable = true;
       texlivePackage = null;
       settings.view_method = "zathura";
     };
     # Language server / spell checking
     lsp.servers = {
-      ltex = lib.mkIf config.programs.texlive.enable {
+      ltex = {
         enable = true;
         settings = {
           language = "en";

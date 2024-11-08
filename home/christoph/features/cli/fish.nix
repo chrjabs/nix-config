@@ -12,6 +12,7 @@
   hasBat = config.programs.bat.enable;
   hasNeovim = config.programs.neovim.enable || config.programs.nixvim.enable;
   hasKitty = config.programs.kitty.enable;
+  hasZathura = config.programs.zathura.enable;
   hasSpecialisationCli = hasPackage "specialisation";
 in {
   programs.fish = {
@@ -31,6 +32,8 @@ in {
       vim = mkIf hasNeovim "nvim";
       vi = vim;
       v = vim;
+
+      z = mkIf hasZathura "zathura";
 
       diff = "diffsitter";
     };
