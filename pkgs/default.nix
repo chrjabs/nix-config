@@ -16,4 +16,8 @@
   gbd = pkgs.python3Packages.callPackage ./gbd {inherit python-gbdc;};
   gbdc = pkgs.callPackage ./gbdc {};
   python-gbdc = pkgs.python3Packages.callPackage ./python-gbdc {};
+
+  # Python-MIP
+  python-cffi-1-15 = pkgs.python3Packages.callPackage ./python-cffi-1-15 {};
+  python-mip = pkgs.python3Packages.callPackage ./python-mip {inherit python-cffi-1-15;};
 }
