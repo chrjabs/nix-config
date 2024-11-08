@@ -37,6 +37,14 @@ in {
             type = types.bool;
             default = true;
           };
+          workspaces = mkOption {
+            type = types.nullOr (types.listOf types.str);
+            default = null;
+          };
+          fallback = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+          };
         };
       }
     );

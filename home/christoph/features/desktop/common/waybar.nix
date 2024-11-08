@@ -210,7 +210,7 @@ in {
           exec = mkScriptJson {
             deps = [pkgs.findutils pkgs.procps];
             script = ''
-              count=$(find ~/Mail/*/Inbox/new -type f | wc -l)
+              count=$(find ~/Mail/${config.accounts.email.mainAccountPattern}/Inbox/new -type f | wc -l)
               if pgrep mbsync &>/dev/null; then
                 status="syncing"
               else

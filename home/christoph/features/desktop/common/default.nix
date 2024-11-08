@@ -20,7 +20,7 @@
 
   xdg.mimeApps.enable = true;
   home.packages = with pkgs; [
-    wf-recorder
+    # wf-recorder
     wl-clipboard
   ];
 

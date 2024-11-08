@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   programs.swaylock = {
@@ -15,7 +16,7 @@
       indicator-caps-lock = true;
       indicator-radius = 40;
       indicator-idle-visible = true;
-      indicator-y-position = 1000;
+      indicator-y-position = lib.mkDefault ((builtins.head config.monitors).height * 0.9);
     };
   };
 }

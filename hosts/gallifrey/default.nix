@@ -26,7 +26,7 @@
   # environment.sessionVariables.WLR_RENDERER = "vulkan";
 
   # Greetd output config
-  greetd.custom.outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-1 enable"];
+  greetd.custom.outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-3 enable"];
 
   # Needed for GTK
   programs.dconf.enable = true;

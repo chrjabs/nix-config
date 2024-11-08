@@ -3,6 +3,7 @@
   config,
   pkgs,
   outputs,
+  inputs,
   ...
 }: {
   imports = [
@@ -11,6 +12,8 @@
 
   wayland.windowManager.sway = {
     enable = true;
+
+    # package = inputs.nixpkgs-stable.legacyPackages.x86_64-linux.sway;
 
     systemd.enable = true;
 
@@ -43,7 +46,7 @@
         if m.enabled
         then "enable res ${toString m.width}x${toString m.height} ${lib.optionalString (m.position != null) "position ${m.position}"} ${lib.optionalString (m.rotation != null) "transform ${m.rotation}"}"
         else "disable"
-      }"
+      }${lib.optionalString (m.workspaces != null) "\n${lib.concatMapStringsSep "\n" (w: "workspace ${w} output ${m.name}${lib.optionalString (m.fallback != null) " ${m.fallback}"}") (m.workspaces)}"}"
     ) (config.monitors);
   };
 }

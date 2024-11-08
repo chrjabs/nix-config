@@ -45,5 +45,9 @@ in {
     ];
   };
 
+  home.packages = with pkgs; [
+    git-crypt
+  ];
+
   specialisation.work.configuration.programs.git.userEmail = "christoph.jabs@helsinki.fi";
 }
