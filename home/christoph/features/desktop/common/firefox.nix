@@ -44,12 +44,12 @@
           {
             name = "GitHub";
             keyword = "gh";
-            url = "https://github.com/";
+            url = "https://github.com/%s";
           }
           {
             name = "Own GitHub By Repo";
             keyword = "ghc";
-            url = "https://github.com/chrjabs/";
+            url = "https://github.com/chrjabs/%s";
           }
           {
             name = "Toggl";
@@ -60,6 +60,16 @@
             name = "Todoist";
             keyword = "td";
             url = "https://firefox.todoist.com/app/upcoming#";
+          }
+          {
+            name = "Nix Packages";
+            keyword = "np";
+            url = "https://search.nixos.org/packages?channel=unstable&query=%s";
+          }
+          {
+            name = "Home Manager Options";
+            keyword = "hm";
+            url = "https://home-manager-options.extranix.com/&query=%s&release=release-24.05";
           }
         ];
         settings = {

@@ -11,7 +11,7 @@ in {
   programs.ssh = {
     enable = true;
     userKnownHostsFile = "~/.ssh/known_hosts.d/hosts";
-    matchBlocks = {
+    matchBlocks = rec {
       own = {
         host = lib.concatStringsSep " " hostnames;
         forwardAgent = true;
@@ -36,9 +36,12 @@ in {
       };
       jabsserver = {
         hostname = "jabsserver.net";
-        dynamicForwards = [{port = 8080;}];
         proxyJump = "vps.jabsserver";
       };
+      jabsserver-tunnel = lib.hm.dag.entryBefore ["jabsserver"] ({
+          dynamicForwards = [{port = 8080;}];
+        }
+        // jabsserver);
     };
   };
 

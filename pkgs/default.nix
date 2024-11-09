@@ -20,4 +20,7 @@
   # Python-MIP
   python-cffi-1-15 = pkgs.python3Packages.callPackage ./python-cffi-1-15 {};
   python-mip = pkgs.python3Packages.callPackage ./python-mip {inherit python-cffi-1-15;};
+
+  # Behring WING
+  wing-edit = pkgs.callPackage ./wing-edit {};
 }
