@@ -7,6 +7,35 @@
   programs.joshuto = {
     enable = true;
 
+    package = pkgs.rustPlatform.buildRustPackage rec {
+      pname = "joshuto";
+      version = "0.9.8";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "kamiyaa";
+        repo = pname;
+        rev = "1bd52c03d7f4df20e5c090db8b6fe43605e16dc4";
+        hash = "sha256-LNMyNA+/ETokDzdjTOcfU9hPKLxD2yhKw/HyDkvQGGI=";
+      };
+      cargoHash = "sha256-05XaEXtYu1/77aKV4tDeMkZEdbbjE0NAUEHT95Ah9lA=";
+
+      nativeBuildInputs = [pkgs.installShellFiles];
+
+      postInstall = lib.optionalString (pkgs.stdenv.buildPlatform.canExecute pkgs.stdenv.hostPlatform) ''
+        installShellCompletion --cmd joshuto \
+          --bash <($out/bin/joshuto completions bash) \
+          --zsh <($out/bin/joshuto completions zsh) \
+          --fish <($out/bin/joshuto completions fish)
+      '';
+
+      meta = {
+        description = "Ranger-like terminal file manager written in Rust";
+        homepage = "https://github.com/kamiyaa/joshuto";
+        license = lib.licenses.lgpl3Only;
+        mainProgram = "joshuto";
+      };
+    };
+
     settings = {
       zoxide_update = true;
       cmd_aliases = {

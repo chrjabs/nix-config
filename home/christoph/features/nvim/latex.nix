@@ -9,7 +9,7 @@
     vimtex = {
       enable = true;
       texlivePackage = null;
-      settings.view_method = "zathura";
+      settings.view_method = "zathura_simple";
     };
     # Language server / spell checking
     lsp.servers = {
