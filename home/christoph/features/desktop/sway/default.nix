@@ -27,6 +27,7 @@
         makoctl = lib.getExe' config.services.mako.package "makoctl";
         pactl = lib.getExe' pkgs.pulseaudio "pactl";
         playerctl = lib.getExe pkgs.playerctl;
+        pass-wofi = lib.getExe pkgs.pass-wofi;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
@@ -35,6 +36,7 @@
           "${modifier}+s" = "exec specialisation $(specialisation | ${wofi} -S dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
+          "${modifier}+p" = "exec ${pass-wofi}";
           # Media keys
           "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
           "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";

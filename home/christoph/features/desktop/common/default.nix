@@ -15,6 +15,7 @@
     ./swaylock.nix
     ./waybar.nix
     ./waypipe.nix
+    ./wofi.nix
     ./zathura.nix
   ];
 
