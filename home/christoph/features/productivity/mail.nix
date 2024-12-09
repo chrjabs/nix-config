@@ -4,8 +4,8 @@
   config,
   ...
 }: let
-  mbsync = "${config.programs.mbsync.package}/bin/mbsync";
-  pass = "${config.programs.password-store.package}/bin/pass";
+  mbsync = lib.getExe config.programs.mbsync.package;
+  pass = lib.getExe config.programs.password-store.package;
   oauth2 = import ./oauth2.nix {
     inherit pkgs;
     inherit lib;
@@ -317,7 +317,10 @@ in {
         Description = "mbsync synchronization";
       };
       Service = let
-        gpgCmds = import ../cli/gpg-commands.nix {inherit pkgs;};
+        gpgCmds = import ../cli/gpg-commands.nix {
+          inherit pkgs;
+          inherit lib;
+        };
       in {
         Type = "oneshot";
         ExecCondition = ''

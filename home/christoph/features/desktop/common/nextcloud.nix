@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: {
@@ -9,7 +10,18 @@
   };
 
   # Ensure that secret service is loaded in order to get stored credentials
-  systemd.user.services.nextcloud-client.Unit.After = ["pass-secret-service.service"];
+  systemd.user.services.nextcloud-client.Service = {
+    Restart = "always";
+    RestartSec = 30;
+    ExecCondition = let
+      gpgCmds = import ../../cli/gpg-commands.nix {
+        inherit pkgs;
+        inherit lib;
+      };
+    in ''
+      /bin/sh -c "${gpgCmds.isUnlocked}"
+    '';
+  };
 
   xdg.configFile."Nextcloud/sync-exclude.lst".text = ''
     # This file contains fixed global exclude patterns

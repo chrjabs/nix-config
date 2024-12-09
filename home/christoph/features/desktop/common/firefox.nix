@@ -96,6 +96,7 @@
           };
           seen = ["save-to-pocket-button" "developer-button" "ublock0_raymondhill_net-browser-action" "_testpilot-containers-browser-action"];
         };
+        "browser.toolbars.bookmarks.visibility" = "never";
       };
     in {
       christoph = {

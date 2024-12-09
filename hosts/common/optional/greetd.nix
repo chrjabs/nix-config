@@ -32,17 +32,20 @@ in {
       # For caching and such
       home = "/tmp/greeter-home";
       createHome = true;
+      isSystemUser = true;
+      group = "greeter";
     };
+    users.groups.greeter = {};
 
     programs.regreet = {
-      enable = true;
+      enable = lib.mkDefault true;
       settings.background = {
         path = pkgs.wallpapers."${christophCfg.recolor-wallpaper.wallpaper}".path;
         fit = "Cover";
       };
     };
     services.greetd = {
-      enable = true;
+      enable = lib.mkDefault true;
       settings.default_session.command = sway-kiosk (lib.getExe config.programs.regreet.package);
     };
   };

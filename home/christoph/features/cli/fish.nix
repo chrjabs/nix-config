@@ -34,8 +34,6 @@ in {
       v = vim;
 
       z = mkIf hasZathura "zathura";
-
-      diff = "diffsitter";
     };
 
     functions = {

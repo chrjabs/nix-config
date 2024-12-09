@@ -1,9 +1,10 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }: let
-  pass = "${config.programs.password-store.package}/bin/pass";
+  pass = lib.getExe config.programs.password-store.package;
 in {
   home.persistence."/persist/${config.home.homeDirectory}".directories = [
     "Calendars"
@@ -71,7 +72,10 @@ in {
       Description = "vdirsyncer synchronization";
     };
     Service = let
-      gpgCmds = import ../cli/gpg-commands.nix {inherit pkgs;};
+      gpgCmds = import ../cli/gpg-commands.nix {
+        inherit pkgs;
+        inherit lib;
+      };
     in {
       Type = "oneshot";
       ExecCondition = ''

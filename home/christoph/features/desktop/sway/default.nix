@@ -28,6 +28,7 @@
         pactl = lib.getExe' pkgs.pulseaudio "pactl";
         playerctl = lib.getExe pkgs.playerctl;
         pass-wofi = lib.getExe pkgs.pass-wofi;
+        joshuto = lib.getExe config.programs.joshuto.package;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
@@ -37,6 +38,7 @@
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
           "${modifier}+p" = "exec ${pass-wofi}";
+          "${modifier}+e" = "exec ${kitty} ${joshuto}";
           # Media keys
           "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
           "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";

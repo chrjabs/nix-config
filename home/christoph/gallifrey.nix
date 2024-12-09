@@ -10,6 +10,8 @@
     ./features/desktop/optional/keepass.nix
     ./features/productivity
     ./features/rust
+
+    ./features/desktop/optional/virtualization.nix
   ];
 
   specialisation.work.configuration.imports = [
