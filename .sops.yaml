@@ -16,3 +16,9 @@ creation_rules:
       - *medusa
       pgp:
       - *christoph
+  - path_regex: hosts/medusa/kodi-secrets.ya?ml$
+    key_groups:
+    - age:
+      - *medusa
+      pgp:
+      - *christoph

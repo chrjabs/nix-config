@@ -5,7 +5,6 @@
       enable = true;
       package = pkgs.kodi.withPackages (kodiPkgs:
         with kodiPkgs; [
-          jellyfin
           youtube
           netflix
         ]);
@@ -15,7 +14,7 @@
 
   services.displayManager.autoLogin = {
     enable = true;
-    user = "kodi";
+    user = config.users.extraUser.kodi.name;
   };
 
   users.extraUsers.kodi.isNormalUser = true;
@@ -32,5 +31,12 @@
         target = ".kodi/cdm/manifest.json";
       };
     };
+  };
+
+  sops.secrets.youtube-api = {
+    sopsFile = ../../${config.networking.hostName}/kodi-secrets.nix;
+    owner = config.users.extraUsers.kodi.name;
+    group = config.users.extraUsers.kodi.group;
+    path = ${config.users.extraUsers.kodi.home} /.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json;
   };
 }
