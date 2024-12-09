@@ -7,6 +7,7 @@
         with kodiPkgs; [
           youtube
           netflix
+          upnext
         ]);
     };
     displayManager.lightdm.greeter.enable = false;
@@ -14,7 +15,7 @@
 
   services.displayManager.autoLogin = {
     enable = true;
-    user = config.users.extraUser.kodi.name;
+    user = config.users.extraUsers.kodi.name;
   };
 
   users.extraUsers.kodi.isNormalUser = true;
@@ -34,9 +35,14 @@
   };
 
   sops.secrets.youtube-api = {
-    sopsFile = ../../${config.networking.hostName}/kodi-secrets.nix;
+    sopsFile = ../../${config.networking.hostName}/kodi-secrets.yaml;
     owner = config.users.extraUsers.kodi.name;
     group = config.users.extraUsers.kodi.group;
-    path = ${config.users.extraUsers.kodi.home} /.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json;
+    path = "${config.users.extraUsers.kodi.home}/.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json";
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [8080];
+    allowedUDPPorts = [8080];
   };
 }
