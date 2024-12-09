@@ -10,14 +10,27 @@
           netflix
         ]);
     };
-    displayManager = {
-      autoLogin.enable = true;
-      autoLogin.user = "kodi";
-      lightdm.greeter.enable = false;
-    };
+    displayManager.lightdm.greeter.enable = false;
+  };
+
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "kodi";
   };
 
   users.extraUsers.kodi.isNormalUser = true;
 
-  home-manager.users.kodi = import ../../../../home/christoph/${config.networking.hostName}.nix;
+  home-manager.users.kodi.home = {
+    stateVersion = "24.11";
+    file = {
+      widevine-lib = {
+        source = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so";
+        target = ".kodi/cdm/libwidevinecdm.so";
+      };
+      widevine-manifest = {
+        source = "${pkgs.widevine-cdm}/share/google/chrome/WidevineCdm/manifest.json";
+        target = ".kodi/cdm/manifest.json";
+      };
+    };
+  };
 }

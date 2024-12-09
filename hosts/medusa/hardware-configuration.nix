@@ -22,7 +22,7 @@ in {
 
   disko.devices = {
     disk = {
-      main = {
+      "${hostname}" = {
         type = "disk";
         device = "/dev/vda";
         content = {
