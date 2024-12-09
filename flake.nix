@@ -78,6 +78,10 @@
         specialArgs = {inherit inputs outputs;};
         modules = [./hosts/gallifrey];
       };
+      medusa = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [./hosts/medusa];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -92,6 +96,11 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/christoph/gallifrey.nix ./home/christoph/nixpkgs.nix];
+      };
+      "christoph@medusa" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/christoph/medusa.nix ./home/christoph/nixpkgs.nix];
       };
     };
   };
