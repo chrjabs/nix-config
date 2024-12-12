@@ -211,10 +211,26 @@
     };
   };
 
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = ["firefox.desktop"];
-    "text/xml" = ["firefox.desktop"];
-    "x-scheme-handler/http" = ["firefox.desktop"];
-    "x-scheme-handler/https" = ["firefox.desktop"];
+  xdg = {
+    mimeApps.defaultApplications = {
+      "text/html" = ["firefox.desktop"];
+      "text/xml" = ["firefox.desktop"];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/https" = ["firefox.desktop"];
+    };
+    desktopEntries = {
+      whatsapp = {
+        name = "WhatsApp";
+        genericName = "WhatApp Web Interface";
+        comment = "Read and send WhatsApp messages from a browser";
+        exec = "firefox -P whatsapp";
+        categories = [
+          "Network"
+          "InstantMessaging"
+          "Chat"
+        ];
+        type = "Application";
+      };
+    };
   };
 }
