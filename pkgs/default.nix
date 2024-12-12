@@ -25,4 +25,7 @@
 
   # Behring WING
   wing-edit = pkgs.callPackage ./wing-edit {};
+
+  # Jack Mixer
+  jack-mixer = pkgs.callPackage ./jack-mixer {};
 }
