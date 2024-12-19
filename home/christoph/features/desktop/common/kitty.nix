@@ -23,6 +23,7 @@
     enable = true;
     keybindings = {
       "ctrl+enter" = "send_text normal clone-in-kitty --type os-window\\r";
+      "ctrl+shift+u" = "no_op";
     };
     settings = {
       editor = config.home.sessionVariables.EDITOR;
