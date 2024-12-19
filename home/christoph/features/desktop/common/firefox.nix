@@ -29,6 +29,9 @@
         # Don't ask for download dir
         "browser.download.useDownloadDir" = false;
 
+        # Disable restore after crash
+        "browser.sessionstore.resume_from_crash" = false;
+
         # Disable crappy home activity stream page
         "browser.newtabpage.activity-stream.feeds.topsites" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
