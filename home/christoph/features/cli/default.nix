@@ -16,10 +16,10 @@
     ./zoxide.nix
   ];
   home.packages = with pkgs; [
-    bottom # System viewer
     eza # Better ls
     ripgrep # Better grep
     diffsitter # Better diff
+    csc # CLI Calculator
 
     nixd # Nix LSP
     alejandra # Nix formatter

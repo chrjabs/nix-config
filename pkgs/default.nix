@@ -28,4 +28,7 @@
 
   # Jack Mixer
   jack-mixer = pkgs.callPackage ./jack-mixer {};
+
+  # csc Calculator
+  csc = pkgs.callPackage ./csc {};
 }
