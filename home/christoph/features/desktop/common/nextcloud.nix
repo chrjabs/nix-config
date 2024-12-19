@@ -10,17 +10,9 @@
   };
 
   # Ensure that secret service is loaded in order to get stored credentials
-  systemd.user.services.nextcloud-client.Service = {
-    Restart = "always";
-    RestartSec = 30;
-    ExecCondition = let
-      gpgCmds = import ../../cli/gpg-commands.nix {
-        inherit pkgs;
-        inherit lib;
-      };
-    in ''
-      /bin/sh -c "${gpgCmds.isUnlocked}"
-    '';
+  systemd.user.services.nextcloud-client.Unit = {
+    Requires = ["pass-secret-service.service"];
+    After = ["pass-secret-service.service"];
   };
 
   xdg.configFile."Nextcloud/sync-exclude.lst".text = ''
