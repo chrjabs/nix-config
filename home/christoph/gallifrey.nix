@@ -24,7 +24,7 @@
       name = "DP-3";
       width = 2560;
       height = 1440;
-      position = "0 270";
+      position = "1080 270";
       primary = true;
       workspaces = ["1" "2" "3" "4" "5"];
     }
@@ -32,8 +32,8 @@
       name = "HDMI-A-1";
       width = 1920;
       height = 1080;
-      rotation = "90";
-      position = "2560 0";
+      rotation = "270";
+      position = "0 0";
       workspaces = ["6" "7" "8" "9" "10"];
     }
   ];

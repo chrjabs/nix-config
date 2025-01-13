@@ -12,7 +12,6 @@
 
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix
-    ../common/optional/peripherals/umc1820.nix
     ../common/optional/peripherals/ibus.nix
 
     ../common/optional/virtualization.nix
