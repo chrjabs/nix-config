@@ -10,6 +10,7 @@
     ../common/global
     ../common/users/christoph
 
+    ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix
     ../common/optional/peripherals/ibus.nix
@@ -33,6 +34,9 @@
   # Needed for GTK
   programs.dconf.enable = true;
 
+  # For Calibre
+  services.udisks2.enable = true;
+
   # Nvidia GPU
   hardware.graphics.enable = true;
   # services.xserver.videoDrivers = ["nvidia"];
@@ -44,4 +48,12 @@
   #   nvidiaSettings = true;
   #   package = config.boot.kernelPackages.nvidiaPackages.stable;
   # };
+
+  # Home assistant API token secret
+  sops.secrets.ha-api-token = {
+    sopsFile = ./secrets.yaml;
+    mode = "0444";
+    owner = config.users.users.nobody.name;
+    group = config.users.users.nobody.group;
+  };
 }

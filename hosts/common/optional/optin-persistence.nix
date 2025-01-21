@@ -7,10 +7,9 @@
   config,
   ...
 }: {
-  imports = [inputs.impermanence.nixosModules.impermanence];
-
   environment.persistence = {
     "/persist" = {
+      enable = true;
       directories = [
         "/var/lib/systemd"
         "/var/lib/nixos"

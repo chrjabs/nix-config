@@ -7,8 +7,11 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     systems.url = "github:nix-systems/default";
 
+    # Custom Nixpkgs
+    custom-nixpkgs.url = "github:chrjabs/nixpkgs/custom";
+
     # Impermanence
-    impermanence.url = "github:Misterio77/impermanence";
+    impermanence.url = "github:chrjabs/impermanence";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -32,6 +35,10 @@
     # Firefox Addons
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+
+    # NixOS Generators
+    nixos-generators.url = "github:nix-community/nixos-generators/7c60ba4bc8d6aa2ba3e5b0f6ceb9fc07bc261565";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -39,6 +46,7 @@
     nixpkgs,
     home-manager,
     systems,
+    nixos-generators,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -71,15 +79,24 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       phantasia = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {
+          inherit inputs outputs;
+          bootstrap = false;
+        };
         modules = [./hosts/phantasia];
       };
       gallifrey = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {
+          inherit inputs outputs;
+          bootstrap = false;
+        };
         modules = [./hosts/gallifrey];
       };
       medusa = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {
+          inherit inputs outputs;
+          bootstrap = false;
+        };
         modules = [./hosts/medusa];
       };
     };

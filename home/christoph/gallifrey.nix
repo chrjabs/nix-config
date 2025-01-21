@@ -10,6 +10,7 @@
     ./features/desktop/optional/keepass.nix
     ./features/productivity
     ./features/rust
+    ./features/homeassistant
 
     ./features/desktop/optional/virtualization.nix
   ];

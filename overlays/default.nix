@@ -25,6 +25,7 @@ in {
   # Adds pkgs.stable == inputs.nixpkgs-stable.legacyPackages.${pkgs.system}
   stable = final: _: {
     stable = inputs.nixpkgs-stable.legacyPackages.${final.system};
+    custom = inputs.custom-nixpkgs.legacyPackages.${final.system};
   };
 
   # This one brings our custom packages from the 'pkgs' directory
@@ -36,5 +37,15 @@ in {
   modifications = final: prev: {
     # https://github.com/mdellweg/pass_secret_service/pull/37
     pass-secret-service = addPatches prev.pass-secret-service [./pass-secret-service-native.diff];
+
+    # Newest Widevine
+    widevine-cdm = prev.widevine-cdm.overrideAttrs rec {
+      version = "4.10.2830.0";
+      src = prev.fetchzip {
+        url = "https://dl.google.com/widevine-cdm/${version}-linux-x64.zip";
+        hash = "sha256-XDnsan1ulnIK87Owedb2s9XWLzk1K2viGGQe9LN/kcE=";
+        stripRoot = false;
+      };
+    };
   };
 }

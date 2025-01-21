@@ -66,6 +66,22 @@
         "type": "github"
       }
     },
+    "custom-nixpkgs": {
+      "locked": {
+        "lastModified": 1737378579,
+        "narHash": "sha256-CfIZE9yYMnAEDikDkQxNAjVoe4NKcZ5RlTG1NO6BKJI=",
+        "owner": "chrjabs",
+        "repo": "nixpkgs",
+        "rev": "72c78c8aa438608f72e091e53ef663314fa0a68e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chrjabs",
+        "ref": "custom",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -384,15 +400,15 @@
     },
     "impermanence": {
       "locked": {
-        "lastModified": 1715197858,
-        "narHash": "sha256-a5Ij25qafHePoSlSzAw3OIG0A/r2OC9v+5XBCaRV1O0=",
-        "owner": "Misterio77",
+        "lastModified": 1737101607,
+        "narHash": "sha256-QymabHb74c98sS4GRMZeKBbLJ499ZXFllnNjTrMOg0w=",
+        "owner": "chrjabs",
         "repo": "impermanence",
-        "rev": "a0593216958c23e44f1d6b2b4124981f011d4d0b",
+        "rev": "80ab4615d55727adc18e42e4fdda2875ed049c02",
         "type": "github"
       },
       "original": {
-        "owner": "Misterio77",
+        "owner": "chrjabs",
         "repo": "impermanence",
         "type": "github"
       }
@@ -443,6 +459,43 @@
       "original": {
         "owner": "lnl7",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nixlib": {
+      "locked": {
+        "lastModified": 1729386149,
+        "narHash": "sha256-hUP9oxmnOmNnKcDOf5Y55HQ+NnoT0+bLWHLQWLLw9Ks=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "cce4521b6df014e79a7b7afc58c703ed683c916e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixos-generators": {
+      "inputs": {
+        "nixlib": "nixlib",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729472750,
+        "narHash": "sha256-s93LPHi5BN7I2xSGNAFWiYb8WRsPvT1LE9ZjZBrpFlg=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "7c60ba4bc8d6aa2ba3e5b0f6ceb9fc07bc261565",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "7c60ba4bc8d6aa2ba3e5b0f6ceb9fc07bc261565",
         "type": "github"
       }
     },
@@ -562,10 +615,12 @@
     },
     "root": {
       "inputs": {
+        "custom-nixpkgs": "custom-nixpkgs",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
