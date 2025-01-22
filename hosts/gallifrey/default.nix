@@ -10,6 +10,8 @@
     ../common/global
     ../common/users/christoph
 
+    ../common/optional/home.nix
+
     ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix

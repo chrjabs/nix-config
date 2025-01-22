@@ -12,6 +12,8 @@
     ../common/global
     ../common/users/christoph
 
+    ../common/optional/home.nix
+
     ../common/optional/kodi.nix
 
     ../common/optional/pipewire.nix
