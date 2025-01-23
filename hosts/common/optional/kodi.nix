@@ -53,7 +53,7 @@
   };
 
   networking.firewall = lib.mkIf (!bootstrap) {
-    allowedTCPPorts = [8080 10001];
-    allowedUDPPorts = [8080 10001];
+    allowedTCPPorts = [8080 9090];
+    allowedUDPPorts = [8080 9090];
   };
 }
