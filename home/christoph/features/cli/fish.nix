@@ -30,6 +30,8 @@ in {
 
       s = mkIf hasSpecialisationCli "specialisation";
 
+      ssh = mkIf hasKitty "kitten ssh";
+
       vim = mkIf hasNeovim "nvim";
       vi = vim;
       v = vim;
