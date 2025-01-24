@@ -32,9 +32,11 @@ in {
       push.autoSetupRemote = true;
       pull.rebase = true;
       rerere.enabled = true;
-      "filter \"dumpsql\"" = {
-        clean = "tmp=$(mktemp); cat > $tmp; sqlite3 $tmp .dump; rm $tmp";
-        smudge = "tmp=$(mktemp); sqlite3 $tmp; cat $tmp; rm $tmp";
+      "filter \"dumpsql\"" = let
+        sqlite = lib.getExe pkgs.sqlite;
+      in {
+        clean = "tmp=$(mktemp); cat > $tmp; ${sqlite} $tmp .dump; rm $tmp";
+        smudge = "tmp=$(mktemp); ${sqlite} $tmp; cat $tmp; rm $tmp";
       };
     };
     lfs.enable = true;
