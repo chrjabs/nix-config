@@ -31,6 +31,17 @@ in {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
+  # Python packages
+  python-additions = self: super: {
+    python3 = super.python3.override {
+      packageOverrides = python-self: python-super: rec {
+        gbd = super.python3Packages.callPackage ../pkgs/gbd {python-gbdc = gbdc;};
+        gbdc = super.python3Packages.callPackage ../pkgs/python-gbdc {};
+      };
+    };
+    python3Packages = self.python3.pkgs;
+  };
+
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
