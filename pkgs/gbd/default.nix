@@ -8,14 +8,14 @@
 }:
 python3.pkgs.buildPythonPackage rec {
   pname = "gbd";
-  version = "4.8.5";
+  version = "4.9.7";
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "Udopia";
+    owner = "chrjabs";
     repo = "gbd";
-    rev = "gbd-tools-${version}";
-    hash = "sha256-8mmCj6syVtch00r/mVwO0IS9AvRf4hQLiWgibSNQ4ns=";
+    rev = "bac1eda7186b79ed183347df51d8aaa01a7d2d48";
+    hash = "sha256-HM200KqJTS3oo1THl8KDpkgDraRqRTPpdq089UwwLwo=";
   };
 
   build-system = [
@@ -30,6 +30,7 @@ python3.pkgs.buildPythonPackage rec {
     waitress
     pebble
     python-gbdc
+    ipython
   ];
 
   pythonImportsCheck = [

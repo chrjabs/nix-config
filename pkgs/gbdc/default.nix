@@ -9,13 +9,13 @@
 }:
 stdenv.mkDerivation rec {
   pname = "gbdc";
-  version = "0.2.46";
+  version = "0.2.47";
 
   src = fetchFromGitHub {
     owner = "Udopia";
     repo = "gbdc";
-    rev = "badb17af3dd63ff8c027fab053b53c110e9f2120";
-    hash = "sha256-ZzVA5sODXwt5sgP9QL4ajv8yfa7JP4YCPmdtJDCfldQ=";
+    rev = "129aa99304cc64a9a2137b784c72967f845ae40e";
+    hash = "sha256-fsqnCMUX9gMpeal39eLQj6U+4ulLlcuMbTg3hruL7R0=";
   };
 
   buildInputs = [
@@ -25,7 +25,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
-    python3
+    (python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        pybind11
+      ]))
   ];
 
   patches = [

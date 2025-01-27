@@ -13,10 +13,10 @@ buildPythonPackage rec {
   pyproject = true;
 
   src = fetchFromGitHub {
-    owner = "Udopia";
+    owner = "chrjabs";
     repo = "gbdc";
-    rev = "badb17af3dd63ff8c027fab053b53c110e9f2120";
-    hash = "sha256-ZzVA5sODXwt5sgP9QL4ajv8yfa7JP4YCPmdtJDCfldQ=";
+    rev = "a0517cefd4f8438f5a02251032c5f79fda35df56";
+    hash = "sha256-aDWYhSP1XlCs+siMyDG4A75KGWCzwnboUc9ywMJjsh0=";
   };
 
   build-system = [
