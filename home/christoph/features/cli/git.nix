@@ -30,7 +30,6 @@ in {
       column.ui = "auto";
       branch.sort = "committerdate";
       push.autoSetupRemote = true;
-      pull.rebase = true;
       rerere.enabled = true;
       "filter \"dumpsql\"" = let
         sqlite = lib.getExe pkgs.sqlite;
