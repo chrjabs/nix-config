@@ -15,8 +15,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "chrjabs";
     repo = "gbdc";
-    rev = "a0517cefd4f8438f5a02251032c5f79fda35df56";
-    hash = "sha256-aDWYhSP1XlCs+siMyDG4A75KGWCzwnboUc9ywMJjsh0=";
+    rev = "50a86a4a569b65da3934dc95462c1130e9568fec";
+    hash = "sha256-p5k3fR7z0bn21K7bpcvPi/X1lpOngCOqMHHLUL/K6gg=";
   };
 
   build-system = [

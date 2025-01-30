@@ -14,8 +14,8 @@ python3.pkgs.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "chrjabs";
     repo = "gbd";
-    rev = "bac1eda7186b79ed183347df51d8aaa01a7d2d48";
-    hash = "sha256-HM200KqJTS3oo1THl8KDpkgDraRqRTPpdq089UwwLwo=";
+    rev = "0509d0a9a993f94d05bbc15049dcacd430f45c40";
+    hash = "sha256-DH5/I1GAjrlYIsLGDriifOCYmBIBxEh5JaxW526uql4=";
   };
 
   build-system = [
