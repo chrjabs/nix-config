@@ -173,6 +173,16 @@
             keyword = "cppstd";
             url = "https://duckduckgo.com/?sites=cppreference.com&q=%s";
           }
+          {
+            name = "dblp search";
+            keyword = "dblp";
+            url = "https://dblp.org/search?q=%s";
+          }
+          {
+            name = "google scholar search";
+            keyword = "gs";
+            url = "https://scholar.google.com/scholar?q=%s";
+          }
         ];
         settings =
           {
