@@ -24,6 +24,7 @@
     keybindings = {
       "ctrl+enter" = "send_text normal clone-in-kitty --type os-window\\r";
       "ctrl+shift+u" = "no_op";
+      "ctrl+shift+t" = "new_tab_with_cwd";
     };
     settings = {
       editor = config.home.sessionVariables.EDITOR;
