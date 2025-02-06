@@ -18,6 +18,7 @@
     ../common/optional/peripherals/ibus.nix
 
     ../common/optional/virtualization.nix
+    ../common/optional/uh-vpn.nix
   ];
 
   # Systemd boot
