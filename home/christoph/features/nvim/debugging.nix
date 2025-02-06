@@ -1,8 +1,8 @@
 {
   programs.nixvim = {
-    plugins.dap = {
-      enable = true;
-      extensions.dap-ui.enable = true;
+    plugins = {
+      dap.enable = true;
+      dap-ui.enable = true;
     };
 
     keymaps = [

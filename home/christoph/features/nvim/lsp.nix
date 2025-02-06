@@ -31,6 +31,10 @@
         action = "code_action";
         desc = "code action";
       };
+      "<leader>r" = {
+        action = "rename";
+        desc = "rename element";
+      };
     };
   };
 }
