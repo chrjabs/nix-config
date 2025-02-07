@@ -3,6 +3,8 @@
     plugins = {
       dap.enable = true;
       dap-ui.enable = true;
+      # Enable stylix styling of DapUI plugin
+      mini.modules.base16.plugins.default = true;
     };
 
     keymaps = [

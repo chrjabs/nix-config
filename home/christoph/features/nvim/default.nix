@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./browsing.nix
+    ./codelldb.nix
     ./completion.nix
     ./cpp.nix
     ./debugging.nix
@@ -16,6 +17,8 @@
     ./rust.nix
     ./tmux.nix
     ./ui.nix
+
+    ./syntax
   ];
 
   programs.nixvim = {
@@ -40,6 +43,8 @@
       splitright = true;
       # Interval of writing swap file and updating gitsigns
       updatetime = 250;
+      # Keep cursor away from top/bottom
+      scrolloff = 5;
     };
   };
 
