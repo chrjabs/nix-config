@@ -220,7 +220,12 @@
 
   home = {
     persistence = {
-      "/persist/${config.home.homeDirectory}".directories = [".mozilla/firefox"];
+      "/persist/${config.home.homeDirectory}".directories = [
+        {
+          directory = ".mozilla/firefox";
+          method = "bindfs";
+        }
+      ];
     };
   };
 
