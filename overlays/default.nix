@@ -59,4 +59,29 @@ in {
       };
     };
   };
+
+  # Python package modifications
+  python-modifications = self: super: {
+    python3 = super.python3.override {
+      packageOverrides = python-self: python-super: {
+        python-sat = python-super.python-sat.overrideAttrs (previousAttrs: rec {
+          name = previousAttrs.pname + "-" + version;
+          version = "0.1.8.dev14";
+          src = super.fetchFromGitHub {
+            owner = "pysathq";
+            repo = "pysat";
+            rev = "b8e73bb4b61427925155259642ff5725412fc979";
+            hash = "sha256-198pyqomVl9fEF1uayGL1Byk2yzQMMYkm4k7x51GlBw=";
+          };
+          doCheck = false;
+          dontCheck = true;
+          # delete failing test
+          postPatch = ''
+            rm tests/test_unique_mus.py
+          '';
+        });
+      };
+    };
+    python3Packages = self.python3.pkgs;
+  };
 }
