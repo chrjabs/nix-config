@@ -15,13 +15,17 @@ with pkgs; (texlive.combine {
     algpseudocodex
     biblatex
     catchfile
+    courier
     csquotes
     esvect
     hypdoc
+    ifoddpage
     multirow
     pgf
     pgfopts
     pgfplots
+    relsize
+    soul
     svg
     tikzfill
     trimspaces
