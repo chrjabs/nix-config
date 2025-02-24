@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   programs.nixvim.plugins = {
     # Treesitter
     treesitter = {
       enable = true;
-      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      grammarPackages = with pkgs.nixvim.vimPlugins.nvim-treesitter.builtGrammars; [
         bash
         make
         markdown
