@@ -8,8 +8,11 @@
 
   pass-wofi = pkgs.callPackage ./pass-wofi {};
 
-  # Personal set of typically needed latex packages
-  latex = pkgs.callPackage ./latex {};
+  # Personal set(s) of typically needed latex packages
+  latex = {
+    default = pkgs.callPackage ./latex {};
+    lipics = pkgs.callPackage ./latex/lipics.nix {};
+  };
 
   # VeriPB proof checker
   veripb = pkgs.python3Packages.callPackage ./veripb {};
