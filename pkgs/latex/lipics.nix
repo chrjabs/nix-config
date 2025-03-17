@@ -10,16 +10,19 @@ with pkgs; (texlive.combine {
     # Packages
     
     algorithms
+    algorithm2e
     catchfile
     changepage
     cleveref
     comment
     fontawesome5
+    ifoddpage
     multirow
     mwe
     pgf
     pgfopts
     pgfplots
+    relsize
     soul
     svg
     thmtools
