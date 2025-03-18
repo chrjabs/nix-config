@@ -32,6 +32,8 @@
       # Leader keys
       mapleader = " ";
       maplocalleader = ",";
+      # No animations
+      snacks_animate = false;
     };
 
     opts = {
@@ -45,6 +47,19 @@
       updatetime = 250;
       # Keep cursor away from top/bottom
       scrolloff = 5;
+    };
+
+    plugins = {
+      snacks = {
+        enable = true;
+        settings = {
+          bigfile.enabled = true;
+          quickfile.enabled = true;
+          scroll.enabled = true;
+          scope.enabled = true;
+          toggle.enabled = true;
+        };
+      };
     };
   };
 

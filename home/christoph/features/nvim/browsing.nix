@@ -1,73 +1,67 @@
 {
   programs.nixvim = {
     plugins = {
-      telescope = {
-        # Fuzzy finder
+      snacks = {
         enable = true;
-        extensions = {
-          fzf-native.enable = true;
+        settings = {
+          # Fuzzy finder
+          picker.enabled = true;
+          # File tree
+          explorer.enabled = true;
         };
       };
-      # File tree
-      nvim-tree.enable = true;
     };
 
     keymaps = [
-      # Telescope
+      # Picker
       {
         key = "<leader>ff";
-        action = "<CMD>Telescope find_files<CR>";
+        action.__raw = "function() Snacks.picker.files() end";
         mode = "n";
         options.desc = "Find file";
       }
       {
         key = "<leader>fa";
-        action = "<CMD>Telescope find_files follow=true no_ignore=true hidden=true<CR>";
+        action.__raw = "function() Snacks.picker.files({ hidden = true, ignored = true, follow = true }) end";
         mode = "n";
         options.desc = "Find file (include ignored/hidden)";
       }
       {
         key = "<leader>fw";
-        action = "<CMD>Telescope live_grep<CR>";
+        action.__raw = "function() Snacks.picker.grep() end";
         mode = "n";
         options.desc = "Find in all files";
       }
       {
         key = "<leader>fb";
-        action = "<CMD>Telescope buffers<CR>";
+        action.__raw = "function() Snacks.picker.buffers() end";
         mode = "n";
         options.desc = "Find buffer";
       }
       {
         key = "<leader>fz";
-        action = "<CMD>Telescope current_buffer_fuzzy_find<CR>";
-        mode = "n";
-        options.desc = "Find in current buffer";
-      }
-      {
-        key = "<leader>fz";
-        action = "<CMD>Telescope current_buffer_fuzzy_find<CR>";
+        action.__raw = "function() Snacks.picker.lines() end";
         mode = "n";
         options.desc = "Find in current buffer";
       }
       {
         key = "<leader>ft";
-        action = "<CMD>TodoTelescope<CR>";
+        action.__raw = "function() Snacks.picker.todo_comments() end";
         mode = "n";
         options.desc = "Find todos";
       }
-      # Nvim Tree
       {
-        key = "<C-n>";
-        action = "<CMD>NvimTreeToggle<CR>";
+        key = "<leader>gl";
+        action.__raw = "function() Snacks.picker.git_log() end";
         mode = "n";
-        options.desc = "Toggle file tree";
+        options.desc = "Find in git log";
       }
+      # Explorer
       {
         key = "<leader>e";
-        action = "<CMD>NvimTreeFocus<CR>";
+        action.__raw = "function() Snacks.explorer.reveal() end";
         mode = "n";
-        options.desc = "Focus file tree";
+        options.desc = "Reveal current file in explorer";
       }
     ];
   };

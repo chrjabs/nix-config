@@ -3,6 +3,22 @@
     plugins = {
       # Git markers
       gitsigns.enable = true;
+      # Status column
+      snacks = {
+        enable = true;
+        settings = {
+          statuscolumn.enabled = true;
+          indent = {
+            enabled = true;
+            indent.char = "┊";
+          };
+          zen = {
+            enabled = true;
+            on_open.__raw = "function(win) vim.opt.scrolloff = 200 end";
+            on_close.__raw = "function(win) vim.opt.scrolloff = 5 end";
+          };
+        };
+      };
       # Status line
       airline = {
         enable = true;
@@ -45,7 +61,7 @@
       }
       {
         key = "<leader>x";
-        action = "<CMD>bd<CR>";
+        action.__raw = "function() Snacks.bufdelete() end";
         mode = "n";
         options.desc = "Close current buffer";
       }
@@ -58,6 +74,12 @@
       {
         key = "<S-tab>";
         action = "<CMD>bp<CR>";
+        mode = "n";
+        options.desc = "Goto previous buffer";
+      }
+      {
+        key = "<leader>z";
+        action.__raw = "function() Snacks.zen() end";
         mode = "n";
         options.desc = "Goto previous buffer";
       }
