@@ -16,13 +16,16 @@ with pkgs; (texlive.combine {
     cleveref
     comment
     fontawesome5
+    greek-fontenc
     ifoddpage
     multirow
     mwe
+    pdfx
     pgf
     pgfopts
     pgfplots
     relsize
+    standalone
     soul
     svg
     thmtools
@@ -33,6 +36,7 @@ with pkgs; (texlive.combine {
     totpages
     type1cm
     urlbst
+    xmpincl
     xstring
     ;
 })
