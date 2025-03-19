@@ -18,6 +18,7 @@ with pkgs; (texlive.combine {
     fontawesome5
     greek-fontenc
     ifoddpage
+    luatex85
     multirow
     mwe
     pdfx
