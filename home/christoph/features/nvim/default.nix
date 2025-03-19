@@ -15,6 +15,7 @@
     ./latex.nix
     ./lsp.nix
     ./rust.nix
+    ./terminal.nix
     ./tmux.nix
     ./ui.nix
 

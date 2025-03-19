@@ -12,6 +12,8 @@
             enabled = true;
             indent.char = "┊";
           };
+          input.enabled = true;
+          notifier.enabled = true;
           zen = {
             enabled = true;
             on_open.__raw = "function(win) vim.opt.scrolloff = 200 end";
