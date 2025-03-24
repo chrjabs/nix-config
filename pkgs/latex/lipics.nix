@@ -27,6 +27,7 @@ with pkgs; (texlive.combine {
     pgfplots
     relsize
     standalone
+    svn-prov
     soul
     svg
     thmtools
