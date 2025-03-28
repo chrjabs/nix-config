@@ -75,12 +75,12 @@ in {
       packageOverrides = python-self: python-super: {
         python-sat = python-super.python-sat.overrideAttrs (previousAttrs: rec {
           name = previousAttrs.pname + "-" + version;
-          version = "0.1.8.dev14";
+          version = "0.1.8.dev16";
           src = super.fetchFromGitHub {
             owner = "pysathq";
             repo = "pysat";
-            rev = "b8e73bb4b61427925155259642ff5725412fc979";
-            hash = "sha256-198pyqomVl9fEF1uayGL1Byk2yzQMMYkm4k7x51GlBw=";
+            rev = "e6a6a2bf78aa7ad806f47a84aecd1b7bfd5b3b89";
+            hash = "sha256-6RX57eAyWypbJFCXxTWJNmjIXwbB7ruJtksDOXzSWo0=";
           };
           doCheck = false;
           dontCheck = true;
