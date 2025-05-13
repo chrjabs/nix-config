@@ -21,6 +21,7 @@
         rust
         julia
         python
+        just
       ];
     };
     treesitter-textobjects.enable = true;

@@ -13,6 +13,7 @@
           cpp = ["clang_format"];
           toml = ["taplo"];
           nix = ["alejandra"];
+          just = ["just"];
         };
         format_on_save =
           # Lua
