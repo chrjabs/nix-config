@@ -10,6 +10,10 @@
     ../common
   ];
 
+  home.packages = with pkgs; [
+    (flameshot.override {enableWlrSupport = true;})
+  ];
+
   wayland.windowManager.sway = {
     enable = true;
 
