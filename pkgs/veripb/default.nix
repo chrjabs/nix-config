@@ -1,11 +1,11 @@
 {
   lib,
-  python3,
+  python,
   fetchFromGitLab,
   gmp,
   zlib,
 }:
-python3.pkgs.buildPythonApplication rec {
+python.pkgs.buildPythonApplication rec {
   pname = "veripb";
   version = "2.2.2";
   pyproject = true;
@@ -18,11 +18,11 @@ python3.pkgs.buildPythonApplication rec {
   };
 
   build-system = [
-    python3.pkgs.setuptools
-    python3.pkgs.wheel
+    python.pkgs.setuptools
+    python.pkgs.wheel
   ];
 
-  propagatedBuildInputs = with python3.pkgs; [
+  propagatedBuildInputs = with python.pkgs; [
     cython
     pybind11
     setuptools-git-versioning
