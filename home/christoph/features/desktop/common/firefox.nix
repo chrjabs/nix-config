@@ -183,6 +183,11 @@
             keyword = "gs";
             url = "https://scholar.google.com/scholar?q=%s";
           }
+          {
+            name = "ctan search";
+            keyword = "ctan";
+            url = "https://ctan.org/search?phrase=%s";
+          }
         ];
         settings =
           {
