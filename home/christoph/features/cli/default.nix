@@ -9,6 +9,7 @@
     ./gh.nix
     ./git.nix
     ./gpg.nix
+    ./jj.nix
     ./joshuto.nix
     ./ssh.nix
     ./starship
