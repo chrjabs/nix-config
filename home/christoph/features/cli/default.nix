@@ -21,6 +21,7 @@
     ripgrep # Better grep
     diffsitter # Better diff
     csc # CLI Calculator
+    dysk # Better df
 
     nixd # Nix LSP
     alejandra # Nix formatter
