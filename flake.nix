@@ -4,8 +4,6 @@
   inputs = {
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-edge.url = "github:nixos/nixpkgs";
     systems.url = "github:nix-systems/default";
 
     # Custom Nixpkgs

@@ -6,7 +6,6 @@
 }: {
   programs.jujutsu = {
     enable = true;
-    package = pkgs.edge.jujutsu;
     settings = {
       user = {
         name = "Christoph Jabs";
