@@ -4,9 +4,9 @@
   lib,
   ...
 }: {
-  xdg.configFile."kitty/ssh.conf".text = ''
-    share_connections no
-  '';
+  # xdg.configFile."kitty/ssh.conf".text = ''
+  #   share_connections no
+  # '';
 
   xdg.mimeApps = {
     associations.added = {
@@ -33,4 +33,5 @@
       window_padding_width = 15;
     };
   };
+  # stylix.targets.kitty.enable = false;
 }

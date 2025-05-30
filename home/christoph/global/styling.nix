@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    inputs.stylix.homeManagerModules.stylix
+    inputs.stylix.homeModules.stylix
   ];
 
   recolor-wallpaper = {
@@ -15,10 +15,10 @@
     wallpaper = lib.mkDefault "earth2";
   };
 
-  specialisation.work.configuration.recolor-wallpaper = {
-    theme = "catppuccin-frappe";
-    wallpaper = "rocket";
-  };
+  # specialisation.work.configuration.recolor-wallpaper = {
+  #   theme = "catppuccin-frappe";
+  #   wallpaper = "rocket";
+  # };
 
   stylix = {
     enable = true;
@@ -32,7 +32,7 @@
         name = "DejaVu Sans";
       };
       monospace = {
-        package = pkgs.fira-code-nerdfont;
+        package = pkgs.nerd-fonts.fira-code;
         name = "Fira Code Nerd Font";
       };
       emoji = {

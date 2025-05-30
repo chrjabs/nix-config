@@ -22,16 +22,6 @@ in {
       inputs;
   };
 
-  # Adds pkgs.stable == inputs.nixpkgs-stable.legacyPackages.${pkgs.system}
-  stable = final: _: {
-    stable = inputs.nixpkgs-stable.legacyPackages.${final.system};
-  };
-
-  # Adds pkgs.edge == inputs.nixpkgs-edge.legacyPackages.${pkgs.system}
-  edge = final: _: {
-    edge = inputs.nixpkgs-edge.legacyPackages.${final.system};
-  };
-
   # Adds pkgs.custom == inputs.custom-nixpkgs.legacyPackages.${pkgs.system}
   custom = final: _: {
     custom = inputs.custom-nixpkgs.legacyPackages.${final.system};

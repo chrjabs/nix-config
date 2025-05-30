@@ -10,8 +10,4 @@
       flake-registry = ""; # Disable global flake registry
     };
   };
-  nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
-    config.allowUnfree = true;
-  };
 }

@@ -106,89 +106,92 @@
         id = 0;
         search = {
           force = true;
-          default = "DuckDuckGo";
-          privateDefault = "DuckDuckGo";
-          order = ["DuckDuckGo" "Google"];
+          default = "ddg";
+          privateDefault = "ddg";
+          order = ["ddg" "google"];
           engines = {
-            "Bing".metaData.hidden = true;
+            "bing".metaData.hidden = true;
           };
         };
-        extensions = with pkgs.inputs.firefox-addons; [
+        extensions.packages = with pkgs.inputs.firefox-addons; [
           ublock-origin
           browserpass
         ];
-        bookmarks = [
-          {
-            name = "Search Wikipedia";
-            keyword = "wiki";
-            url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-          }
-          {
-            name = "YouTube Subs";
-            keyword = "ya";
-            url = "https://www.youtube.com/feed/subscriptions";
-          }
-          {
-            name = "Search YouTube";
-            keyword = "y";
-            url = "https://www.youtube.com/results?search_query=%s";
-          }
-          {
-            name = "GitHub";
-            keyword = "gh";
-            url = "https://github.com/%s";
-          }
-          {
-            name = "Own GitHub By Repo";
-            keyword = "ghc";
-            url = "https://github.com/chrjabs/%s";
-          }
-          {
-            name = "Toggl";
-            keyword = "t";
-            url = "https://toggl.com/app/timer";
-          }
-          {
-            name = "Todoist";
-            keyword = "td";
-            url = "https://firefox.todoist.com/app/upcoming#";
-          }
-          {
-            name = "Nix Packages";
-            keyword = "np";
-            url = "https://search.nixos.org/packages?channel=unstable&query=%s";
-          }
-          {
-            name = "Home Manager Options";
-            keyword = "hm";
-            url = "https://home-manager-options.extranix.com/&query=%s&release=release-24.05";
-          }
-          {
-            name = "Rust stdlib documentation search";
-            keyword = "rsstd";
-            url = "https://doc.rust-lang.org/stable/std/index.html?search=%s";
-          }
-          {
-            name = "C++ stdlib documentation search";
-            keyword = "cppstd";
-            url = "https://duckduckgo.com/?sites=cppreference.com&q=%s";
-          }
-          {
-            name = "dblp search";
-            keyword = "dblp";
-            url = "https://dblp.org/search?q=%s";
-          }
-          {
-            name = "google scholar search";
-            keyword = "gs";
-            url = "https://scholar.google.com/scholar?q=%s";
-          }
-          {
-            name = "ctan search";
-            keyword = "ctan";
-            url = "https://ctan.org/search?phrase=%s";
-          }
-        ];
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              name = "Search Wikipedia";
+              keyword = "wiki";
+              url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+            }
+            {
+              name = "YouTube Subs";
+              keyword = "ya";
+              url = "https://www.youtube.com/feed/subscriptions";
+            }
+            {
+              name = "Search YouTube";
+              keyword = "y";
+              url = "https://www.youtube.com/results?search_query=%s";
+            }
+            {
+              name = "GitHub";
+              keyword = "gh";
+              url = "https://github.com/%s";
+            }
+            {
+              name = "Own GitHub By Repo";
+              keyword = "ghc";
+              url = "https://github.com/chrjabs/%s";
+            }
+            {
+              name = "Toggl";
+              keyword = "t";
+              url = "https://toggl.com/app/timer";
+            }
+            {
+              name = "Todoist";
+              keyword = "td";
+              url = "https://firefox.todoist.com/app/upcoming#";
+            }
+            {
+              name = "Nix Packages";
+              keyword = "np";
+              url = "https://search.nixos.org/packages?channel=unstable&query=%s";
+            }
+            {
+              name = "Home Manager Options";
+              keyword = "hm";
+              url = "https://home-manager-options.extranix.com/&query=%s&release=release-24.05";
+            }
+            {
+              name = "Rust stdlib documentation search";
+              keyword = "rsstd";
+              url = "https://doc.rust-lang.org/stable/std/index.html?search=%s";
+            }
+            {
+              name = "C++ stdlib documentation search";
+              keyword = "cppstd";
+              url = "https://duckduckgo.com/?sites=cppreference.com&q=%s";
+            }
+            {
+              name = "dblp search";
+              keyword = "dblp";
+              url = "https://dblp.org/search?q=%s";
+            }
+            {
+              name = "google scholar search";
+              keyword = "gs";
+              url = "https://scholar.google.com/scholar?q=%s";
+            }
+            {
+              name = "ctan search";
+              keyword = "ctan";
+              url = "https://ctan.org/search?phrase=%s";
+            }
+          ];
+        };
         settings =
           {
             "browser.startup.homepage" = "about:home";
