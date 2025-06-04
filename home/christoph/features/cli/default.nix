@@ -25,6 +25,7 @@
 
     nixd # Nix LSP
     alejandra # Nix formatter
+    nix-output-monitor
   ];
   programs = {
     bash.enable = true;
