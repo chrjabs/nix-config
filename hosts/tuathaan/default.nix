@@ -15,6 +15,7 @@
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix
     ../common/optional/peripherals/ibus.nix
+    ../common/optional/peripherals/remap-caps.nix
 
     ../common/optional/uh-vpn.nix
   ];

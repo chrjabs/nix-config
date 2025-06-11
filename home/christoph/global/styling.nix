@@ -15,10 +15,10 @@
     wallpaper = lib.mkDefault "earth2";
   };
 
-  # specialisation.work.configuration.recolor-wallpaper = {
-  #   theme = "catppuccin-frappe";
-  #   wallpaper = "rocket";
-  # };
+  specialisation.work.configuration.recolor-wallpaper = {
+    theme = "catppuccin-frappe";
+    wallpaper = "rocket";
+  };
 
   stylix = {
     enable = true;
@@ -33,7 +33,7 @@
       };
       monospace = {
         package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font";
+        name = "FiraCode Nerd Font";
       };
       emoji = {
         package = pkgs.noto-fonts-emoji;

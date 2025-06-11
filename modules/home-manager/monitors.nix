@@ -38,12 +38,16 @@ in {
             default = true;
           };
           workspaces = mkOption {
-            type = types.nullOr (types.listOf types.str);
-            default = null;
+            type = types.listOf types.str;
+            default = [];
           };
           fallback = mkOption {
             type = types.nullOr types.str;
             default = null;
+          };
+          scale = mkOption {
+            type = types.float;
+            default = 1.0;
           };
         };
       }

@@ -17,11 +17,12 @@
 
   monitors = [
     {
-      name = "DP-1";
+      name = "eDP-1";
       width = 2560;
       height = 1440;
       primary = true;
       workspaces = ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10"];
+      scale = 1.5;
     }
   ];
 

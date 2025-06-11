@@ -43,6 +43,10 @@
     # NixOS Generators
     nixos-generators.url = "github:nix-community/nixos-generators/7c60ba4bc8d6aa2ba3e5b0f6ceb9fc07bc261565";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
+    # xremap
+    xremap.url = "github:xremap/nix-flake";
+    xremap.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

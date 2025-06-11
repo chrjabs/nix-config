@@ -33,5 +33,4 @@
       window_padding_width = 15;
     };
   };
-  # stylix.targets.kitty.enable = false;
 }

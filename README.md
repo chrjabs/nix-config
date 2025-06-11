@@ -15,7 +15,7 @@ system.
 
 ```bash
 ssh-keygen -t ed25519 -f /tmp/ssh_host_ed25519_key
-cp /tmp/ssh_host_ed25519_key.pub $FLAKE/hosts/<hostname>/
+cp /tmp/ssh_host_ed25519_key.pub $NH_FLAKE/hosts/<hostname>/
 cat /tmp/ssh_host_ed25519_key.pub | ssh-to-age > /tmp/age.pub
 ```
 
@@ -23,7 +23,7 @@ Put the contents of `/tmp/age.pub` into `.sops.yaml` and update the secrets
 file(s).
 
 ```bash
-sops updatekeys $FLAKE/hosts/common/secrets.yaml
+sops updatekeys $NH_FLAKE/hosts/common/secrets.yaml
 ```
 
 Commit and push the changes.

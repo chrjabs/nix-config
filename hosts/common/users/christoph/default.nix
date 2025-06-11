@@ -18,6 +18,7 @@ in {
       "video"
       "wheel"
       "fuse"
+      "network"
     ];
 
     openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/christoph/ssh.pub);
