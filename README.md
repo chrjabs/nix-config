@@ -38,6 +38,8 @@ commands:
 echo "mypwd" > /tmp/secret.key
 # Format disk using disko
 sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko' -- --mode disko --flake '/tmp/nix-config#<host>'
+# Optionally enroll YubiKey as crypt device
+sudo systemd-cryptenroll <dev> --fido2-device=auto --fido2-with-client-pin=yes
 # Copy the SSH keypair to the persist volume
 sudo mkdir -p /mnt/persist/etc/ssh/
 sudo cp <keypair> /mnt/persist/etc/ssh/

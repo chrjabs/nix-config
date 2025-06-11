@@ -27,6 +27,13 @@
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   disko.devices.disk.${config.networking.hostName}.device = lib.mkForce "/dev/nvme0n1";
+  # Luks with yubikey in systemd-cryptenroll
+  # https://discourse.nixos.org/t/fde-using-systemd-cryptenroll-with-fido2-key/47762
+  boot.initrd = {
+    systemd.enable = true;
+    luks.fido2Support = false;
+    luks.devices.${config.networking.hostName}.crypttabExtraOpts = ["fido2-device=auto"];
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
