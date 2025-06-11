@@ -92,6 +92,13 @@
         };
         modules = [./hosts/gallifrey];
       };
+      tuathaan = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+          bootstrap = false;
+        };
+        modules = [./hosts/tuathaan];
+      };
       medusa = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
@@ -113,6 +120,11 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/christoph/gallifrey.nix ./home/christoph/nixpkgs.nix];
+      };
+      "christoph@tuathaan" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/christoph/tuathaan.nix ./home/christoph/nixpkgs.nix];
       };
       "christoph@medusa" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
