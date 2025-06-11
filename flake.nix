@@ -4,15 +4,13 @@
   inputs = {
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-edge.url = "github:nixos/nixpkgs";
     systems.url = "github:nix-systems/default";
 
     # Custom Nixpkgs
     custom-nixpkgs.url = "github:chrjabs/nixpkgs/custom";
 
     # Impermanence
-    impermanence.url = "github:chrjabs/impermanence";
+    impermanence.url = "github:nix-community/impermanence";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -30,7 +28,13 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Stylix
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.tinted-kitty.follows = "tinted-kitty";
+    tinted-kitty = {
+      url = "github:tinted-theming/tinted-kitty";
+      flake = false;
+    };
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Firefox Addons
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";

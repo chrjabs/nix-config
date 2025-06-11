@@ -9,15 +9,15 @@
 
     package = pkgs.rustPlatform.buildRustPackage rec {
       pname = "joshuto";
-      version = "0.9.8";
+      version = "0.9.9";
 
       src = pkgs.fetchFromGitHub {
         owner = "kamiyaa";
         repo = pname;
-        rev = "1bd52c03d7f4df20e5c090db8b6fe43605e16dc4";
-        hash = "sha256-LNMyNA+/ETokDzdjTOcfU9hPKLxD2yhKw/HyDkvQGGI=";
+        rev = "v${version}";
+        hash = "sha256-hfu3Verbrq0to3I5/gX6ZhVr7ewjHNamzvaUcmcUIRU=";
       };
-      cargoHash = "sha256-05XaEXtYu1/77aKV4tDeMkZEdbbjE0NAUEHT95Ah9lA=";
+      cargoHash = "sha256-K/++/NdOLSvhxQ8LBS+jnthCRJxScoOjWSp7pmfHVaQ=";
 
       nativeBuildInputs = [pkgs.installShellFiles];
 

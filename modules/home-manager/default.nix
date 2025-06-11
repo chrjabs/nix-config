@@ -4,6 +4,5 @@
   # List your module files here
   monitors = import ./monitors.nix;
   pass-secret-service = import ./pass-secret-service.nix;
-  mako = import ./mako.nix;
   recolor-wallpaper = import ./recolor-wallpaper.nix;
 }
