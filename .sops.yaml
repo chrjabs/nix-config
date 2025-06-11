@@ -7,6 +7,7 @@ keys:
     - &phantasia age1kdmc7uwtgnghwyn4uzswdkc4ya3wvgk3egquejthvx99wyd2fpdqg9pkzp
     - &gallifrey age148f0u0ytpveuaq8xgeulnrm6l7fslc8gysk2uaf03tt9ejern3ys9vteg7
     - &medusa age1rcf425yjzkua5keaktw6s9rkjwx28vgkjm7evtt0m5s3lpyz9p6sr73k6j
+    - &tuathaan age1qrvskael2jehwv8yg0f7f6tn5zd3rfez0ne7fzsqn0t5up58k9aqcegsdl
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
@@ -14,6 +15,7 @@ creation_rules:
       - *phantasia
       - *gallifrey
       - *medusa
+      - *tuathaan
       pgp:
       - *christoph
   - path_regex: hosts/gallifrey/secrets.ya?ml$
