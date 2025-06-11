@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  bootstrap ? false,
   ...
 }: let
   homeCfgs = config.home-manager.users;
@@ -39,7 +40,7 @@ in {
 
     programs.regreet = {
       enable = lib.mkDefault true;
-      settings.background = {
+      settings.background = lib.mkIf (!bootstrap) {
         path = pkgs.wallpapers."${christophCfg.recolor-wallpaper.wallpaper}".path;
         fit = "Cover";
       };

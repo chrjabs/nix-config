@@ -95,7 +95,7 @@
       tuathaan = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          bootstrap = false;
+          bootstrap = true;
         };
         modules = [./hosts/tuathaan];
       };
