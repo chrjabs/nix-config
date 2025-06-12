@@ -18,18 +18,19 @@
         pskRaw = "ext:Spectrum";
       };
       "Spectrum-portable" = {
-        pskRaw = "ext:Spectrum-portable";
+        pskRaw = "ext:Portable";
       };
       "eduroam" = {
         authProtocols = ["WPA-EAP"];
         auth = ''
           pairwise=CCMP
-          group=CCMP
+          group=CCMP TKIP
           eap=PEAP
           ca_cert="${./eduroam-cert.pem}"
-          identity="chrjabs@ad.helsinki.fi"
+          identity="chrisjab@helsinki.fi"
           password=ext:eduroam
           phase2="auth=MSCHAPV2"
+          anonymous_identity="anonymous@helsinki.fi"
           altsubject_match="DNS:rad-proxy.fe.helsinki.fi"
         '';
       };
