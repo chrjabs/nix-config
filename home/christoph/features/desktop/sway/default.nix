@@ -32,6 +32,7 @@
         pass-wofi = lib.getExe pkgs.pass-wofi;
         joshuto = lib.getExe config.programs.joshuto.package;
         brightnessctl = lib.getExe pkgs.brightnessctl;
+        swaylock = lib.getExe config.programs.swaylock.package;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
@@ -43,7 +44,7 @@
           "${modifier}+Shift+s" = "exec ${makoctl} mode -t do-not-disturb";
           "${modifier}+p" = "exec ${pass-wofi}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
-          "${modifier}+Shift+l" = "exec swaylock";
+          "${modifier}+Shift+l" = "exec ${swaylock} --daemonize --grace 15";
           # Move workspace to other output
           "${modifier}+Ctrl+l" = "move workspace to output right";
           "${modifier}+Ctrl+h" = "move workspace to output left";

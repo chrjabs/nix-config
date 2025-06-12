@@ -35,4 +35,12 @@
   # Laptop power management
   powerManagement.enable = true;
   services.tlp.enable = true;
+  services.logind = {
+    # Don't shutdown on power button press
+    powerKey = "ignore";
+    # Give swaylock a bit more time to lock before suspend
+    extraConfig = ''
+      InhibitDelayMaxSec=10
+    '';
+  };
 }

@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  swaylock = "${config.programs.swaylock.package}/bin/swaylock";
-  pgrep = "${pkgs.procps}/bin/pgrep";
-  hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
-  swaymsg = "${config.wayland.windowManager.sway.package}/bin/swaymsg";
+  swaylock = lib.getExe config.programs.swaylock.package;
+  pgrep = lib.getExe' pkgs.procps "prgrep";
+  hyprctl = lib.getExe' config.wayland.windowManager.hyprland.package "hypercts";
+  swaymsg = lib.getExe' config.wayland.windowManager.sway.package "swaymsg";
 
   isLocked = "${pgrep} -x ${swaylock}";
 
@@ -58,5 +58,16 @@ in {
         command = "${swaymsg} 'output * dpms off'";
         resumeCommand = "${swaymsg} 'output * dpms on'";
       }));
+    # Lock before sleep
+    events = [
+      {
+        event = "before-sleep";
+        command = "${swaylock} --daemonize";
+      }
+      {
+        event = "lock";
+        command = "${swaylock} --daemonize --grace 15";
+      }
+    ];
   };
 }
