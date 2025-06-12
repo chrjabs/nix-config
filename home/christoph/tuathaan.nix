@@ -7,6 +7,7 @@
     ./global
     ./features/desktop/sway
     ./features/desktop/optional/keepass.nix
+    ./features/desktop/optional/zoom.nix
     ./features/productivity
     ./features/rust
   ];

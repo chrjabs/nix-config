@@ -39,8 +39,10 @@
           "${modifier}+s" = "exec specialisation $(specialisation | ${wofi} -S dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
+          "${modifier}+Shift+s" = "exec ${makoctl} mode -t do-not-disturb";
           "${modifier}+p" = "exec ${pass-wofi}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
+          "${modifier}+Shift+l" = "exec swaylock";
           # Media keys
           "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
           "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";

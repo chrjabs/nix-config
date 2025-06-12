@@ -94,6 +94,7 @@ in {
         modules-right = [
           "tray"
           "custom/rfkill"
+          "custom/dnd"
           "network"
           "pulseaudio"
           "battery"
@@ -290,11 +291,20 @@ in {
           };
         };
         "custom/rfkill" = {
-          interval = 1;
+          interval = 3;
           exec-if = mkScript {
             deps = [pkgs.util-linux];
-            script = "rfkill | grep '\<blocked\>'";
+            script = "rfkill list wifi | grep yes -q";
           };
+          exec = "echo 󰀝";
+        };
+        "custom/dnd" = {
+          interval = 3;
+          exec-if = mkScript {
+            deps = [pkgs.mako];
+            script = "makoctl mode | grep 'do-not-disturb' 2&>/dev/null";
+          };
+          exec = "echo 󱏧";
         };
       };
     };
