@@ -302,7 +302,7 @@ in {
           interval = 3;
           exec-if = mkScript {
             deps = [pkgs.mako];
-            script = "makoctl mode | grep 'do-not-disturb' 2&>/dev/null";
+            script = "makoctl mode | grep 'do-not-disturb' -q";
           };
           exec = "echo 󱏧";
         };
