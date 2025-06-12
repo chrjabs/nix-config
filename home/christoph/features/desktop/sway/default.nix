@@ -31,6 +31,7 @@
         playerctl = lib.getExe pkgs.playerctl;
         pass-wofi = lib.getExe pkgs.pass-wofi;
         joshuto = lib.getExe config.programs.joshuto.package;
+        brightnessctl = lib.getExe pkgs.brightnessctl;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
@@ -55,6 +56,8 @@
           "XF86AudioPlay" = "exec ${playerctl} play-pause";
           "XF86AudioNext" = "exec ${playerctl} next";
           "XF86AudioPrev" = "exec ${playerctl} previous";
+          "XF86MonBrightnessUp" = "exec ${brightnessctl} set 10%+";
+          "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10%-";
         };
 
       bars = [];

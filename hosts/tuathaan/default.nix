@@ -31,4 +31,8 @@
   programs.dconf.enable = true;
 
   hardware.graphics.enable = true;
+
+  # Laptop power management
+  powerManagement.enable = true;
+  services.tlp.enable = true;
 }
