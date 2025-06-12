@@ -208,7 +208,11 @@ in {
                 auth = "xoauth2";
               };
             };
-            smtp.host = "smtp.office365.com";
+            smtp = {
+              host = "smtp.office365.com";
+              port = 587;
+              tls.useStartTls = true;
+            };
             userName = "chrisjab@ad.helsinki.fi";
           }
           // common;

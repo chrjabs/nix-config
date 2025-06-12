@@ -8,6 +8,7 @@
     ./features/desktop/sway
     ./features/desktop/optional/keepass.nix
     ./features/desktop/optional/zoom.nix
+    ./features/desktop/optional/bluetui.nix
     ./features/productivity
     ./features/rust
   ];
