@@ -43,6 +43,11 @@
           "${modifier}+p" = "exec ${pass-wofi}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
           "${modifier}+Shift+l" = "exec swaylock";
+          # Move workspace to other output
+          "${modifier}+Ctrl+l" = "move workspace to output right";
+          "${modifier}+Ctrl+h" = "move workspace to output left";
+          "${modifier}+Ctrl+j" = "move workspace to output down";
+          "${modifier}+Ctrl+k" = "move workspace to output up";
           # Media keys
           "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
           "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";
