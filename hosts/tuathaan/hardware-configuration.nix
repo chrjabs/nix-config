@@ -10,11 +10,12 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../common/optional/systemd-initrd.nix
     ../common/optional/single-disk-encrypted.nix
     ../common/optional/ephemeral-btrfs.nix
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "cryptd" "aes"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
@@ -30,7 +31,6 @@
   # Luks with yubikey in systemd-cryptenroll
   # https://discourse.nixos.org/t/fde-using-systemd-cryptenroll-with-fido2-key/47762
   boot.initrd = {
-    systemd.enable = true;
     luks.fido2Support = false;
     luks.devices.${config.networking.hostName}.crypttabExtraOpts = ["fido2-device=auto"];
   };

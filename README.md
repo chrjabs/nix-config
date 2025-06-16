@@ -45,12 +45,6 @@ sudo mkdir -p /mnt/persist/etc/ssh/
 sudo cp <keypair> /mnt/persist/etc/ssh/
 # Unmount all subvolumes
 sudo umount {/mnt/{persist,nix,.swapvol,boot},/mnt}
-# Mount root of file system
-sudo mount -t btrfs -o subvol=/ /dev/mapper/<hostname> /mnt
-# Create read-only blank snapshot for root volume to roll back to
-sudo btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
-# Unmount
-sudo umount /mnt
 # Install with disko-install in mount mode
 sudo nix --experimental-features "nix-command flakes" run 'github:nix-community/disko#disko-install' -- --mode mount --disk <hostname> <devpath> --flake '/tmp/nix-config#<host>'
 ```

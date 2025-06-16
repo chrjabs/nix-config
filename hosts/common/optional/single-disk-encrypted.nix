@@ -36,9 +36,17 @@ in {
                 name = hostname;
                 passwordFile = "/tmp/secret.key"; # Interactive
                 settings.allowDiscards = true;
-                content = {
+                content = let
+                  this = config.disko.devices.disk.${hostname}.content.partitions.crypt.content.content;
+                in {
                   type = "btrfs";
-                  extraArgs = ["-f"];
+                  extraArgs = ["-f" "-L${hostname}"];
+                  postCreateHook = ''
+                    MNTPOINT=$(mktemp -d)
+                    mount -t btrfs "${this.device}" "$MNTPOINT"
+                    trap 'umount $MNTPOINT; rm -d $MNTPOINT' EXIT
+                    btrfs subvolume snapshot -r $MNTPOINT/root $MNTPOINT/root-blank
+                  '';
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
