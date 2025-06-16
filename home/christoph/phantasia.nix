@@ -8,12 +8,12 @@
 
   home.sessionVariables.FLAKE = "/mnt/nix-config";
 
-  monitors = [
-    {
-      name = "Virtual-1";
-      width = 1920;
-      height = 1080;
-      primary = true;
-    }
-  ];
+  monitors.layouts = {
+    "Virtual-1" = {
+      mode = {
+        x = 1920;
+        y = 1080;
+      };
+    };
+  };
 }

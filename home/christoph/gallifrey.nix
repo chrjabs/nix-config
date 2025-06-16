@@ -19,25 +19,32 @@
     ./features/desktop/optional/slack.nix
   ];
 
-  monitors = [
-    {
-      # name = "DP-1";
-      name = "DP-3";
-      width = 2560;
-      height = 1440;
-      position = "1080 270";
-      primary = true;
-      workspaces = ["1" "2" "3" "4" "5"];
-    }
-    {
-      name = "HDMI-A-1";
-      width = 1920;
-      height = 1080;
-      rotation = "270";
-      position = "0 0";
-      workspaces = ["6" "7" "8" "9" "10"];
-    }
-  ];
+  monitors.layouts = {
+    default = {
+      "DP-3" = {
+        mode = {
+          x = 2560;
+          y = 1440;
+        };
+        position = {
+          x = 1080;
+          y = 270;
+        };
+        workspaces = ["1" "2" "3" "4" "5"];
+      };
+      "HDMI-A-1" = {
+        mode = {
+          x = 1920;
+          y = 1080;
+        };
+        position = {
+          x = 0;
+          y = 0;
+        };
+        workspaces = ["6" "7" "8" "9" "10"];
+      };
+    };
+  };
 
   services.swayidle.lockTime = 8 * 60; # 8 min
 

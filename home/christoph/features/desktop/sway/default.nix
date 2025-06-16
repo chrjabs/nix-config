@@ -12,6 +12,7 @@
 
   home.packages = with pkgs; [
     (flameshot.override {enableWlrSupport = true;})
+    config.monitors.swayLayoutsScript
   ];
 
   wayland.windowManager.sway = {
@@ -33,6 +34,7 @@
         joshuto = lib.getExe config.programs.joshuto.package;
         brightnessctl = lib.getExe pkgs.brightnessctl;
         swaylock = lib.getExe config.programs.swaylock.package;
+        monitorLayouts = lib.getExe config.monitors.swayLayoutsScript;
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
@@ -45,6 +47,7 @@
           "${modifier}+p" = "exec ${pass-wofi}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
           "${modifier}+Shift+l" = "exec ${swaylock} --daemonize --grace 15";
+          "${modifier}+Shift+m" = "exec ${monitorLayouts} $(${monitorLayouts} | ${wofi} -S dmenu)";
           # Move workspace to other output
           "${modifier}+Ctrl+l" = "move workspace to output right";
           "${modifier}+Ctrl+h" = "move workspace to output left";
@@ -74,32 +77,32 @@
         };
       };
 
-      output = builtins.listToAttrs (builtins.map (m: {
-          name = m.name;
-          value = {
-            disable = lib.mkIf (!m.enabled) "";
-            res = "${toString m.width}x${toString m.height}";
-            scale = toString m.scale;
-            position = lib.mkIf (m.position != null) m.position;
-          };
+      output = lib.mkIf (config.monitors.layouts.default != null) (builtins.mapAttrs (_: m: {
+          # somwhat hacky way of getting `disable` to show up if a monitor is not enabled
+          disable = lib.mkIf (!m.enabled) "";
+          mode = lib.mkIf (m.mode != null) ("${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${m.mode.rate}Hz");
+          scale = lib.mkIf (m.scale != null) "${toString m.scale}";
+          position = lib.mkIf (m.position != null) "${toString m.position.x} ${toString m.position.y}";
+          rotation = lib.mkIf (m.rotation != null) m.rotation;
         })
-        config.monitors);
+        config.monitors.layouts.default);
 
-      workspaceOutputAssign = lib.flatten (builtins.map (m:
-        builtins.map (w: {
-          workspace = w;
-          output = m.name + lib.optionalString (m.fallback != null) " ${m.fallback}";
-        })
-        m.workspaces)
-      config.monitors);
+      workspaceOutputAssign = lib.mkIf (config.monitors.layouts.default != null) (
+        lib.flatten (
+          lib.mapAttrsToList (
+            name: m: (
+              builtins.map (
+                w: {
+                  workspace = w;
+                  output = [name] ++ lib.optionals (m.fallback != null) [m.fallback];
+                }
+              )
+              m.workspaces
+            )
+          )
+          config.monitors.layouts.default
+        )
+      );
     };
-
-    # extraConfig = lib.concatMapStringsSep "\n" (
-    #   m: "output ${m.name} ${
-    #     if m.enabled
-    #     then "enable res ${toString m.width}x${toString m.height} scale ${toString m.scale} ${lib.optionalString (m.position != null) "position ${m.position}"} ${lib.optionalString (m.rotation != null) "transform ${m.rotation}"}"
-    #     else "disable"
-    #   }${lib.optionalString (m.workspaces != null) "\n${lib.concatMapStringsSep "\n" (w: "workspace ${w} output ${m.name}${lib.optionalString (m.fallback != null) " ${m.fallback}"}") (m.workspaces)}"}"
-    # ) (config.monitors);
   };
 }

@@ -17,7 +17,7 @@
     input "type:touchpad" {
       tap enabled
     }
-    exec '${vars} ${command}; ${pkgs.sway}/bin/swaymsg exit'
+    exec '${vars} ${command}; ${lib.getExe' pkgs.sway "swaymsg"} exit'
   ''}";
 in {
   options.greetd.custom = with lib; {

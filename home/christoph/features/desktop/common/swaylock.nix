@@ -16,10 +16,6 @@
       indicator-caps-lock = true;
       indicator-radius = 40;
       indicator-idle-visible = true;
-      indicator-y-position = let
-        firstMon = builtins.head config.monitors;
-      in
-        lib.mkDefault (firstMon.height * 0.9 / firstMon.scale);
     };
   };
 }
