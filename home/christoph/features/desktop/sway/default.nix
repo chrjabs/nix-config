@@ -23,6 +23,35 @@
     config = {
       modifier = "Mod4";
 
+      modes = let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+      in {
+        resize = {
+          Escape = "mode default";
+          Return = "mode default";
+          h = "resize shrink width 10 px";
+          j = "resize grow height 10 px";
+          k = "resize shrink height 10 px";
+          l = "resize grow width 10 px";
+        };
+        move = {
+          Escape = "mode default";
+          Return = "mode default";
+          h = "move left";
+          j = "move down";
+          k = "move up";
+          l = "move right";
+        };
+        move-workspace = {
+          Escape = "mode default";
+          Return = "mode default";
+          h = "move workspace to output left";
+          j = "move workspace to output down";
+          k = "move workspace to output up";
+          l = "move workspace to output right";
+        };
+      };
+
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;
         kitty = lib.getExe config.programs.kitty.package;
@@ -47,12 +76,9 @@
           "${modifier}+p" = "exec ${pass-wofi}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
           "${modifier}+Shift+l" = "exec ${swaylock} --daemonize --grace 15";
-          "${modifier}+Shift+m" = "exec ${monitorLayouts} $(${monitorLayouts} | ${wofi} -S dmenu)";
-          # Move workspace to other output
-          "${modifier}+Ctrl+l" = "move workspace to output right";
-          "${modifier}+Ctrl+h" = "move workspace to output left";
-          "${modifier}+Ctrl+j" = "move workspace to output down";
-          "${modifier}+Ctrl+k" = "move workspace to output up";
+          "${modifier}+Shift+o" = "exec ${monitorLayouts} $(${monitorLayouts} | ${wofi} -S dmenu)";
+          "${modifier}+m" = "mode move";
+          "${modifier}+Shift+m" = "mode move-workspace";
           # Media keys
           "XF86AudioMute" = "exec ${pactl} set-sink-mute \\@DEFAULT_SINK@ toggle";
           "XF86AudioLowerVolume" = "exec ${pactl} set-sink-volume \\@DEFAULT_SINK@ -5%";
