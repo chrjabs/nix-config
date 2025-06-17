@@ -22,6 +22,15 @@
         executable-path = lib.getExe config.programs.git.package;
         sign-on-push = true;
       };
+      "--scope" = [
+        {
+          "--when".commands = ["diff" "show"];
+          ui = {
+            pager = lib.getExe pkgs.delta;
+            diff-formatter = "git";
+          };
+        }
+      ];
     };
   };
 

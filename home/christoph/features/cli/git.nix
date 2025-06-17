@@ -9,6 +9,12 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
+    delta = {
+      enable = true;
+      options = {
+        syntax-theme = lib.mkIf (config.stylix.enable && config.stylix.targets.bat.enable) "base16-stylix";
+      };
+    };
     aliases = {
       fpush = "push --force-with-lease";
       p = "pull --ff-only";
