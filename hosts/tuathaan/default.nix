@@ -36,6 +36,7 @@
   # Laptop power management
   powerManagement.enable = true;
   services.tlp.enable = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
   services.logind = {
     # Don't shutdown on power button press
     powerKey = "ignore";

@@ -17,6 +17,8 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+  hardware.cpu.amd.updateMicrocode = true;
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/36adc27c-52b8-48cf-8334-fb54a550fd63";
     fsType = "btrfs";
@@ -54,5 +56,4 @@
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
