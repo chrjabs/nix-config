@@ -8,4 +8,5 @@
   };
   location.provider = "geoclue2";
   time.timeZone = lib.mkDefault "Europe/Helsinki";
+  services.automatic-timezoned.enable = true;
 }

@@ -35,6 +35,10 @@ in {
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
+  plymouth-theme = final: _: {
+    plymouth-spinner-monochrome = inputs.misterio.packages.${final.system}.plymouth-spinner-monochrome;
+  };
+
   # Python packages
   python-additions = self: super: {
     python3 = super.python3.override {

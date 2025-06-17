@@ -12,6 +12,7 @@
 
     ../common/optional/home.nix
 
+    ../common/optional/quietboot.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix
     ../common/optional/pipewire.nix

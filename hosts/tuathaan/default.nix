@@ -10,6 +10,7 @@
     ../common/global
     ../common/users/christoph
 
+    ../common/optional/quietboot.nix
     ../common/optional/wireless.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix

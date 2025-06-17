@@ -47,6 +47,10 @@
     # xremap
     xremap.url = "github:xremap/nix-flake";
     xremap.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Using plymouth theme from here
+    misterio.url = "github:Misterio77/nix-config";
+    misterio.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
