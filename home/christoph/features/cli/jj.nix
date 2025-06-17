@@ -27,7 +27,7 @@
           "--when".commands = ["diff" "show"];
           ui = {
             pager = lib.getExe pkgs.delta;
-            diff-formatter = "git";
+            diff-formatter = ":git";
           };
         }
       ];
