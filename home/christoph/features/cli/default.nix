@@ -11,6 +11,7 @@
     ./gpg.nix
     ./jj.nix
     ./joshuto.nix
+    ./newsboat.nix
     ./ssh.nix
     ./starship
     ./tmux.nix
