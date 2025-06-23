@@ -22,6 +22,7 @@
 
   stylix = {
     enable = true;
+    polarity = "dark";
     fonts = {
       serif = {
         package = pkgs.dejavu_fonts;
