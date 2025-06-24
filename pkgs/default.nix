@@ -16,6 +16,7 @@
 
   # VeriPB proof checker
   veripb = pkgs.python3Packages.callPackage ./veripb {};
+  pboxide = pkgs.callPackage ./pboxide {};
 
   # GBD benchmark database ecosystem
   gbd = pkgs.python3Packages.callPackage ./gbd {inherit python-gbdc;};

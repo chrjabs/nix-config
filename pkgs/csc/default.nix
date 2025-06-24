@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/zahash/csc";
     changelog = "https://github.com/zahash/csc/releases/tag/v${version}";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [];
+    maintainers = with lib.maintainers; [chrjabs];
     platforms = lib.platforms.all;
     mainProgram = "csc";
   };
