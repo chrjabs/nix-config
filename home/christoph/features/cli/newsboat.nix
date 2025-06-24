@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   programs.newsboat = {
     enable = true;
     extraConfig = ''
@@ -15,6 +15,10 @@
     '';
     urls = [
       {
+        title = "Daniel Stenberg";
+        url = "https://daniel.haxx.se/blog/feed/";
+      }
+      {
         title = "Anna Latour";
         url = "https://latower.github.io/feed.xml";
       }
@@ -24,4 +28,6 @@
       }
     ];
   };
+
+  home.persistence."/persist/${config.home.homeDirectory}".directories = [".local/share/newsboat"];
 }
