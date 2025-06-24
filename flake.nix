@@ -51,6 +51,10 @@
     # Using plymouth theme from here
     misterio.url = "github:Misterio77/nix-config";
     misterio.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Rust overlay for building kani
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -72,7 +76,7 @@
   in {
     # Your custom packages
     # Accessible through 'nix build', 'nix shell', etc
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
+    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs inputs;});
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forEachSystem (pkgs: pkgs.alejandra);

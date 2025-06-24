@@ -1711,6 +1711,7 @@
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
+        "rust-overlay": "rust-overlay_2",
         "sops-nix": "sops-nix_2",
         "stylix": "stylix",
         "systems": "systems_6",
@@ -1732,6 +1733,26 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "5b07506ae89b025b14de91f697eba23b48654c52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1750732748,
+        "narHash": "sha256-HR2b3RHsPeJm+Fb+1ui8nXibgniVj7hBNvUbXEyz0DU=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "4b4494b2ba7e8a8041b2e28320b2ee02c115c75f",
         "type": "github"
       },
       "original": {

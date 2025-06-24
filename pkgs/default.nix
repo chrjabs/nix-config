@@ -1,6 +1,10 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example'
-{pkgs ? <nixpkgs> {}, ...}: rec {
+{
+  pkgs ? <nixpkgs> {},
+  inputs,
+  ...
+}: rec {
   # example = pkgs.callPackage ./example { };
 
   # Personal wallpaper collection for recoloring with base16 themes
@@ -13,6 +17,9 @@
     default = pkgs.callPackage ./latex {};
     lipics = pkgs.callPackage ./latex/lipics.nix {};
   };
+
+  # Kani Rust Verifier
+  kani = pkgs.callPackage ./kani {inherit (inputs) rust-overlay;};
 
   # VeriPB proof checker
   veripb = pkgs.python3Packages.callPackage ./veripb {};
