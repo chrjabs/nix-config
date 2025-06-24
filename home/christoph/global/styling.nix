@@ -41,5 +41,15 @@
         name = "Noto Color Emoji";
       };
     };
+    # cursor = {
+    #   package = pkgs.vanilla-dmz;
+    #   name = "Vanilla-DMZ";
+    #   size = 24;
+    # };
+    cursor = {
+      package = pkgs.vimix-cursors;
+      name = "Vimix-cursors";
+      size = 24;
+    };
   };
 }
