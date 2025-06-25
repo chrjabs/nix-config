@@ -98,5 +98,10 @@ in {
     };
   };
 
-  home.persistence."/persist/${config.home.homeDirectory}".files = [".local/share/fish/fish_history"];
+  home.persistence."/persist/${config.home.homeDirectory}".directories = [
+    {
+      directory = ".local/share/fish";
+      method = "bindfs";
+    }
+  ];
 }
