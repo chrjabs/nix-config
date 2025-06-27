@@ -115,7 +115,7 @@
       gallifrey = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
-          bootstrap = true;
+          bootstrap = false;
         };
         modules = [./hosts/gallifrey];
       };
