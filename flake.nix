@@ -136,22 +136,22 @@
       "christoph@phantasia" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/phantasia.nix ./home/christoph/nixpkgs.nix];
+        modules = [./home/christoph/phantasia.nix ./home/christoph/standalone.nix];
       };
       "christoph@gallifrey" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/gallifrey.nix ./home/christoph/nixpkgs.nix];
+        modules = [./home/christoph/gallifrey.nix ./home/christoph/standalone.nix];
       };
       "christoph@tuathaan" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/tuathaan.nix ./home/christoph/nixpkgs.nix];
+        modules = [./home/christoph/tuathaan.nix ./home/christoph/standalone.nix];
       };
       "christoph@medusa" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/medusa.nix ./home/christoph/nixpkgs.nix];
+        modules = [./home/christoph/medusa.nix ./home/christoph/standalone.nix];
       };
     };
   };

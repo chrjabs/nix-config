@@ -4,10 +4,6 @@
   lib,
   ...
 }: {
-  imports = [
-    inputs.stylix.homeModules.stylix
-  ];
-
   recolor-wallpaper = {
     enable = true;
     theme = lib.mkDefault "gruvbox-material-dark-hard";
@@ -22,6 +18,7 @@
   stylix = {
     enable = true;
     polarity = "dark";
+    overlays.enable = false;
     fonts = {
       serif = {
         package = pkgs.dejavu_fonts;
@@ -40,11 +37,6 @@
         name = "Noto Color Emoji";
       };
     };
-    # cursor = {
-    #   package = pkgs.vanilla-dmz;
-    #   name = "Vanilla-DMZ";
-    #   size = 24;
-    # };
     cursor = {
       package = pkgs.vimix-cursors;
       name = "Vimix-cursors";
