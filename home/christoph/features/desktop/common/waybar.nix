@@ -1,9 +1,7 @@
 {
-  outputs,
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   commonDeps = with pkgs; [coreutils gnugrep systemd];

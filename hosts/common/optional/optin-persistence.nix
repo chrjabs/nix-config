@@ -3,7 +3,6 @@
 # users' home persist dir exists and has the right permissions
 {
   lib,
-  inputs,
   config,
   ...
 }: {

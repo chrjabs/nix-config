@@ -2,10 +2,6 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  pkg-config,
-  stdenv,
-  darwin,
-  nix-update-script,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "csc";

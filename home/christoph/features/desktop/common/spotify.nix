@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{config, ...}: let
   pass = "${config.programs.password-store.package}/bin/pass";
 in {
   programs.spotify-player = {

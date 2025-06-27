@@ -46,14 +46,6 @@
               match: $
               pop: true
       '';
-      dimacs_cnf_clause_start = prefix:
-      /*
-      yaml
-      */
-      ''
-        - match: ^[^pc]
-              push: hard_clause
-      '';
       dimacs_clause_context = prefix:
       /*
       yaml

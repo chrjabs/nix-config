@@ -1,6 +1,4 @@
 {
-  lib,
-  stdenv,
   buildPythonPackage,
   fetchPypi,
   setuptools,

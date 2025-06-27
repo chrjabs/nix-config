@@ -4,11 +4,9 @@ with pkgs; (texlive.combine {
     (texlive)
     scheme-small
     # Tools
-    
     latexmk
     tools
     # Packages
-    
     algorithms
     algorithm2e
     catchfile

@@ -33,6 +33,8 @@
         age
 
         deploy
+
+        deadnix
       ];
     };
 }

@@ -2,7 +2,6 @@
 {
   lib,
   rust-overlay,
-  fetchurl,
   fetchFromGitHub,
   glibc,
   extend,

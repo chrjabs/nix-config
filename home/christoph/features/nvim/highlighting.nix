@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.nixvim.plugins = {
     # Treesitter
     treesitter = {

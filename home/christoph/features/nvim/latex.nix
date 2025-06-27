@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: {
+{...}: {
   programs.nixvim.plugins = {
     # Vimtex
     vimtex = {

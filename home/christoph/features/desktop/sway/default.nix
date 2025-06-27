@@ -2,8 +2,6 @@
   lib,
   config,
   pkgs,
-  outputs,
-  inputs,
   ...
 }: {
   imports = [
@@ -23,9 +21,7 @@
     config = {
       modifier = "Mod4";
 
-      modes = let
-        modifier = config.wayland.windowManager.sway.config.modifier;
-      in {
+      modes = {
         resize = {
           Escape = "mode default";
           Return = "mode default";

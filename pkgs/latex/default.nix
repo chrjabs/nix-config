@@ -4,11 +4,9 @@ with pkgs; (texlive.combine {
     (texlive)
     scheme-small
     # Tools
-    
     latexmk
     tools
     # Packages
-    
     algorithm2e
     algorithms
     algorithmicx

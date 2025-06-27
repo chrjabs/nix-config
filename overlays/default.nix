@@ -46,7 +46,7 @@ in {
   # Python packages
   python-additions = self: super: {
     python3 = super.python3.override {
-      packageOverrides = python-self: python-super: rec {
+      packageOverrides = _: _: rec {
         gbd = super.python3Packages.callPackage ../pkgs/gbd {python-gbdc = gbdc;};
         gbdc = super.python3Packages.callPackage ../pkgs/python-gbdc {};
       };
@@ -57,7 +57,7 @@ in {
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = final: prev: {
+  modifications = _: prev: {
     # https://github.com/mdellweg/pass_secret_service/pull/37
     pass-secret-service = addPatches prev.pass-secret-service [./pass-secret-service-native.diff];
 
@@ -75,7 +75,7 @@ in {
   # Python package modifications
   python-modifications = self: super: {
     python3 = super.python3.override {
-      packageOverrides = python-self: python-super: {
+      packageOverrides = _: python-super: {
         python-sat = python-super.python-sat.overrideAttrs (previousAttrs: rec {
           name = previousAttrs.pname + "-" + version;
           version = "0.1.8.dev16";

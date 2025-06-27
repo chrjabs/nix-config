@@ -1,13 +1,9 @@
 {
-  config,
   lib,
-  pkgs,
   inputs,
   modulesPath,
   ...
-}: let
-  hostname = config.networking.hostName;
-in {
+}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     inputs.disko.nixosModules.disko

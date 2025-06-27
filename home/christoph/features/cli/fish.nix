@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -7,7 +6,6 @@
   inherit (lib) mkIf;
   packageNames = map (p: p.pname or p.name or null) config.home.packages;
   hasPackage = name: lib.any (x: x == name) packageNames;
-  hasRipgrep = hasPackage "ripgrep";
   hasEza = hasPackage "eza";
   hasBat = config.programs.bat.enable;
   hasNeovim = config.programs.neovim.enable || config.programs.nixvim.enable;
