@@ -105,7 +105,7 @@
           mode = lib.mkIf (m.mode != null) ("${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${m.mode.rate}Hz");
           scale = lib.mkIf (m.scale != null) "${toString m.scale}";
           position = lib.mkIf (m.position != null) "${toString m.position.x} ${toString m.position.y}";
-          rotation = lib.mkIf (m.rotation != null) m.rotation;
+          transform = lib.mkIf (m.rotation != null) m.rotation;
         })
         config.monitors.layouts.default);
 

@@ -40,16 +40,18 @@
   programs.dconf.enable = true;
 
   # Nvidia GPU
-  hardware.graphics.enable = true;
-  # services.xserver.videoDrivers = ["nvidia"];
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   powerManagement.enable = false;
-  #   powerManagement.finegrained = false;
-  #   open = false;
-  #   nvidiaSettings = true;
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  # };
+  hardware = {
+    graphics.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Home assistant API token secret
   sops.secrets.ha-api-token = {
