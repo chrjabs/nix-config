@@ -1,12 +1,12 @@
 {
   lib,
-  python3,
+  python,
   fetchFromGitHub,
   setuptools,
   wheel,
   python-gbdc,
 }:
-python3.pkgs.buildPythonPackage rec {
+python.pkgs.buildPythonPackage rec {
   pname = "gbd";
   version = "4.9.7";
   pyproject = true;
@@ -23,7 +23,7 @@ python3.pkgs.buildPythonPackage rec {
     wheel
   ];
 
-  propagatedBuildInputs = with python3.pkgs; [
+  propagatedBuildInputs = with python.pkgs; [
     flask
     tatsu
     pandas
