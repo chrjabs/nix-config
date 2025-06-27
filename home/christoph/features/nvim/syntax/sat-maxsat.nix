@@ -23,63 +23,65 @@ in {
     "mcnf" = "mcnf";
   };
 
-  xdg.configFile."nvim/syntax/cnf.vim".text = let
-    pre = "cnf";
-  in
-    /*
-    vim
-    */
-    ''
-      ${preamble pre}
+  xdg.configFile = {
+    "nvim/syntax/cnf.vim".text = let
+      pre = "cnf";
+    in
+      /*
+      vim
+      */
+      ''
+        ${preamble pre}
 
-      syn match ${pre}Header "^p cnf \d* \d*$"
-      syn match ${pre}Literal "${literal}"
-      syn match ${pre}Comment "${comment}"
-      syn match ${pre}Delimiter "${delimiter}"
+        syn match ${pre}Header "^p cnf \d* \d*$"
+        syn match ${pre}Literal "${literal}"
+        syn match ${pre}Comment "${comment}"
+        syn match ${pre}Delimiter "${delimiter}"
 
-      ${assignHi pre}
-      hi def link ${pre}Header    Special
-    '';
+        ${assignHi pre}
+        hi def link ${pre}Header    Special
+      '';
 
-  xdg.configFile."nvim/syntax/wcnf.vim".text = let
-    pre = "wcnf";
-  in
-    /*
-    vim
-    */
-    ''
-      ${preamble pre}
+    "nvim/syntax/wcnf.vim".text = let
+      pre = "wcnf";
+    in
+      /*
+      vim
+      */
+      ''
+        ${preamble pre}
 
-      syn match ${pre}Literal "${literal}" contained nextgroup=wcnfLiteral,wcnfDelimiter skipwhite
-      syn match ${pre}Delimiter "${delimiter}"
-      syn match ${pre}Soft "^\d*" nextgroup=wcnfLiteral skipwhite
-      syn match ${pre}Hard "${hard}" nextgroup=wcnfLiteral skipwhite
-      syn match ${pre}Comment "${comment}"
+        syn match ${pre}Literal "${literal}" contained nextgroup=wcnfLiteral,wcnfDelimiter skipwhite
+        syn match ${pre}Delimiter "${delimiter}"
+        syn match ${pre}Soft "^\d*" nextgroup=wcnfLiteral skipwhite
+        syn match ${pre}Hard "${hard}" nextgroup=wcnfLiteral skipwhite
+        syn match ${pre}Comment "${comment}"
 
-      ${assignHi pre}
-      hi def link ${pre}Hard      Keyword
-      hi def link ${pre}Soft      Number
-    '';
+        ${assignHi pre}
+        hi def link ${pre}Hard      Keyword
+        hi def link ${pre}Soft      Number
+      '';
 
-  xdg.configFile."nvim/syntax/mcnf.vim".text = let
-    pre = "mcnf";
-  in
-    /*
-    vim
-    */
-    ''
-      ${preamble pre}
+    "nvim/syntax/mcnf.vim".text = let
+      pre = "mcnf";
+    in
+      /*
+      vim
+      */
+      ''
+        ${preamble pre}
 
-      syn match ${pre}Delimiter "${delimiter}"
-      syn match ${pre}Literal "${literal}" contained nextgroup=mcnfLiteral,mcnfDelimiter skipwhite
-      syn match ${pre}Weight "\d*" contained nextgroup=mcnfLiteral skipwhite
-      syn match ${pre}Hard "${hard}" nextgroup=mcnfLiteral skipwhite
-      syn match ${pre}Soft "^o" nextgroup=mcnfWeight
-      syn match ${pre}Comment "${comment}"
+        syn match ${pre}Delimiter "${delimiter}"
+        syn match ${pre}Literal "${literal}" contained nextgroup=mcnfLiteral,mcnfDelimiter skipwhite
+        syn match ${pre}Weight "\d*" contained nextgroup=mcnfLiteral skipwhite
+        syn match ${pre}Hard "${hard}" nextgroup=mcnfLiteral skipwhite
+        syn match ${pre}Soft "^o" nextgroup=mcnfWeight
+        syn match ${pre}Comment "${comment}"
 
-      ${assignHi pre}
-      hi def link preHard      Keyword
-      hi def link preSoft      Keyword
-      hi def link preWeight    Number
-    '';
+        ${assignHi pre}
+        hi def link preHard      Keyword
+        hi def link preSoft      Keyword
+        hi def link preWeight    Number
+      '';
+  };
 }

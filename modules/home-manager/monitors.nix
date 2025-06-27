@@ -77,7 +77,7 @@ in {
         swaymsg = lib.getExe' config.wayland.windowManager.sway.package "swaymsg";
         outputCmd = name: m:
           "${swaymsg} output \"${name}\""
-          + (lib.optionalString (m.enabled) " enable")
+          + (lib.optionalString m.enabled " enable")
           + (lib.optionalString (!m.enabled) " disable")
           + (lib.optionalString (m.mode != null) (" mode ${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${m.mode.rate}Hz"))
           + (lib.optionalString (m.scale != null) " scale ${toString m.scale}")

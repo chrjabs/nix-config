@@ -45,9 +45,8 @@
   };
 
   sops.secrets.youtube-api = lib.mkIf (!bootstrap) {
+    inherit (config.users.extraUsers.kodi) name group;
     sopsFile = ../../${config.networking.hostName}/kodi-secrets.yaml;
-    owner = config.users.extraUsers.kodi.name;
-    group = config.users.extraUsers.kodi.group;
     path = "${config.users.extraUsers.kodi.home}/.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json";
   };
 

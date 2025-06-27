@@ -14,10 +14,20 @@
     ../common/optional/ephemeral-btrfs.nix
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "cryptd" "aes"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot = {
+    initrd = {
+      availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod" "cryptd" "aes"];
+      kernelModules = [];
+      luks = {
+        fido2Support = false;
+        # Luks with yubikey in systemd-cryptenroll
+        # https://discourse.nixos.org/t/fde-using-systemd-cryptenroll-with-fido2-key/47762
+        devices.${config.networking.hostName}.crypttabExtraOpts = ["fido2-device=auto"];
+      };
+    };
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
+  };
 
   hardware.cpu.amd.updateMicrocode = true;
 
@@ -29,12 +39,6 @@
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   disko.devices.disk.${config.networking.hostName}.device = lib.mkForce "/dev/nvme0n1";
-  # Luks with yubikey in systemd-cryptenroll
-  # https://discourse.nixos.org/t/fde-using-systemd-cryptenroll-with-fido2-key/47762
-  boot.initrd = {
-    luks.fido2Support = false;
-    luks.devices.${config.networking.hostName}.crypttabExtraOpts = ["fido2-device=auto"];
-  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

@@ -35,6 +35,7 @@
         deploy
 
         deadnix
+        statix
       ];
     };
 }

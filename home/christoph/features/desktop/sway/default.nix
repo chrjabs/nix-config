@@ -49,7 +49,7 @@
       };
 
       keybindings = let
-        modifier = config.wayland.windowManager.sway.config.modifier;
+        inherit (config.wayland.windowManager.sway.config) modifier;
         kitty = lib.getExe config.programs.kitty.package;
         wofi = lib.getExe config.programs.wofi.package;
         makoctl = lib.getExe' config.services.mako.package "makoctl";

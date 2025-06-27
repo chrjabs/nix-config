@@ -38,13 +38,15 @@ in {
   };
 
   config = {
-    home.persistence."/persist/${config.home.homeDirectory}".directories = ["Mail"];
+    home = {
+      persistence."/persist/${config.home.homeDirectory}".directories = ["Mail"];
 
-    home.packages = [
-      oauth2.mutt_oauth2
-      oauth2.work.authorize
-      # oauth2.gmail.authorize
-    ];
+      packages = [
+        oauth2.mutt_oauth2
+        oauth2.work.authorize
+        # oauth2.gmail.authorize
+      ];
+    };
 
     accounts.email = {
       mainAccountPattern = lib.mkDefault "{personal,family}";

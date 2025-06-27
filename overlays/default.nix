@@ -40,7 +40,7 @@ in {
     };
 
   plymouth-theme = final: _: {
-    plymouth-spinner-monochrome = inputs.misterio.packages.${final.system}.plymouth-spinner-monochrome;
+    inherit (inputs.misterio.packages.${final.system}) plymouth-spinner-monochrome;
   };
 
   # Python packages

@@ -54,9 +54,8 @@
 
   # Home assistant API token secret
   sops.secrets.ha-api-token = {
+    inherit (config.users.users.nobody) name group;
     sopsFile = ./secrets.yaml;
     mode = "0444";
-    owner = config.users.users.nobody.name;
-    group = config.users.users.nobody.group;
   };
 }

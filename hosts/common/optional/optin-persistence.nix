@@ -15,7 +15,7 @@
           "/var/lib/nixos"
           "/var/log"
         ]
-        ++ lib.optionals (config.hardware.bluetooth.enable) ["/var/lib/bluetooth"];
+        ++ lib.optionals config.hardware.bluetooth.enable ["/var/lib/bluetooth"];
     };
   };
 

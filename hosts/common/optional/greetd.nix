@@ -41,7 +41,7 @@ in {
     programs.regreet = {
       enable = lib.mkDefault true;
       settings.background = lib.mkIf (!bootstrap) {
-        path = pkgs.wallpapers."${christophCfg.recolor-wallpaper.wallpaper}".path;
+        inherit (pkgs.wallpapers."${christophCfg.recolor-wallpaper.wallpaper}") path;
         fit = "Cover";
       };
     };

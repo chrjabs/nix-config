@@ -13,44 +13,60 @@
     impermanence.url = "github:nix-community/impermanence";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Disko
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NixVim
     nixvim.url = "github:nix-community/nixvim";
 
     # SopsNix
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Stylix
-    stylix.url = "github:nix-community/stylix";
-    stylix.inputs.tinted-kitty.follows = "tinted-kitty";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.tinted-kitty.follows = "tinted-kitty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     tinted-kitty = {
       url = "github:tinted-theming/tinted-kitty";
       flake = false;
     };
-    stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Firefox Addons
-    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # xremap
-    xremap.url = "github:xremap/nix-flake";
-    xremap.inputs.nixpkgs.follows = "nixpkgs";
+    xremap = {
+      url = "github:xremap/nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Using plymouth theme from here
-    misterio.url = "github:Misterio77/nix-config";
-    misterio.inputs.nixpkgs.follows = "nixpkgs";
+    misterio = {
+      url = "github:Misterio77/nix-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Rust overlay for building kani
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
