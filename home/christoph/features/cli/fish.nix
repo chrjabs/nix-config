@@ -98,6 +98,8 @@ in {
     };
   };
 
+  programs.carapace.enableFishIntegration = true;
+
   home.persistence."/persist/${config.home.homeDirectory}".directories = [
     {
       directory = ".local/share/fish";
