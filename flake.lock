@@ -1677,7 +1677,6 @@
         "sops-nix": "sops-nix_2",
         "stylix": "stylix",
         "systems": "systems_6",
-        "tinted-kitty": "tinted-kitty",
         "xremap": "xremap"
       }
     },
@@ -1782,9 +1781,7 @@
         "nur": "nur",
         "systems": "systems_5",
         "tinted-foot": "tinted-foot",
-        "tinted-kitty": [
-          "tinted-kitty"
-        ],
+        "tinted-kitty": "tinted-kitty",
         "tinted-schemes": "tinted-schemes",
         "tinted-tmux": "tinted-tmux",
         "tinted-zed": "tinted-zed"

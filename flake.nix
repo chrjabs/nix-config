@@ -36,12 +36,7 @@
     # Stylix
     stylix = {
       url = "github:nix-community/stylix";
-      inputs.tinted-kitty.follows = "tinted-kitty";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    tinted-kitty = {
-      url = "github:tinted-theming/tinted-kitty";
-      flake = false;
     };
 
     # Firefox Addons
