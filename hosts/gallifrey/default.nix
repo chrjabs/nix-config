@@ -1,32 +1,34 @@
 {
-  config,
   lib,
+  config,
+  bootstrap,
   ...
 }: {
-  imports = [
-    ./hardware-configuration.nix
+  imports =
+    [
+      ./hardware-configuration.nix
 
-    ../common/global
-    ../common/users/christoph
+      ../common/global
+      ../common/users/christoph
 
-    ../common/optional/home.nix
+      ../common/optional/home.nix
 
-    ../common/optional/quietboot.nix
-    ../common/optional/optin-persistence.nix
-    ../common/optional/greetd.nix
-    ../common/optional/pipewire.nix
-    ../common/optional/peripherals/ibus.nix
-
-    ../common/optional/virtualization.nix
-    ../common/optional/uh-vpn.nix
-  ];
+      ../common/optional/optin-persistence.nix
+      ../common/optional/greetd.nix
+    ]
+    ++ lib.optionals (!bootstrap) [
+      ../common/optional/quietboot.nix
+      ../common/optional/pipewire.nix
+      ../common/optional/peripherals/ibus.nix
+      ../common/optional/uh-vpn.nix
+    ];
 
   # Systemd boot
   boot.loader.systemd-boot.enable = true;
 
   networking.hostName = "gallifrey";
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 
   # Sway on NVidia
   # environment.sessionVariables.WLR_RENDERER = "vulkan";
@@ -36,9 +38,6 @@
 
   # Needed for GTK
   programs.dconf.enable = true;
-
-  # For Calibre
-  services.udisks2.enable = true;
 
   # Nvidia GPU
   hardware.graphics.enable = true;

@@ -3,17 +3,27 @@
 # to /etc/nixos/configuration.nix instead.
 {
   lib,
+  config,
   modulesPath,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../common/optional/systemd-initrd.nix
+    ../common/optional/single-disk-encrypted.nix
+    ../common/optional/ephemeral-btrfs.nix
   ];
 
   boot = {
     initrd = {
-      availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+      availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "cryptd" "aes"];
       kernelModules = [];
+      luks = {
+        fido2Support = false;
+        # Luks with yubikey in systemd-cryptenroll
+        # https://discourse.nixos.org/t/fde-using-systemd-cryptenroll-with-fido2-key/47762
+        devices.${config.networking.hostName}.crypttabExtraOpts = ["fido2-device=auto"];
+      };
     };
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
@@ -21,43 +31,14 @@
 
   hardware.cpu.amd.updateMicrocode = true;
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/36adc27c-52b8-48cf-8334-fb54a550fd63";
-      fsType = "btrfs";
-      options = ["subvol=root"];
-    };
-
-    "/nix" = {
-      device = "/dev/disk/by-uuid/36adc27c-52b8-48cf-8334-fb54a550fd63";
-      fsType = "btrfs";
-      options = ["subvol=nix"];
-    };
-
-    "/persist" = {
-      device = "/dev/disk/by-uuid/36adc27c-52b8-48cf-8334-fb54a550fd63";
-      fsType = "btrfs";
-      options = ["subvol=persist"];
-      neededForBoot = true;
-    };
-
-    "/boot" = {
-      device = "/dev/disk/by-uuid/7976-A46F";
-      fsType = "vfat";
-      options = ["fmask=0022" "dmask=0022"];
-    };
-  };
-
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/dc358f64-205c-44ff-9e98-f5297b129af8";}
-  ];
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+
+  disko.devices.disk.${config.networking.hostName}.device = lib.mkForce "/dev/nvme0n1";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
