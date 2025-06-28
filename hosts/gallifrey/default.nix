@@ -21,6 +21,7 @@
       ../common/optional/pipewire.nix
       ../common/optional/peripherals/ibus.nix
       ../common/optional/uh-vpn.nix
+      ../common/optional/niri.nix
       ../common/optional/virtualization.nix
     ];
 

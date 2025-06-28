@@ -21,7 +21,7 @@ in {
   ];
   xdg = {
     desktopEntries = {
-      neomutt = {
+      spotify = {
         name = "Spotify Player";
         genericName = "Music Player";
         comment = "Play spotify from the commandline";

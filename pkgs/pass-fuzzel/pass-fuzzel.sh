@@ -21,7 +21,7 @@ fi
 
 selected=$(find -L . -not -path '*\/.*' -path "*.gpg" -type f -printf '%P\n' | \
   sed 's/.gpg$//g' | \
-  wofi -S dmenu -Q "$query") || exit 2
+  fuzzel --dmenu --search "$query") || exit 2
 
 username=$(echo "$selected" | cut -d '/' -f2)
 url=$(echo "$selected" | cut -d '/' -f1)
@@ -36,7 +36,7 @@ OTP
 URL
 Fill"
 
-    field=$(printf "$fields" | wofi -S dmenu) || field="password"
+    field=$(printf "$fields" | fuzzel --dmenu) || field="password"
 fi
 
 secret=0

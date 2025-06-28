@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./global
-    ./features/desktop/sway
+    ./features/desktop/niri
     ./features/desktop/optional/zoom.nix
     ./features/desktop/optional/keepass.nix
     ./features/productivity
@@ -32,12 +32,13 @@
         mode = {
           x = 1920;
           y = 1080;
+          rate = 60.000;
         };
         position = {
           x = 0;
           y = 0;
         };
-        rotation = "270";
+        rotation = 270;
         workspaces = ["6" "7" "8" "9" "10"];
       };
     };

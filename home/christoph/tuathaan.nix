@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./global
-    ./features/desktop/sway
+    ./features/desktop/niri
     ./features/desktop/optional/keepass.nix
     ./features/desktop/optional/zoom.nix
     ./features/desktop/optional/bluetui.nix

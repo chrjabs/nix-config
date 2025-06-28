@@ -10,7 +10,7 @@
   # Personal wallpaper collection for recoloring with base16 themes
   wallpapers = pkgs.callPackage ./wallpapers {};
 
-  pass-wofi = pkgs.callPackage ./pass-wofi {};
+  pass-fuzzel = pkgs.callPackage ./pass-fuzzel {};
 
   # Personal set(s) of typically needed latex packages
   latex = {

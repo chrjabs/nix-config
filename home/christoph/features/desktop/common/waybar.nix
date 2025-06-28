@@ -54,10 +54,7 @@ in {
     package = pkgs.waybar.overrideAttrs (oa: {
       mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
-    systemd = {
-      enable = true;
-      target = lib.optionals swayCfg.enable "sway-session.target";
-    };
+    systemd.enable = true;
     settings = {
       primary = {
         exclusive = false;
@@ -77,6 +74,8 @@ in {
             "hyprland/submap"
           ])
           ++ [
+            "niri/workspaces"
+            "niri/submap"
             "custom/currentplayer"
             "custom/player"
           ];
@@ -96,12 +95,11 @@ in {
           "network"
           "pulseaudio"
           "battery"
-          "custom/hostname"
         ];
 
         clock = {
           interval = 1;
-          format = "{:%d/%m %H:%M:%S}";
+          format = "{:%d/%m %H:%M}";
           format-alt = "{:%Y-%m-%d %H:%M:%S %z}";
           on-click-left = "mode";
           tooltip-format = ''
@@ -167,8 +165,8 @@ in {
         };
         network = {
           interval = 3;
-          format-wifi = "   {essid}";
-          format-ethernet = "󰈁 Connected";
+          format-wifi = "  {essid}";
+          format-ethernet = "󰈁";
           format-disconnected = "";
           tooltip-format = ''
             {ifname}
@@ -189,18 +187,6 @@ in {
                 then "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null"
                 else "false";
             in "$(if ${isFullScreen}; then echo fullscreen; fi)";
-          };
-        };
-        "custom/hostname" = {
-          exec = mkScript {
-            script = ''
-              echo "$USER@$HOSTNAME"
-            '';
-          };
-          on-click = mkScript {
-            script = ''
-              systemctl --user restart waybar
-            '';
           };
         };
         "custom/unread-mail" = {

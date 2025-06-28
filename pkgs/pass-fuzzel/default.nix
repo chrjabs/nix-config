@@ -4,7 +4,7 @@
   makeWrapper,
   pass,
   jq,
-  wofi,
+  fuzzel,
   libnotify,
   wl-clipboard,
   wtype,
@@ -13,9 +13,9 @@
   coreutils,
 }:
 stdenv.mkDerivation {
-  name = "pass-wofi";
+  name = "pass-fuzzel";
   version = "1.0";
-  src = ./pass-wofi.sh;
+  src = ./pass-fuzzel.sh;
 
   nativeBuildInputs = [makeWrapper];
 
@@ -24,13 +24,13 @@ stdenv.mkDerivation {
   dontConfigure = true;
 
   installPhase = ''
-    install -Dm 0755 $src $out/bin/pass-wofi
-    wrapProgram $out/bin/pass-wofi --prefix PATH ':' \
+    install -Dm 0755 $src $out/bin/pass-fuzzel
+    wrapProgram $out/bin/pass-fuzzel --prefix PATH ':' \
       "${
       lib.makeBinPath [
         pass
         jq
-        wofi
+        fuzzel
         libnotify
         wl-clipboard
         wtype
@@ -42,9 +42,9 @@ stdenv.mkDerivation {
   '';
 
   meta = {
-    description = "A wofi graphical menu for pass";
+    description = "A fuzzel graphical menu for pass";
     license = lib.licenses.mit;
     platforms = lib.platforms.all;
-    mainProgram = "pass-wofi";
+    mainProgram = "pass-fuzzel";
   };
 }
