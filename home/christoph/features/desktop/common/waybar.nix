@@ -54,10 +54,7 @@ in {
     package = pkgs.waybar.overrideAttrs (oa: {
       mesonFlags = (oa.mesonFlags or []) ++ ["-Dexperimental=true"];
     });
-    systemd = {
-      enable = true;
-      target = lib.optionals swayCfg.enable "sway-session.target";
-    };
+    systemd.enable = true;
     settings = {
       primary = {
         exclusive = false;

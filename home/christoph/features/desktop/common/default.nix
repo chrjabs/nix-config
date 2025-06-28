@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./firefox.nix
+    ./fuzzel.nix
     ./gamma-step.nix
     ./gtk.nix
     ./imv.nix
@@ -15,7 +16,6 @@
     ./swaylock.nix
     ./waybar.nix
     ./waypipe.nix
-    ./wofi.nix
     ./zathura.nix
   ];
 

@@ -16,6 +16,10 @@ in {
                 type = types.bool;
                 default = true;
               };
+              primary = mkOption {
+                type = types.bool;
+                default = false;
+              };
               mode = mkOption {
                 type = types.nullOr (types.submodule {
                   options = {
@@ -51,7 +55,7 @@ in {
                 default = null;
               };
               rotation = mkOption {
-                type = types.nullOr types.str;
+                type = types.nullOr types.int;
                 default = null;
               };
               workspaces = mkOption {
@@ -79,10 +83,10 @@ in {
           "${swaymsg} output \"${name}\""
           + (lib.optionalString m.enabled " enable")
           + (lib.optionalString (!m.enabled) " disable")
-          + (lib.optionalString (m.mode != null) (" mode ${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${m.mode.rate}Hz"))
+          + (lib.optionalString (m.mode != null) (" mode ${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${toString m.mode.rate}Hz"))
           + (lib.optionalString (m.scale != null) " scale ${toString m.scale}")
           + (lib.optionalString (m.position != null) " position ${toString m.position.x} ${toString m.position.y}")
-          + (lib.optionalString (m.rotation != null) " rotation ${m.rotation}");
+          + (lib.optionalString (m.rotation != null) " rotation ${toString m.rotation}");
         workspaceCmds = name: m: (builtins.map (w: "${swaymsg} move workspace \"${w}\" output \"${name}\"${lib.optionalString (m.fallback != null) " \"${m.fallback}\""}") m.workspaces);
         layoutCase = name: layout: ''
           "${name}")

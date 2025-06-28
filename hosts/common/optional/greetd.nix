@@ -47,7 +47,7 @@ in {
     };
     services.greetd = {
       enable = lib.mkDefault true;
-      settings.default_session.command = sway-kiosk (lib.getExe config.programs.regreet.package);
+      #settings.default_session.command = sway-kiosk (lib.getExe config.programs.regreet.package);
     };
   };
 }

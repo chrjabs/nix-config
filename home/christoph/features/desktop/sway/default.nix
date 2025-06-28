@@ -51,11 +51,11 @@
       keybindings = let
         inherit (config.wayland.windowManager.sway.config) modifier;
         kitty = lib.getExe config.programs.kitty.package;
-        wofi = lib.getExe config.programs.wofi.package;
+        fuzzel = lib.getExe config.programs.fuzzel.package;
         makoctl = lib.getExe' config.services.mako.package "makoctl";
         pactl = lib.getExe' pkgs.pulseaudio "pactl";
         playerctl = lib.getExe pkgs.playerctl;
-        pass-wofi = lib.getExe pkgs.pass-wofi;
+        pass-fuzzel = lib.getExe pkgs.pass-fuzzel;
         joshuto = lib.getExe config.programs.joshuto.package;
         brightnessctl = lib.getExe pkgs.brightnessctl;
         swaylock = lib.getExe config.programs.swaylock.package;
@@ -63,16 +63,15 @@
       in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
-          "${modifier}+d" = "exec ${wofi} -S drun";
-          "${modifier}+Shift+d" = "exec ${wofi} -S drun";
-          "${modifier}+s" = "exec specialisation $(specialisation | ${wofi} -S dmenu)";
+          "${modifier}+d" = "exec ${fuzzel}";
+          "${modifier}+s" = "exec specialisation $(specialisation | ${fuzzel} --dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
           "${modifier}+Shift+s" = "exec ${makoctl} mode -t do-not-disturb";
-          "${modifier}+p" = "exec ${pass-wofi}";
+          "${modifier}+p" = "exec ${pass-fuzzel}";
           "${modifier}+e" = "exec ${kitty} ${joshuto}";
-          "${modifier}+Shift+l" = "exec ${swaylock} --daemonize --grace 15";
-          "${modifier}+Shift+o" = "exec ${monitorLayouts} $(${monitorLayouts} | ${wofi} -S dmenu)";
+          "${modifier}+Alt+l" = "exec ${swaylock} --daemonize --grace 15";
+          "${modifier}+Shift+o" = "exec ${monitorLayouts} $(${monitorLayouts} | ${fuzzel} --dmenu)";
           "${modifier}+m" = "mode move";
           "${modifier}+Shift+m" = "mode move-workspace";
           # Media keys
@@ -102,10 +101,10 @@
       output = lib.mkIf (config.monitors.layouts.default != null) (builtins.mapAttrs (_: m: {
           # somwhat hacky way of getting `disable` to show up if a monitor is not enabled
           disable = lib.mkIf (!m.enabled) "";
-          mode = lib.mkIf (m.mode != null) ("${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${m.mode.rate}Hz");
-          scale = lib.mkIf (m.scale != null) "${toString m.scale}";
+          mode = lib.mkIf (m.mode != null) ("${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${toString m.mode.rate}Hz");
+          scale = lib.mkIf (m.scale != null) (toString m.scale);
           position = lib.mkIf (m.position != null) "${toString m.position.x} ${toString m.position.y}";
-          transform = lib.mkIf (m.rotation != null) m.rotation;
+          transform = lib.mkIf (m.rotation != null) (toString m.rotation);
         })
         config.monitors.layouts.default);
 

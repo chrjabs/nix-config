@@ -1,4 +1,8 @@
 {
+  lib,
+  bootstrap,
+  ...
+}: {
   imports =
     [
       ./hardware-configuration.nix
@@ -16,6 +20,7 @@
       ../common/optional/pipewire.nix
       ../common/optional/peripherals/ibus.nix
       ../common/optional/uh-vpn.nix
+      ../common/optional/niri.nix
     ];
 
   # Systemd boot
@@ -42,4 +47,6 @@
       InhibitDelayMaxSec=10
     '';
   };
+
+  services.automatic-timezoned.enable = true;
 }
