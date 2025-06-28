@@ -18,7 +18,6 @@
   stylix = {
     enable = true;
     polarity = "dark";
-    overlays.enable = false;
     fonts = {
       serif = {
         package = pkgs.dejavu_fonts;
