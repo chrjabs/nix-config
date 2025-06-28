@@ -17,7 +17,7 @@
 
   monitors.layouts = {
     default = {
-      "DP-3" = {
+      "DP-1" = {
         mode = {
           x = 2560;
           y = 1440;
