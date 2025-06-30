@@ -19,4 +19,20 @@ in {
   home.persistence."/persist/${config.home.homeDirectory}".directories = [
     ".cache/spotify-player"
   ];
+  xdg = {
+    desktopEntries = {
+      neomutt = {
+        name = "Spotify Player";
+        genericName = "Music Player";
+        comment = "Play spotify from the commandline";
+        exec = "spotify_player";
+        icon = "spotify";
+        terminal = true;
+        categories = [
+          "Music"
+        ];
+        type = "Application";
+      };
+    };
+  };
 }
