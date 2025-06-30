@@ -159,6 +159,11 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/christoph/medusa.nix ./home/christoph/standalone.nix];
       };
+      "christoph@jabsserver" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/christoph/jabsserver.nix ./home/christoph/standalone.nix];
+      };
     };
   };
 }
