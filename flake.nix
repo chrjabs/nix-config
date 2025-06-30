@@ -3,7 +3,7 @@
 
   inputs = {
     # Nix ecosystem
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
 
     # Custom Nixpkgs
