@@ -71,29 +71,4 @@ in {
       };
     };
   };
-
-  # Python package modifications
-  python-modifications = self: super: {
-    python3 = super.python3.override {
-      packageOverrides = _: python-super: {
-        python-sat = python-super.python-sat.overrideAttrs (previousAttrs: rec {
-          name = previousAttrs.pname + "-" + version;
-          version = "0.1.8.dev16";
-          src = super.fetchFromGitHub {
-            owner = "pysathq";
-            repo = "pysat";
-            rev = "e6a6a2bf78aa7ad806f47a84aecd1b7bfd5b3b89";
-            hash = "sha256-6RX57eAyWypbJFCXxTWJNmjIXwbB7ruJtksDOXzSWo0=";
-          };
-          doCheck = false;
-          dontCheck = true;
-          # delete failing test
-          postPatch = ''
-            rm tests/test_unique_mus.py
-          '';
-        });
-      };
-    };
-    python3Packages = self.python3.pkgs;
-  };
 }

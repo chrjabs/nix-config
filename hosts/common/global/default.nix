@@ -26,7 +26,7 @@
   };
 
   nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
+    overlays = builtins.attrValues outputs.overlays ++ [inputs.starship-jj.overlays.default];
     config.allowUnfree = true;
   };
 

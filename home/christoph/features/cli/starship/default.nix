@@ -8,12 +8,12 @@
     settings = let
       hostInfo = "$username$hostname($shlvl)($cmd_duration)";
       nixInfo = "($nix_shell)\${custom.nix_inspect}";
-      localInfo = "$directory($git_branch$git_commit$git_state$git_status)";
+      localInfo = "$directory(\${custom.jj}\${custom.git_branch}\${custom.git_commit}\${custom.git_state}\${custom.git_status})";
       prompt = "$jobs$character";
     in {
       format = ''
         ${hostInfo} $fill ${nixInfo}
-        ${localInfo} $fill $time
+        ${localInfo}
         ${prompt}
       '';
 
@@ -40,6 +40,15 @@
         symbol = " ";
         style = "bold red";
       };
+      # Disable git modules by default. They are used via a custom module
+      # below, only if we're not in a JJ repo.
+      git_branch = {
+        disabled = true;
+        format = "[$symbol$branch(:$remote_branch)]($style) ";
+      };
+      git_commit.disabled = true;
+      git_state.disabled = true;
+      git_status.disabled = true;
       custom = {
         nix_inspect = {
           when = "test -x $IN_NIX_SHELL";
@@ -52,6 +61,27 @@
           symbol = " ";
           style = "bold blue";
         };
+        jj = {
+          when = "jj root --ignore-working-copy";
+          command = "${lib.getExe' pkgs.starship-jj "starship-jj"} --ignore-working-copy starship prompt";
+          ignore_timeout = true;
+        };
+        git_branch = {
+          when = "! jj root --ignore-working-copy";
+          command = "starship module git_branch";
+        };
+        git_commit = {
+          when = "! jj root --ignore-working-copy";
+          command = "starship module git_commit";
+        };
+        git_state = {
+          when = "! jj root --ignore-working-copy";
+          command = "starship module git_state";
+        };
+        git_status = {
+          when = "! jj root --ignore-working-copy";
+          command = "starship module git_status";
+        };
       };
 
       character = {
@@ -61,11 +91,6 @@
         vimcmd_visual_symbol = "[<<-](bold cyan)";
         vimcmd_replace_symbol = "[<<-](bold purple)";
         vimcmd_replace_one_symbol = "[<<-](bold purple)";
-      };
-
-      time = {
-        format = "\\[[$time]($style)\\]";
-        disabled = false;
       };
 
       # Cloud formatting
