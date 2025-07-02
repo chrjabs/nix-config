@@ -161,6 +161,17 @@
           min-width = 250;
           open-focused = true;
         }
+        # Zoom screensharing overlay
+        {
+          matches = [
+            {
+              app-id = "Zoom Workplace";
+              title = "as_toolbar";
+            }
+          ];
+          open-floating = true;
+          open-focused = true;
+        }
         {
           matches = [
             {
@@ -170,6 +181,11 @@
           open-maximized = true;
         }
       ];
+
+      xwayland-satellite = {
+        enable = true;
+        path = lib.getExe pkgs.xwayland-satellite-unstable;
+      };
     };
   };
 
