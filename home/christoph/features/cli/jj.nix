@@ -20,7 +20,7 @@
       };
       git = {
         executable-path = lib.getExe config.programs.git.package;
-        sign-on-push = true;
+        sign-on-push = lib.mkDefault true;
       };
       "--scope" = [
         {

@@ -169,7 +169,7 @@
       "christoph@jabsserver" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/jabsserver.nix ./home/christoph/standalone.nix];
+        modules = [./home/christoph/jabsserver ./home/christoph/standalone.nix];
       };
     };
   };
