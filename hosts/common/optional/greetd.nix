@@ -26,6 +26,23 @@ in {
       default = "output * bg #000000 solid_color";
       description = "the sway output configuration for the greeter";
     };
+    autoLogin = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "enable auto login";
+      };
+      user = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "the user to auto login";
+      };
+      command = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+        description = "the command of the auto login session";
+      };
+    };
   };
 
   config = {
@@ -47,7 +64,12 @@ in {
     };
     services.greetd = {
       enable = lib.mkDefault true;
-      settings.default_session.command = sway-kiosk (lib.getExe config.programs.regreet.package);
+      settings = {
+        default_session.command = sway-kiosk (lib.getExe config.programs.regreet.package);
+        initial_session = lib.mkIf config.greetd.custom.autoLogin.enable {
+          inherit (config.greetd.custom.autoLogin) command user;
+        };
+      };
     };
   };
 }

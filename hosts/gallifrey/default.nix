@@ -32,11 +32,15 @@
 
   system.stateVersion = "25.05";
 
-  # Sway on NVidia
-  # environment.sessionVariables.WLR_RENDERER = "vulkan";
-
-  # Greetd output config
-  greetd.custom.outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-1 enable"];
+  greetd.custom = {
+    autoLogin = {
+      enable = true;
+      user = "christoph";
+      command = "${lib.getExe' config.programs.niri.package "niri-session"} -l";
+    };
+    # Greetd output config
+    outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-1 enable"];
+  };
 
   # Needed for GTK
   programs.dconf.enable = true;

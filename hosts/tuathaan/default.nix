@@ -30,6 +30,14 @@
 
   system.stateVersion = "25.05";
 
+  greetd.custom = {
+    autoLogin = {
+      enable = true;
+      user = "christoph";
+      command = "${lib.getExe' config.programs.niri.package "niri-session"} -l";
+    };
+  };
+
   # Needed for GTK
   programs.dconf.enable = true;
 
