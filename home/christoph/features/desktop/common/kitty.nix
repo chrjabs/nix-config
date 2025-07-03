@@ -17,7 +17,7 @@
   programs.kitty = {
     enable = true;
     keybindings = {
-      "ctrl+enter" = "send_text normal clone-in-kitty --type os-window\\r";
+      "ctrl+enter" = "new_ow_window_with_cwd";
       "ctrl+shift+u" = "no_op";
       "ctrl+shift+t" = "new_tab_with_cwd";
     };
