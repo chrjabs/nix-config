@@ -26,6 +26,9 @@
   };
 
   programs.nh.enable = true;
+  programs.fish.shellAbbrs = {
+    occ = "dcmp nextcloud exec --user www-data service php occ";
+  };
 
   sops = {
     age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];

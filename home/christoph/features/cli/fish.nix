@@ -35,8 +35,6 @@ in {
       v = vim;
 
       z = mkIf hasZathura "zathura";
-
-      c = mkIf hasCsc "csc";
     };
 
     functions = {
