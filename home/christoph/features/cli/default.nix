@@ -32,5 +32,6 @@
   ];
   programs = {
     bash.enable = true;
+    fd.enable = true;
   };
 }
