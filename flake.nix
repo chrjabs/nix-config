@@ -75,6 +75,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
+
+    # Stylix LS_COLORS theming through vivid
+    base16-vivid = {
+      url = "github:tinted-theming/base16-vivid";
+      flake = false;
+    };
   };
 
   outputs = {

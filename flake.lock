@@ -120,6 +120,22 @@
         "type": "github"
       }
     },
+    "base16-vivid": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1751163888,
+        "narHash": "sha256-ZHG+t8uNH1RoWOZajpQETrBHK3F/d9RAhURh0Y2xfEU=",
+        "owner": "tinted-theming",
+        "repo": "base16-vivid",
+        "rev": "825dd888bb058e1e26cb0055f6ca1f2446ae4b08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "base16-vivid",
+        "type": "github"
+      }
+    },
     "blobs": {
       "flake": false,
       "locked": {
@@ -1698,6 +1714,7 @@
     },
     "root": {
       "inputs": {
+        "base16-vivid": "base16-vivid",
         "custom-nixpkgs": "custom-nixpkgs",
         "disko": "disko",
         "firefox-addons": "firefox-addons",

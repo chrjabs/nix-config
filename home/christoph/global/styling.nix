@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  config,
+  inputs,
   ...
 }: {
   recolor-wallpaper = {
@@ -41,4 +43,12 @@
       size = 24;
     };
   };
+
+  # LS_COLORS theming
+  home.sessionVariables.LS_COLORS = let
+    theme = config.lib.stylix.colors {templateRepo = inputs.base16-vivid;};
+    lsColors = builtins.readFile (pkgs.runCommand "vivid-ls-colors" {} ''
+      ${lib.getExe pkgs.vivid} generate ${theme} > $out
+    '');
+  in "${lsColors}";
 }
