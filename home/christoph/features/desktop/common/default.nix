@@ -29,7 +29,7 @@
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
     LIBSEAT_BACKEND = "logind";
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    NIXOS_OZONE_WL = "1";
   };
 
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
