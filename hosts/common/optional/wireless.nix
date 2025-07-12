@@ -20,6 +20,9 @@
       "Spectrum-portable" = {
         pskRaw = "ext:Portable";
       };
+      "JABSUNIFI" = {
+        pskRaw = "ext:Jabsunifi";
+      };
       "eduroam" = {
         authProtocols = ["WPA-EAP"];
         auth = ''
