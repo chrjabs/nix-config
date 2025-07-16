@@ -25,6 +25,7 @@
     dysk # Better df
     delta # Better diff
     glow # CLI markdown renderer
+    tree
 
     nixd # Nix LSP
     alejandra # Nix formatter
