@@ -8,6 +8,7 @@
   pgrep = lib.getExe' pkgs.procps "prgrep";
   hyprctl = lib.getExe' config.wayland.windowManager.hyprland.package "hypercts";
   swaymsg = lib.getExe' config.wayland.windowManager.sway.package "swaymsg";
+  niri = lib.getExe config.programs.niri.package;
 
   isLocked = "${pgrep} -x ${swaylock}";
 
@@ -57,7 +58,14 @@ in {
         timeout = 40;
         command = "${swaymsg} 'output * dpms off'";
         resumeCommand = "${swaymsg} 'output * dpms on'";
-      }));
+      }))
+      ++
+      # Turn off displays (niri)
+      (afterLockTimeout {
+        timeout = 40;
+        command = "${niri} msg 'output * off'";
+        resumeCommand = "${niri} 'output * on'";
+      });
     # Lock before sleep
     events = [
       {
