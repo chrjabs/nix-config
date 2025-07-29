@@ -21,7 +21,7 @@
   home.packages = with pkgs; [
     eza # Better ls
     ripgrep # Better grep
-    csc # CLI Calculator
+    pcalc # CLI Calculator
     dysk # Better df
     delta # Better diff
     glow # CLI markdown renderer
