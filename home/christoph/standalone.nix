@@ -18,4 +18,9 @@
     overlays = builtins.attrValues outputs.overlays ++ [inputs.starship-jj.overlays.default];
     config.allowUnfree = true;
   };
+
+  programs.nh.clean = {
+    enable = true;
+    extraArgs = "--keep-since 90d --keep 3";
+  };
 }
