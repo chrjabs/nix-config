@@ -66,12 +66,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Rust overlay for building kani
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Niri compositor
     niri = {
       url = "github:sodiboo/niri-flake";

@@ -13,7 +13,6 @@ let
   hasKitty = config.programs.kitty.enable;
   hasZathura = config.programs.zathura.enable;
   hasSpecialisationCli = hasPackage "specialisation";
-  hasCsc = hasPackage "csc";
 in
 {
   programs.fish = {

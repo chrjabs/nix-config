@@ -1724,7 +1724,6 @@
         "niri": "niri",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
-        "rust-overlay": "rust-overlay_2",
         "sops-nix": "sops-nix_2",
         "starship-jj": "starship-jj",
         "stylix": "stylix",
@@ -1763,26 +1762,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "539ba15741f0e6691a2448743dbc601d8910edce",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752028888,
-        "narHash": "sha256-LRj3/PUpII6taWOrX1w/OeI6f1ncND02PP/kEHvPCqU=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "a0f1c656e053463b47639234b151a05e4441bb19",
         "type": "github"
       },
       "original": {

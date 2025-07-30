@@ -44,17 +44,6 @@ in
     inherit (inputs.misterio.packages.${final.system}) plymouth-spinner-monochrome;
   };
 
-  # Python packages
-  python-additions = self: super: {
-    python3 = super.python3.override {
-      packageOverrides = _: _: rec {
-        gbd = super.python3Packages.callPackage ../pkgs/gbd { python-gbdc = gbdc; };
-        gbdc = super.python3Packages.callPackage ../pkgs/python-gbdc { };
-      };
-    };
-    python3Packages = self.python3.pkgs;
-  };
-
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
