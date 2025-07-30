@@ -13,7 +13,13 @@
   inputs = {
     # Nix ecosystem
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Custom Nixpkgs
     custom-nixpkgs.url = "github:chrjabs/nixpkgs/custom";
@@ -76,7 +82,6 @@
     starship-jj = {
       url = "gitlab:lanastara_foss/starship-jj";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
     };
 
     # Stylix LS_COLORS theming through vivid
@@ -87,86 +92,128 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      systems,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      lib = nixpkgs.lib // home-manager.lib;
-      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-      pkgsFor = lib.genAttrs (import systems) (
-        system:
-        import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        }
-      );
-    in
-    {
-      # Your custom packages
-      # Accessible through 'nix build', 'nix shell', etc
-      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs inputs; });
-      # Formatter for your nix files, available through 'nix fmt'
-      formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
-      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
+    inputs@{ flake-parts, ... }:
+    # https://flake.parts/module-arguments.html
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      {
+        config,
+        ...
+      }:
+      {
+        imports = [
+          inputs.flake-parts.flakeModules.easyOverlay
+          inputs.treefmt-nix.flakeModule
+        ];
 
-      # Your custom packages and modifications, exported as overlays
-      overlays = import ./overlays { inherit inputs; };
-      # Reusable nixos modules you might want to export
-      # These are usually stuff you would upstream into nixpkgs
-      nixosModules = import ./modules/nixos;
-      # Reusable home-manager modules you might want to export
-      # These are usually stuff you would upstream into home-manager
-      homeManagerModules = import ./modules/home-manager;
+        flake =
+          let
+            outputs = inputs.self.outputs;
+          in
+          {
+            # Your custom packages and modifications, exported as overlays
+            overlays = import ./overlays { inherit inputs; };
+            # Reusable nixos modules you might want to export
+            # These are usually stuff you would upstream into nixpkgs
+            nixosModules = import ./modules/nixos;
+            # Reusable home-manager modules you might want to export
+            # These are usually stuff you would upstream into home-manager
+            homeManagerModules = import ./modules/home-manager;
 
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixosConfigurations = {
-        phantasia = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-            bootstrap = false;
-          };
-          modules = [ ./hosts/phantasia ];
-        };
-        gallifrey = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-            bootstrap = false;
-          };
-          modules = [ ./hosts/gallifrey ];
-        };
-        tuathaan = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-            bootstrap = false;
-          };
-          modules = [ ./hosts/tuathaan ];
-        };
-        medusa = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-            bootstrap = false;
-          };
-          modules = [ ./hosts/medusa ];
-        };
-      };
+            # NixOS configuration entrypoint
+            # Available through 'nixos-rebuild --flake .#your-hostname'
+            nixosConfigurations = {
+              phantasia = inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit inputs outputs;
+                  bootstrap = false;
+                };
+                modules = [ ./hosts/phantasia ];
+              };
+              gallifrey = inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit inputs outputs;
+                  bootstrap = false;
+                };
+                modules = [ ./hosts/gallifrey ];
+              };
+              tuathaan = inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit inputs outputs;
+                  bootstrap = false;
+                };
+                modules = [ ./hosts/tuathaan ];
+              };
+              medusa = inputs.nixpkgs.lib.nixosSystem {
+                specialArgs = {
+                  inherit inputs outputs;
+                  bootstrap = false;
+                };
+                modules = [ ./hosts/medusa ];
+              };
+            };
 
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        "christoph@jabsserver" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/christoph/jabsserver
-            ./home/christoph/standalone.nix
-          ];
-        };
-      };
-    };
+            # Standalone home-manager configuration entrypoint
+            # Available through 'home-manager --flake .#your-username@your-hostname'
+            homeConfigurations = {
+              "christoph@jabsserver" = inputs.home-manager.lib.homeManagerConfiguration {
+                pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+                extraSpecialArgs = { inherit inputs outputs; };
+                modules = [
+                  ./home/christoph/jabsserver
+                  ./home/christoph/standalone.nix
+                ];
+              };
+            };
+          };
+
+        systems = [
+          "x86_64-linux"
+        ];
+
+        perSystem =
+          {
+            system,
+            pkgs,
+            ...
+          }:
+          {
+            _module.args.pkgs = import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
+
+            packages = import ./pkgs { inherit pkgs inputs; };
+            devShells = import ./shell.nix { inherit pkgs; };
+
+            treefmt = {
+              settings = {
+                global.on-unmatched = "error";
+                formatter.shellcheck.options = [ "--shell=bash" ];
+              };
+              programs = {
+                # Nix
+                deadnix.enable = true;
+                nixfmt.enable = true;
+                # Shell
+                shellcheck = {
+                  enable = true;
+                  excludes = [ ".envrc" ];
+                };
+                shfmt.enable = true;
+                # TOML
+                taplo.enable = true;
+                # YAML
+                actionlint.enable = true;
+                yamlfmt = {
+                  enable = true;
+                  excludes = [
+                    ".sops.yaml"
+                    "**/*secrets.yaml"
+                  ];
+                };
+              };
+            };
+          };
+      }
+    );
 }
