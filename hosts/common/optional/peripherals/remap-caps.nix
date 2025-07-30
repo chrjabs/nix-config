@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.xremap.nixosModules.default
   ];
@@ -9,7 +10,9 @@
     config.modmap = [
       {
         name = "Global";
-        remap = {CapsLock = "Esc";};
+        remap = {
+          CapsLock = "Esc";
+        };
       }
     ];
   };

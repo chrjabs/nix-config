@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.newsboat = {
     enable = true;
     extraConfig = ''
@@ -29,5 +30,5 @@
     ];
   };
 
-  home.persistence."/persist/${config.home.homeDirectory}".directories = [".local/share/newsboat"];
+  home.persistence."/persist/${config.home.homeDirectory}".directories = [ ".local/share/newsboat" ];
 }

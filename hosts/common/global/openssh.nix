@@ -3,12 +3,17 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   hosts = lib.attrNames outputs.nixosConfigurations;
 
   # Sops needs acess to the keys before the persist dirs are mounted; so just persisting the keys won't work, we must point at /persist
-  hasOptinPersistence = lib.hasAttr "persistence" config.environment && lib.hasAttr "/persist" config.environment.persistence && config.environment.persistence."/persist".enable;
-in {
+  hasOptinPersistence =
+    lib.hasAttr "persistence" config.environment
+    && lib.hasAttr "/persist" config.environment.persistence
+    && config.environment.persistence."/persist".enable;
+in
+{
   services.openssh = {
     enable = true;
     settings = {
@@ -43,6 +48,6 @@ in {
   # Passwordless sudo when SSH'ing with keys
   security.pam.sshAgentAuth = {
     enable = true;
-    authorizedKeysFiles = ["/etc/ssh/authorized_keys.d/%u"];
+    authorizedKeysFiles = [ "/etc/ssh/authorized_keys.d/%u" ];
   };
 }

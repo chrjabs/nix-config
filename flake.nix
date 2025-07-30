@@ -92,80 +92,87 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    systems,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs (import systems) (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
-  in {
-    # Your custom packages
-    # Accessible through 'nix build', 'nix shell', etc
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs inputs;});
-    # Formatter for your nix files, available through 'nix fmt'
-    # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forEachSystem (pkgs: pkgs.alejandra);
-    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      systems,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
+      pkgsFor = lib.genAttrs (import systems) (
+        system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        }
+      );
+    in
+    {
+      # Your custom packages
+      # Accessible through 'nix build', 'nix shell', etc
+      packages = forEachSystem (pkgs: import ./pkgs { inherit pkgs inputs; });
+      # Formatter for your nix files, available through 'nix fmt'
+      formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+      devShells = forEachSystem (pkgs: import ./shell.nix { inherit pkgs; });
 
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
+      # Your custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
+      # Reusable nixos modules you might want to export
+      # These are usually stuff you would upstream into nixpkgs
+      nixosModules = import ./modules/nixos;
+      # Reusable home-manager modules you might want to export
+      # These are usually stuff you would upstream into home-manager
+      homeManagerModules = import ./modules/home-manager;
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      phantasia = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-          bootstrap = false;
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#your-hostname'
+      nixosConfigurations = {
+        phantasia = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+            bootstrap = false;
+          };
+          modules = [ ./hosts/phantasia ];
         };
-        modules = [./hosts/phantasia];
+        gallifrey = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+            bootstrap = false;
+          };
+          modules = [ ./hosts/gallifrey ];
+        };
+        tuathaan = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+            bootstrap = false;
+          };
+          modules = [ ./hosts/tuathaan ];
+        };
+        medusa = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+            bootstrap = false;
+          };
+          modules = [ ./hosts/medusa ];
+        };
       };
-      gallifrey = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-          bootstrap = false;
+
+      # Standalone home-manager configuration entrypoint
+      # Available through 'home-manager --flake .#your-username@your-hostname'
+      homeConfigurations = {
+        "christoph@jabsserver" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/christoph/jabsserver
+            ./home/christoph/standalone.nix
+          ];
         };
-        modules = [./hosts/gallifrey];
-      };
-      tuathaan = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-          bootstrap = false;
-        };
-        modules = [./hosts/tuathaan];
-      };
-      medusa = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-          bootstrap = false;
-        };
-        modules = [./hosts/medusa];
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "christoph@jabsserver" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/christoph/jabsserver ./home/christoph/standalone.nix];
-      };
-    };
-  };
 }

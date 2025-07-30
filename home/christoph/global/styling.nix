@@ -4,7 +4,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   recolor-wallpaper = {
     enable = true;
     theme = lib.mkDefault "gruvbox-material-dark-hard";
@@ -45,9 +46,13 @@
   };
 
   # LS_COLORS theming
-  home.sessionVariables.LS_COLORS = let
-    lsColors = builtins.readFile (pkgs.runCommand "vivid-ls-colors" {} ''
-      ${lib.getExe pkgs.vivid} generate ${./vivid-theme.yaml} > $out
-    '');
-  in "${lsColors}";
+  home.sessionVariables.LS_COLORS =
+    let
+      lsColors = builtins.readFile (
+        pkgs.runCommand "vivid-ls-colors" { } ''
+          ${lib.getExe pkgs.vivid} generate ${./vivid-theme.yaml} > $out
+        ''
+      );
+    in
+    "${lsColors}";
 }

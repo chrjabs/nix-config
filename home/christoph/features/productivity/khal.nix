@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs.khal = {
     enable = true;
     locale = rec {

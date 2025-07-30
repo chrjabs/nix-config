@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.openvpn.servers.uh-allroute = {
     autoStart = false;
     config = ''

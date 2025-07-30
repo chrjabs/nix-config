@@ -13,7 +13,8 @@
   withGui ? false,
   withJackMidi ? true,
 }:
-assert lib.assertMsg (withGui || withJackMidi) "either GUI of JackMIDI needs to be enabled"; let
+assert lib.assertMsg (withGui || withJackMidi) "either GUI of JackMIDI needs to be enabled";
+let
   pythonDeps = with python3.pkgs; [
     pygobject3
     pycairo
@@ -21,56 +22,52 @@ assert lib.assertMsg (withGui || withJackMidi) "either GUI of JackMIDI needs to 
     cython
   ];
 
-  guiFlag =
-    if withGui
-    then "-Dgui=enabled"
-    else "-Dgui=disabled";
-  jackMidiFlag =
-    if withJackMidi
-    then "-Djack-midi=enabled"
-    else "-Djack-midi=disabled";
+  guiFlag = if withGui then "-Dgui=enabled" else "-Dgui=disabled";
+  jackMidiFlag = if withJackMidi then "-Djack-midi=enabled" else "-Djack-midi=disabled";
 in
-  stdenv.mkDerivation
-  rec {
-    name = "jack-mixer";
-    version = "19";
+stdenv.mkDerivation rec {
+  name = "jack-mixer";
+  version = "19";
 
-    src = fetchFromGitHub {
-      owner = "jack-mixer";
-      repo = "jack_mixer";
-      rev = "release-${version}";
-      hash = "sha256-ElpoDJ8DJI8bV3PEAPhtTxr2JgFcRBQIp1rxpVVSpqI=";
-    };
+  src = fetchFromGitHub {
+    owner = "jack-mixer";
+    repo = "jack_mixer";
+    rev = "release-${version}";
+    hash = "sha256-ElpoDJ8DJI8bV3PEAPhtTxr2JgFcRBQIp1rxpVVSpqI=";
+  };
 
-    postPatch = ''
-      # Fix installation path of xdg schemas.
-      substituteInPlace meson.build --replace "'/'" "prefix"
-    '';
+  postPatch = ''
+    # Fix installation path of xdg schemas.
+    substituteInPlace meson.build --replace "'/'" "prefix"
+  '';
 
-    buildInputs = [
-      glib
-      libjack2
-      python3
-    ];
+  buildInputs = [
+    glib
+    libjack2
+    python3
+  ];
 
-    propagatedBuildInputs = pythonDeps;
+  propagatedBuildInputs = pythonDeps;
 
-    nativeBuildInputs = [
-      meson
-      ninja
-      pkg-config
-      cmake
-      docutils
-    ];
+  nativeBuildInputs = [
+    meson
+    ninja
+    pkg-config
+    cmake
+    docutils
+  ];
 
-    mesonFlags = [guiFlag jackMidiFlag];
+  mesonFlags = [
+    guiFlag
+    jackMidiFlag
+  ];
 
-    meta = {
-      description = "A multi-channel audio mixer desktop application for the JACK Audio Connection Kit";
-      homepage = "https://rdio.space/jackmixer/";
-      changelog = "https://github.com/jack-mixer/jack_mixer/releases/tag/release-${version}";
-      mainProgram = "jack_mixer";
-      license = lib.licenses.gpl2Plus;
-      maintainers = with lib.maintainers; [];
-    };
-  }
+  meta = {
+    description = "A multi-channel audio mixer desktop application for the JACK Audio Connection Kit";
+    homepage = "https://rdio.space/jackmixer/";
+    changelog = "https://github.com/jack-mixer/jack_mixer/releases/tag/release-${version}";
+    mainProgram = "jack_mixer";
+    license = lib.licenses.gpl2Plus;
+    maintainers = with lib.maintainers; [ ];
+  };
+}

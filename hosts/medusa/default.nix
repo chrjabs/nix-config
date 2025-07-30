@@ -5,7 +5,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
 

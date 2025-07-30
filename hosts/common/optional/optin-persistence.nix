@@ -5,7 +5,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   environment.persistence = {
     "/persist" = {
       enable = true;
@@ -15,21 +16,23 @@
           "/var/lib/nixos"
           "/var/log"
         ]
-        ++ lib.optionals config.hardware.bluetooth.enable ["/var/lib/bluetooth"]
-        ++ lib.optionals config.programs.regreet.enable ["/var/lib/regreet"];
+        ++ lib.optionals config.hardware.bluetooth.enable [ "/var/lib/bluetooth" ]
+        ++ lib.optionals config.programs.regreet.enable [ "/var/lib/regreet" ];
     };
   };
 
   programs.fuse.userAllowOther = true;
 
-  system.activationScripts.persistent-dirs.text = let
-    mkHomePersist = user:
-      lib.optionalString user.createHome ''
-        mkdir -p /persist/${user.home}
-        chown ${user.name}:${user.group} /persist/${user.home}
-        chmod ${user.homeMode} /persist/${user.home}
-      '';
-    users = lib.attrValues config.users.users;
-  in
+  system.activationScripts.persistent-dirs.text =
+    let
+      mkHomePersist =
+        user:
+        lib.optionalString user.createHome ''
+          mkdir -p /persist/${user.home}
+          chown ${user.name}:${user.group} /persist/${user.home}
+          chmod ${user.homeMode} /persist/${user.home}
+        '';
+      users = lib.attrValues config.users.users;
+    in
     lib.concatLines (map mkHomePersist users);
 }

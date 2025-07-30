@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   version = "1.0";
   src = ./pass-fuzzel.sh;
 
-  nativeBuildInputs = [makeWrapper];
+  nativeBuildInputs = [ makeWrapper ];
 
   dontUnpack = true;
   dontBuild = true;
@@ -27,18 +27,18 @@ stdenv.mkDerivation {
     install -Dm 0755 $src $out/bin/pass-fuzzel
     wrapProgram $out/bin/pass-fuzzel --prefix PATH ':' \
       "${
-      lib.makeBinPath [
-        pass
-        jq
-        fuzzel
-        libnotify
-        wl-clipboard
-        wtype
-        findutils
-        gnused
-        coreutils
-      ]
-    }"
+        lib.makeBinPath [
+          pass
+          jq
+          fuzzel
+          libnotify
+          wl-clipboard
+          wtype
+          findutils
+          gnused
+          coreutils
+        ]
+      }"
   '';
 
   meta = {

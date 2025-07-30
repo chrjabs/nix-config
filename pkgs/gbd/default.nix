@@ -58,7 +58,7 @@ python.pkgs.buildPythonPackage rec {
     description = "Management of Benchmark Instances and Instance Attributes";
     homepage = "https://github.com/udopia/gbd";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [];
+    maintainers = with lib.maintainers; [ ];
     mainProgram = "gbd";
   };
 }

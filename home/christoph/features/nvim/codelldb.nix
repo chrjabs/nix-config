@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.nixvim.plugins = {
     dap-lldb = {
       enable = true;

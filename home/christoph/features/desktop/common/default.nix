@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./firefox.nix
     ./fuzzel.nix
@@ -32,7 +33,7 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-wlr];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
 
   services.cliphist.enable = true;
 }

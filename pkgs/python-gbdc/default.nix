@@ -37,6 +37,6 @@ buildPythonPackage rec {
     description = "Instance Identification, Feature Extraction, and Problem Transformation";
     homepage = "https://github.com/Udopia/gbdc";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [];
+    maintainers = with lib.maintainers; [ ];
   };
 }

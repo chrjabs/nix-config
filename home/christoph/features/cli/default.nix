@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./bat.nix
     ./btop.nix
@@ -27,7 +28,6 @@
     tree
 
     nixd # Nix LSP
-    alejandra # Nix formatter
     nix-output-monitor
   ];
   programs = {

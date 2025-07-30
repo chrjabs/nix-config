@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim.plugins = {
     rustaceanvim = {
       enable = true;
@@ -38,7 +39,9 @@
     crates.enable = true;
   };
   # With codelldb on the path, the plugin automatically detects it
-  home.packages = let
-    codelldb = pkgs.vscode-extensions.vadimcn.vscode-lldb.adapter;
-  in [codelldb];
+  home.packages =
+    let
+      codelldb = pkgs.vscode-extensions.vadimcn.vscode-lldb.adapter;
+    in
+    [ codelldb ];
 }

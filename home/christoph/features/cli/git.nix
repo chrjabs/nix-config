@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
@@ -35,12 +36,14 @@
       branch.sort = "committerdate";
       push.autoSetupRemote = true;
       rerere.enabled = true;
-      "filter \"dumpsql\"" = let
-        sqlite = lib.getExe pkgs.sqlite;
-      in {
-        clean = "tmp=$(mktemp); cat > $tmp; ${sqlite} $tmp .dump; rm $tmp";
-        smudge = "tmp=$(mktemp); ${sqlite} $tmp; cat $tmp; rm $tmp";
-      };
+      "filter \"dumpsql\"" =
+        let
+          sqlite = lib.getExe pkgs.sqlite;
+        in
+        {
+          clean = "tmp=$(mktemp); cat > $tmp; ${sqlite} $tmp .dump; rm $tmp";
+          smudge = "tmp=$(mktemp); ${sqlite} $tmp; cat $tmp; rm $tmp";
+        };
     };
     lfs.enable = true;
     ignores = [

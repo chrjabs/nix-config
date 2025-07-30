@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./global
     ./features/desktop/niri
@@ -26,7 +27,13 @@
           x = 1080;
           y = 270;
         };
-        workspaces = ["1" "2" "3" "4" "5"];
+        workspaces = [
+          "1"
+          "2"
+          "3"
+          "4"
+          "5"
+        ];
       };
       "HDMI-A-1" = {
         mode = {
@@ -39,7 +46,13 @@
           y = 0;
         };
         rotation = 270;
-        workspaces = ["6" "7" "8" "9" "10"];
+        workspaces = [
+          "6"
+          "7"
+          "8"
+          "9"
+          "10"
+        ];
       };
     };
   };

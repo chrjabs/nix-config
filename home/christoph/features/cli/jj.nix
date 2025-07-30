@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   programs.jujutsu = {
     enable = true;
     settings = {
@@ -24,7 +25,10 @@
       };
       "--scope" = [
         {
-          "--when".commands = ["diff" "show"];
+          "--when".commands = [
+            "diff"
+            "show"
+          ];
           ui = {
             pager = lib.getExe pkgs.delta;
             diff-formatter = ":git";
@@ -34,5 +38,6 @@
     };
   };
 
-  specialisation.work.configuration.programs.jujutsu.settings.user.email = "christoph.jabs@helsinki.fi";
+  specialisation.work.configuration.programs.jujutsu.settings.user.email =
+    "christoph.jabs@helsinki.fi";
 }

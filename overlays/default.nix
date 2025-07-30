@@ -1,25 +1,25 @@
 # This file defines overlays
-{inputs, ...}: let
-  addPatches = pkg: patches:
+{ inputs, ... }:
+let
+  addPatches =
+    pkg: patches:
     pkg.overrideAttrs (oldAttrs: {
-      patches = (oldAttrs.patches or []) ++ patches;
+      patches = (oldAttrs.patches or [ ]) ++ patches;
     });
-in {
+in
+{
   # For every flake input, aliases 'pkgs.inputs.${flake}' to
   # 'inputs.${flake}.packages.${pkgs.system}' or
   # 'inputs.${flake}.legacyPackages.${pkgs.system}'
   flake-inputs = final: _: {
-    inputs =
-      builtins.mapAttrs (
-        _: flake: let
-          legacyPackages = (flake.legacyPackages or {}).${final.system} or {};
-          packages = (flake.packages or {}).${final.system} or {};
-        in
-          if legacyPackages != {}
-          then legacyPackages
-          else packages
-      )
-      inputs;
+    inputs = builtins.mapAttrs (
+      _: flake:
+      let
+        legacyPackages = (flake.legacyPackages or { }).${final.system} or { };
+        packages = (flake.packages or { }).${final.system} or { };
+      in
+      if legacyPackages != { } then legacyPackages else packages
+    ) inputs;
   };
 
   # Adds pkgs.custom == inputs.custom-nixpkgs.legacyPackages.${pkgs.system}
@@ -33,7 +33,8 @@ in {
   };
 
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev:
+  additions =
+    final: _prev:
     import ../pkgs {
       pkgs = final;
       inherit inputs;
@@ -47,8 +48,8 @@ in {
   python-additions = self: super: {
     python3 = super.python3.override {
       packageOverrides = _: _: rec {
-        gbd = super.python3Packages.callPackage ../pkgs/gbd {python-gbdc = gbdc;};
-        gbdc = super.python3Packages.callPackage ../pkgs/python-gbdc {};
+        gbd = super.python3Packages.callPackage ../pkgs/gbd { python-gbdc = gbdc; };
+        gbdc = super.python3Packages.callPackage ../pkgs/python-gbdc { };
       };
     };
     python3Packages = self.python3.pkgs;
@@ -59,7 +60,7 @@ in {
   # https://nixos.wiki/wiki/Overlays
   modifications = _: prev: {
     # https://github.com/mdellweg/pass_secret_service/pull/37
-    pass-secret-service = addPatches prev.pass-secret-service [./pass-secret-service-native.diff];
+    pass-secret-service = addPatches prev.pass-secret-service [ ./pass-secret-service-native.diff ];
 
     # Newest Widevine
     widevine-cdm = prev.widevine-cdm.overrideAttrs rec {

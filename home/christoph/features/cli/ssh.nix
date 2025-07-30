@@ -3,11 +3,15 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   nixosConfigs = builtins.attrNames outputs.nixosConfigurations;
-  homeConfigs = map (n: lib.last (lib.splitString "@" n)) (builtins.attrNames outputs.homeConfigurations);
+  homeConfigs = map (n: lib.last (lib.splitString "@" n)) (
+    builtins.attrNames outputs.homeConfigurations
+  );
   hostnames = lib.unique (homeConfigs ++ nixosConfigs);
-in {
+in
+{
   programs.ssh = {
     enable = true;
     userKnownHostsFile = "~/.ssh/known_hosts.d/hosts";
@@ -30,7 +34,7 @@ in {
         setEnv.WAYLAND_DISPLAY = "wayland-waypipe";
         extraOptions.StreamLocalBindUnlink = "yes";
       };
-      "vps.jabsserver" = lib.hm.dag.entryBefore ["jabsserver"] {
+      "vps.jabsserver" = lib.hm.dag.entryBefore [ "jabsserver" ] {
         hostname = "portmapper.jabsserver.net";
         user = "root";
       };
@@ -38,19 +42,21 @@ in {
         hostname = "jabsserver.net";
         proxyJump = "vps.jabsserver";
       };
-      jabsserver-tunnel = lib.hm.dag.entryBefore ["jabsserver"] ({
-          dynamicForwards = [{port = 8080;}];
+      jabsserver-tunnel = lib.hm.dag.entryBefore [ "jabsserver" ] (
+        {
+          dynamicForwards = [ { port = 8080; } ];
         }
-        // jabsserver);
+        // jabsserver
+      );
     };
   };
 
   specialisation.work.configuration.programs.ssh.matchBlocks = {
-    uh = lib.hm.dag.entryBefore ["melkki" "melkinkari" "turso" "turso01" "turso02" "turso03"] {
+    uh = lib.hm.dag.entryBefore [ "melkki" "melkinkari" "turso" "turso01" "turso02" "turso03" ] {
       host = "*.helsinki.fi melkki melkinkari turso*";
       user = "chrisjab";
     };
-    melkki = lib.hm.dag.entryBefore ["turso" "turso01" "turso02" "turso03"] {
+    melkki = lib.hm.dag.entryBefore [ "turso" "turso01" "turso02" "turso03" ] {
       hostname = "melkki.cs.helsinki.fi";
     };
     melkinkari = {

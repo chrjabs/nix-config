@@ -9,8 +9,8 @@
   pkg-config,
   pycparser,
 }:
-if isPyPy
-then null
+if isPyPy then
+  null
 else
   buildPythonPackage rec {
     pname = "cffi";
@@ -21,13 +21,16 @@ else
       sha256 = "sha256-1AC/uaN7E1ElPLQCZxzqfom97MKU6AFqcH9tHYrJNPk=";
     };
 
-    outputs = ["out" "dev"];
+    outputs = [
+      "out"
+      "dev"
+    ];
 
-    buildInputs = [libffi];
+    buildInputs = [ libffi ];
 
-    nativeBuildInputs = [pkg-config];
+    nativeBuildInputs = [ pkg-config ];
 
-    propagatedBuildInputs = [pycparser];
+    propagatedBuildInputs = [ pycparser ];
 
     postPatch = lib.optionalString stdenv.isDarwin ''
       # Remove setup.py impurities
@@ -38,16 +41,17 @@ else
     '';
 
     # The tests use -Werror but with python3.6 clang detects some unreachable code.
-    NIX_CFLAGS_COMPILE =
-      lib.optionalString stdenv.cc.isClang
-      "-Wno-unused-command-line-argument -Wno-unreachable-code -Wno-c++11-narrowing";
+    NIX_CFLAGS_COMPILE = lib.optionalString stdenv.cc.isClang "-Wno-unused-command-line-argument -Wno-unreachable-code -Wno-c++11-narrowing";
 
     doCheck = false;
 
-    checkInputs = [pytestCheckHook];
+    checkInputs = [ pytestCheckHook ];
 
     meta = with lib; {
-      maintainers = with maintainers; [domenkozar lnl7];
+      maintainers = with maintainers; [
+        domenkozar
+        lnl7
+      ];
       homepage = "https://cffi.readthedocs.org/";
       license = licenses.mit;
       description = "Foreign Function Interface for Python calling C code";

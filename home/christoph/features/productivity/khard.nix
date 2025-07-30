@@ -1,12 +1,11 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [khard];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ khard ];
 
   # Need to manually configure khard because home manager does not support
   # specifying a subcollection for khard
   xdg.configFile."khard/khard.conf".text =
-    /*
-    toml
-    */
+    # toml
     ''
       [addressbooks]
       [[contacts]]

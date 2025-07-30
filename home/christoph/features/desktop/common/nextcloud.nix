@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.nextcloud-client = {
     enable = true;
     startInBackground = true;
@@ -6,8 +7,8 @@
 
   # Ensure that secret service is loaded in order to get stored credentials
   systemd.user.services.nextcloud-client.Unit = {
-    Requires = ["pass-secret-service.service"];
-    After = ["pass-secret-service.service"];
+    Requires = [ "pass-secret-service.service" ];
+    After = [ "pass-secret-service.service" ];
   };
 
   xdg.configFile."Nextcloud/sync-exclude.lst".text = ''

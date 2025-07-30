@@ -10,14 +10,20 @@
   makeWrapper,
   stdenv,
   autoPatchelfHook,
-}: let
+}:
+let
   version = "0.63.0";
 
   rustPkgs = extend (import rust-overlay);
 
   # Rust toolchain as specified in `$KANI_HOME/rust-toolchain-version`
   rustHome = rustPkgs.rust-bin.nightly."2025-06-03".default.override {
-    extensions = ["rustc-dev" "rust-src" "llvm-tools" "rustfmt"];
+    extensions = [
+      "rustc-dev"
+      "rust-src"
+      "llvm-tools"
+      "rustfmt"
+    ];
   };
 
   rustPlatform = rustPkgs.makeRustPlatform {
@@ -47,7 +53,9 @@
   kani-home = stdenv.mkDerivation {
     name = "kani-home";
 
-    src = releases.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+    src =
+      releases.${stdenv.hostPlatform.system}
+        or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
 
     buildInputs = [
       stdenv.cc.cc.lib # libs needed by patchelf
@@ -57,7 +65,7 @@
       glibc # not detected as missing by patchelf for some reason
     ];
 
-    nativeBuildInputs = [autoPatchelfHook];
+    nativeBuildInputs = [ autoPatchelfHook ];
 
     installPhase = ''
       runHook preInstall
@@ -66,53 +74,58 @@
     '';
   };
 in
-  rustPlatform.buildRustPackage {
-    pname = "kani";
+rustPlatform.buildRustPackage {
+  pname = "kani";
 
-    inherit version;
+  inherit version;
 
-    src = fetchFromGitHub {
-      owner = "model-checking";
-      repo = "kani";
-      rev = "kani-${version}";
-      hash = "sha256-SCiptYoUPSw9tIEzl+htqD8KDBbL4wNLrv38BSlpJmY=";
-      fetchSubmodules = true;
-    };
+  src = fetchFromGitHub {
+    owner = "model-checking";
+    repo = "kani";
+    rev = "kani-${version}";
+    hash = "sha256-SCiptYoUPSw9tIEzl+htqD8KDBbL4wNLrv38BSlpJmY=";
+    fetchSubmodules = true;
+  };
 
-    cargoPatches = [
-      ./deduplicate-tracing-tree.patch
+  cargoPatches = [
+    ./deduplicate-tracing-tree.patch
+  ];
+
+  nativeBuildInputs = [ makeWrapper ];
+
+  postInstall = ''
+    mkdir -p $out/lib/
+    ${rsync}/bin/rsync -av ${kani-home}/ $out/lib/kani-${version} --perms --chmod=D+rw,F+rw
+    cp $out/bin/* $out/lib/kani-${version}/bin/
+    ln -s ${rustHome} $out/lib/kani-${version}/toolchain
+  '';
+
+  postFixup = ''
+    wrapProgram $out/bin/kani --set KANI_HOME $out/lib/
+    wrapProgram $out/bin/cargo-kani --set KANI_HOME $out/lib/
+  '';
+
+  cargoHash = "sha256-DeDvhzQuTyklpneGFqa7iYdhcRBRV8+6BgiD1/bWQ7Y=";
+
+  env = {
+    RUSTUP_HOME = "${rustHome}";
+    RUSTUP_TOOLCHAIN = "..";
+  };
+
+  meta = {
+    description = "Kani Rust Verifier ";
+    homepage = "https://model-checking.github.io/kani/";
+    license = with lib.licenses; [
+      mit
+      asl20
     ];
-
-    nativeBuildInputs = [makeWrapper];
-
-    postInstall = ''
-      mkdir -p $out/lib/
-      ${rsync}/bin/rsync -av ${kani-home}/ $out/lib/kani-${version} --perms --chmod=D+rw,F+rw
-      cp $out/bin/* $out/lib/kani-${version}/bin/
-      ln -s ${rustHome} $out/lib/kani-${version}/toolchain
-    '';
-
-    postFixup = ''
-      wrapProgram $out/bin/kani --set KANI_HOME $out/lib/
-      wrapProgram $out/bin/cargo-kani --set KANI_HOME $out/lib/
-    '';
-
-    cargoHash = "sha256-DeDvhzQuTyklpneGFqa7iYdhcRBRV8+6BgiD1/bWQ7Y=";
-
-    env = {
-      RUSTUP_HOME = "${rustHome}";
-      RUSTUP_TOOLCHAIN = "..";
-    };
-
-    meta = {
-      description = "Kani Rust Verifier ";
-      homepage = "https://model-checking.github.io/kani/";
-      license = with lib.licenses; [
-        mit
-        asl20
-      ];
-      meta.platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-      maintainers = with lib.maintainers; [chrjabs];
-      mainProgram = "kani";
-    };
-  }
+    meta.platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
+    maintainers = with lib.maintainers; [ chrjabs ];
+    mainProgram = "kani";
+  };
+}

@@ -1,7 +1,7 @@
-{pkgs}:
-with pkgs; (texlive.combine {
-  inherit
-    (texlive)
+{ pkgs }:
+with pkgs;
+(texlive.combine {
+  inherit (texlive)
     scheme-small
     # Tools
     latexmk

@@ -3,7 +3,8 @@
   config,
   bootstrap,
   ...
-}: {
+}:
+{
   imports =
     [
       ./hardware-configuration.nix
@@ -39,7 +40,10 @@
       command = "${lib.getExe' config.programs.niri.package "niri-session"} -l";
     };
     # Greetd output config
-    outputConfig = lib.concatStringsSep "\n" ["output HDMI-A-1 disable" "output DP-1 enable"];
+    outputConfig = lib.concatStringsSep "\n" [
+      "output HDMI-A-1 disable"
+      "output DP-1 enable"
+    ];
   };
 
   # Needed for GTK
@@ -57,7 +61,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Home assistant API token secret
   sops.secrets.ha-api-token = {

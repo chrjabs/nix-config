@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./browsing.nix
     ./codelldb.nix

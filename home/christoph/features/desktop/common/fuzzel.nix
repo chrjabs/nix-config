@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs.fuzzel = {
     enable = true;
 
@@ -17,8 +18,9 @@
     };
   };
 
-  home.packages = let
-    inherit (config.programs.password-store) package enable;
-  in
-    lib.optional enable (pkgs.pass-fuzzel.override {pass = package;});
+  home.packages =
+    let
+      inherit (config.programs.password-store) package enable;
+    in
+    lib.optional enable (pkgs.pass-fuzzel.override { pass = package; });
 }

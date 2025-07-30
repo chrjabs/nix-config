@@ -23,7 +23,7 @@ rustPlatform.buildRustPackage rec {
       mit
       asl20
     ];
-    maintainers = with lib.maintainers; [chrjabs];
+    maintainers = with lib.maintainers; [ chrjabs ];
     mainProgram = "pboxide_veripb";
   };
 }

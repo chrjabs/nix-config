@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   # xdg.configFile."kitty/ssh.conf".text = ''
   #   share_connections no
   # '';

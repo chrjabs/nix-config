@@ -3,7 +3,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ../global
     inputs.sops-nix.homeManagerModules.sops
@@ -16,13 +17,15 @@
 
     sessionVariables.NH_FLAKE = "$HOME/nix-config";
 
-    packages = let
-      dcmp = pkgs.writeShellScriptBin "dcmp" ''
-        source ${config.sops.secrets.docker.path}
-        cd ~/jabsserver_docker/$1
-        sudo -E docker compose --project-name "$1" "''${@:2}"
-      '';
-    in [dcmp];
+    packages =
+      let
+        dcmp = pkgs.writeShellScriptBin "dcmp" ''
+          source ${config.sops.secrets.docker.path}
+          cd ~/jabsserver_docker/$1
+          sudo -E docker compose --project-name "$1" "''${@:2}"
+        '';
+      in
+      [ dcmp ];
   };
 
   programs.nh.enable = true;
@@ -31,7 +34,7 @@
   };
 
   sops = {
-    age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+    age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     secrets.docker.sopsFile = ./secrets.yaml;
   };
 

@@ -4,9 +4,11 @@
   lib,
   bootstrap ? false,
   ...
-}: let
+}:
+let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   users.users.christoph = {
     isNormalUser = true;
     shell = pkgs.fish;
@@ -21,10 +23,12 @@ in {
       "network"
     ];
 
-    openssh.authorizedKeys.keys = lib.splitString "\n" (builtins.readFile ../../../../home/christoph/ssh.pub);
+    openssh.authorizedKeys.keys = lib.splitString "\n" (
+      builtins.readFile ../../../../home/christoph/ssh.pub
+    );
     hashedPasswordFile = lib.mkIf (!bootstrap) config.sops.secrets.christoph-password.path;
     initialPassword = lib.mkIf bootstrap "bootstrap";
-    packages = lib.mkIf (!bootstrap) (with pkgs; [home-manager]);
+    packages = lib.mkIf (!bootstrap) (with pkgs; [ home-manager ]);
   };
 
   sops.secrets.christoph-password = lib.mkIf (!bootstrap) {
@@ -32,9 +36,11 @@ in {
     neededForUsers = true;
   };
 
-  home-manager.users.christoph = lib.mkIf (!bootstrap) (import ../../../../home/christoph/${config.networking.hostName}.nix);
+  home-manager.users.christoph = lib.mkIf (
+    !bootstrap
+  ) (import ../../../../home/christoph/${config.networking.hostName}.nix);
 
   security.pam.services = lib.mkIf (!bootstrap) {
-    swaylock = {};
+    swaylock = { };
   };
 }

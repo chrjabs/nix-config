@@ -4,22 +4,26 @@
   config,
   bootstrap ? false,
   ...
-}: let
+}:
+let
   homeCfgs = config.home-manager.users;
   homeSharePaths = lib.mapAttrsToList (_: v: "${v.home.path}/share") homeCfgs;
   vars = ''XDG_DATA_DIRS="$XDG_DATA_DIRS:${lib.concatStringsSep ":" homeSharePaths}" GTK_USE_PORTAL=0'';
 
   christophCfg = homeCfgs.christoph;
 
-  sway-kiosk = command: "${lib.getExe pkgs.sway} --unsupported-gpu --config ${pkgs.writeText "kiosk.config" ''
-    ${config.greetd.custom.outputConfig}
-    xwayland disable
-    input "type:touchpad" {
-      tap enabled
-    }
-    exec '${vars} ${command}; ${lib.getExe' pkgs.sway "swaymsg"} exit'
-  ''}";
-in {
+  sway-kiosk =
+    command:
+    "${lib.getExe pkgs.sway} --unsupported-gpu --config ${pkgs.writeText "kiosk.config" ''
+      ${config.greetd.custom.outputConfig}
+      xwayland disable
+      input "type:touchpad" {
+        tap enabled
+      }
+      exec '${vars} ${command}; ${lib.getExe' pkgs.sway "swaymsg"} exit'
+    ''}";
+in
+{
   options.greetd.custom = with lib; {
     outputConfig = mkOption {
       type = types.str;
@@ -53,7 +57,7 @@ in {
       isSystemUser = true;
       group = "greeter";
     };
-    users.groups.greeter = {};
+    users.groups.greeter = { };
 
     programs.regreet = {
       enable = lib.mkDefault true;

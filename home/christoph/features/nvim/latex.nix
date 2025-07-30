@@ -23,10 +23,19 @@
             default = "information";
           };
           dictionary = {
-            "en" = ["Jeremias" "Niskanen" "Matti" "Järvisalo" "MaxSAT"];
+            "en" = [
+              "Jeremias"
+              "Niskanen"
+              "Matti"
+              "Järvisalo"
+              "MaxSAT"
+            ];
           };
           disabledRules = {
-            "en" = ["EN_FOR_DE_SPEAKERS_FALSE_FRIENDS_FORMULA_FORM" "OXFORD_SPELLING_Z_NOT_S"];
+            "en" = [
+              "EN_FOR_DE_SPEAKERS_FALSE_FRIENDS_FORMULA_FORM"
+              "OXFORD_SPELLING_Z_NOT_S"
+            ];
           };
           latex = {
             environments = {
@@ -48,7 +57,19 @@
             };
           };
         };
-        filetypes = ["bibtex" "gitcommit" "markdown" "org" "tex" "restructuredtext" "rsweave" "latex" "quarto" "rmd" "context"];
+        filetypes = [
+          "bibtex"
+          "gitcommit"
+          "markdown"
+          "org"
+          "tex"
+          "restructuredtext"
+          "rsweave"
+          "latex"
+          "quarto"
+          "rmd"
+          "context"
+        ];
       };
     };
   };

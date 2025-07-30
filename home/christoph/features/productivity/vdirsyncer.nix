@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   pass = lib.getExe config.programs.password-store.package;
-in {
+in
+{
   home.persistence."/persist/${config.home.homeDirectory}".directories = [
     "Calendars"
     "Contacts"
@@ -28,12 +30,21 @@ in {
           type = "caldav";
           url = "https://cloud.jabsserver.net";
           userName = "christoph";
-          passwordCommand = ["${pass}" "cloud.jabsserver.net/christoph-vdirsync"];
+          passwordCommand = [
+            "${pass}"
+            "cloud.jabsserver.net/christoph-vdirsync"
+          ];
         };
         vdirsyncer = {
           enable = true;
-          collections = ["from a" "from b"];
-          metadata = ["color" "displayname"];
+          collections = [
+            "from a"
+            "from b"
+          ];
+          metadata = [
+            "color"
+            "displayname"
+          ];
           conflictResolution = "remote wins";
         };
         khal = {
@@ -56,11 +67,17 @@ in {
           type = "carddav";
           url = "https://cloud.jabsserver.net";
           userName = "christoph";
-          passwordCommand = ["${pass}" "cloud.jabsserver.net/christoph-vdirsync"];
+          passwordCommand = [
+            "${pass}"
+            "cloud.jabsserver.net/christoph-vdirsync"
+          ];
         };
         vdirsyncer = {
           enable = true;
-          collections = ["from a" "from b"];
+          collections = [
+            "from a"
+            "from b"
+          ];
           conflictResolution = "remote wins";
         };
       };
@@ -71,18 +88,20 @@ in {
     Unit = {
       Description = "vdirsyncer synchronization";
     };
-    Service = let
-      gpgCmds = import ../cli/gpg-commands.nix {
-        inherit pkgs;
-        inherit lib;
+    Service =
+      let
+        gpgCmds = import ../cli/gpg-commands.nix {
+          inherit pkgs;
+          inherit lib;
+        };
+      in
+      {
+        Type = "oneshot";
+        ExecCondition = ''
+          /bin/sh -c "${gpgCmds.isUnlocked}"
+        '';
+        ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
       };
-    in {
-      Type = "oneshot";
-      ExecCondition = ''
-        /bin/sh -c "${gpgCmds.isUnlocked}"
-      '';
-      ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
-    };
   };
   systemd.user.timers.vdirsyncer = {
     Unit = {
@@ -93,7 +112,7 @@ in {
       OnUnitActiveSec = "5m";
     };
     Install = {
-      WantedBy = ["timers.target"];
+      WantedBy = [ "timers.target" ];
     };
   };
 }

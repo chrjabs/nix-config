@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   mbsync = lib.getExe config.programs.mbsync.package;
   pass = lib.getExe config.programs.password-store.package;
   oauth2 = import ./oauth2.nix {
@@ -28,7 +29,8 @@
       '';
     };
   };
-in {
+in
+{
   options = {
     accounts.email.mainAccountPattern = lib.mkOption {
       type = lib.types.str;
@@ -39,7 +41,7 @@ in {
 
   config = {
     home = {
-      persistence."/persist/${config.home.homeDirectory}".directories = ["Mail"];
+      persistence."/persist/${config.home.homeDirectory}".directories = [ "Mail" ];
 
       packages = [
         oauth2.mutt_oauth2
@@ -53,171 +55,165 @@ in {
       maildirBasePath = "Mail";
 
       accounts = {
-        personal =
-          rec {
-            primary = lib.mkDefault true;
-            address = "contact@christophjabs.info";
-            passwordCommand = "${pass} ${smtp.host}/${address}";
+        personal = rec {
+          primary = lib.mkDefault true;
+          address = "contact@christophjabs.info";
+          passwordCommand = "${pass} ${smtp.host}/${address}";
 
-            imap.host = "mail.jabsserver.net";
-            mbsync = {
-              enable = true;
-              create = "maildir";
-              expunge = "both";
-            };
-            folders = {
-              inbox = "Inbox";
-              drafts = "Drafts";
-              sent = "Sent";
-              trash = "Trash";
-            };
-            neomutt = {
-              enable = lib.mkDefault true;
-              mailboxName = "==  Personal ==";
-              extraMailboxes = [
-                {
-                  mailbox = "Archive";
-                  name = "  Archive";
-                }
-                {
-                  mailbox = "Drafts";
-                  name = "  Drafts";
-                }
-                {
-                  mailbox = "Junk";
-                  name = "  Junk";
-                }
-                {
-                  mailbox = "Sent";
-                  name = "  Sent";
-                }
-                {
-                  mailbox = "Trash";
-                  name = "  Deleted";
-                }
-              ];
-            };
+          imap.host = "mail.jabsserver.net";
+          mbsync = {
+            enable = true;
+            create = "maildir";
+            expunge = "both";
+          };
+          folders = {
+            inbox = "Inbox";
+            drafts = "Drafts";
+            sent = "Sent";
+            trash = "Trash";
+          };
+          neomutt = {
+            enable = lib.mkDefault true;
+            mailboxName = "==  Personal ==";
+            extraMailboxes = [
+              {
+                mailbox = "Archive";
+                name = "  Archive";
+              }
+              {
+                mailbox = "Drafts";
+                name = "  Drafts";
+              }
+              {
+                mailbox = "Junk";
+                name = "  Junk";
+              }
+              {
+                mailbox = "Sent";
+                name = "  Sent";
+              }
+              {
+                mailbox = "Trash";
+                name = "  Deleted";
+              }
+            ];
+          };
 
-            msmtp.enable = true;
-            smtp.host = "mail.jabsserver.net";
-            userName = address;
-          }
-          // common;
+          msmtp.enable = true;
+          smtp.host = "mail.jabsserver.net";
+          userName = address;
+        } // common;
 
-        family =
-          rec {
-            address = "christoph@jabs-family.de";
-            passwordCommand = "${pass} ${smtp.host}/${address}";
+        family = rec {
+          address = "christoph@jabs-family.de";
+          passwordCommand = "${pass} ${smtp.host}/${address}";
 
-            imap.host = "mx2f80.netcup.net";
-            mbsync = {
-              enable = true;
-              create = "maildir";
-              expunge = "both";
-            };
-            folders = {
-              inbox = "Inbox";
-              drafts = "Drafts";
-              sent = "Sent";
-              trash = "Trash";
-            };
-            neomutt = {
-              enable = lib.mkDefault true;
-              mailboxName = "==  Family ==";
-              extraMailboxes = [
-                {
-                  mailbox = "Archives";
-                  name = "  Archive";
-                }
-                {
-                  mailbox = "Drafts";
-                  name = "  Drafts";
-                }
-                {
-                  mailbox = "Spam";
-                  name = "  Junk";
-                }
-                {
-                  mailbox = "Sent";
-                  name = "  Sent";
-                }
-                {
-                  mailbox = "Trash";
-                  name = "  Deleted";
-                }
-              ];
-            };
+          imap.host = "mx2f80.netcup.net";
+          mbsync = {
+            enable = true;
+            create = "maildir";
+            expunge = "both";
+          };
+          folders = {
+            inbox = "Inbox";
+            drafts = "Drafts";
+            sent = "Sent";
+            trash = "Trash";
+          };
+          neomutt = {
+            enable = lib.mkDefault true;
+            mailboxName = "==  Family ==";
+            extraMailboxes = [
+              {
+                mailbox = "Archives";
+                name = "  Archive";
+              }
+              {
+                mailbox = "Drafts";
+                name = "  Drafts";
+              }
+              {
+                mailbox = "Spam";
+                name = "  Junk";
+              }
+              {
+                mailbox = "Sent";
+                name = "  Sent";
+              }
+              {
+                mailbox = "Trash";
+                name = "  Deleted";
+              }
+            ];
+          };
 
-            msmtp.enable = true;
-            smtp.host = "mx2f80.netcup.net";
-            userName = address;
-          }
-          // common;
+          msmtp.enable = true;
+          smtp.host = "mx2f80.netcup.net";
+          userName = address;
+        } // common;
 
-        work =
-          rec {
-            address = "christoph.jabs@helsinki.fi";
-            passwordCommand = oauth2.work.pwd_cmd;
+        work = rec {
+          address = "christoph.jabs@helsinki.fi";
+          passwordCommand = oauth2.work.pwd_cmd;
 
-            imap.host = "outlook.office365.com";
-            mbsync = {
-              enable = true;
-              create = "maildir";
-              expunge = "both";
-              extraConfig.account = {
-                AuthMechs = "XOAUTH2";
-              };
+          imap.host = "outlook.office365.com";
+          mbsync = {
+            enable = true;
+            create = "maildir";
+            expunge = "both";
+            extraConfig.account = {
+              AuthMechs = "XOAUTH2";
             };
-            folders = {
-              inbox = "Inbox";
-              drafts = "Drafts";
-              sent = "Sent Items";
-              trash = "Deleted Items";
-            };
-            neomutt = {
-              mailboxName = "==  Work ==";
-              extraMailboxes = [
-                {
-                  mailbox = "GitHub";
-                  name = "  GitHub";
-                }
-                {
-                  mailbox = "Archive";
-                  name = "  Archive";
-                }
-                {
-                  mailbox = "Drafts";
-                  name = "  Drafts";
-                }
-                {
-                  mailbox = "Junk Email";
-                  name = "  Junk";
-                }
-                {
-                  mailbox = "Deleted Items";
-                  name = "  Deleted";
-                }
-                {
-                  mailbox = "Publication News";
-                  name = "  Publication News";
-                }
-              ];
-            };
+          };
+          folders = {
+            inbox = "Inbox";
+            drafts = "Drafts";
+            sent = "Sent Items";
+            trash = "Deleted Items";
+          };
+          neomutt = {
+            mailboxName = "==  Work ==";
+            extraMailboxes = [
+              {
+                mailbox = "GitHub";
+                name = "  GitHub";
+              }
+              {
+                mailbox = "Archive";
+                name = "  Archive";
+              }
+              {
+                mailbox = "Drafts";
+                name = "  Drafts";
+              }
+              {
+                mailbox = "Junk Email";
+                name = "  Junk";
+              }
+              {
+                mailbox = "Deleted Items";
+                name = "  Deleted";
+              }
+              {
+                mailbox = "Publication News";
+                name = "  Publication News";
+              }
+            ];
+          };
 
-            msmtp = {
-              enable = true;
-              extraConfig = {
-                auth = "xoauth2";
-              };
+          msmtp = {
+            enable = true;
+            extraConfig = {
+              auth = "xoauth2";
             };
-            smtp = {
-              host = "smtp.office365.com";
-              port = 587;
-              tls.useStartTls = true;
-            };
-            userName = "chrisjab@ad.helsinki.fi";
-          }
-          // common;
+          };
+          smtp = {
+            host = "smtp.office365.com";
+            port = 587;
+            tls.useStartTls = true;
+          };
+          userName = "chrisjab@ad.helsinki.fi";
+        } // common;
 
         jabsserver = rec {
           address = "admin@jabsserver.net";
@@ -314,7 +310,7 @@ in {
 
     programs.mbsync = {
       enable = true;
-      package = pkgs.isync.override {withCyrusSaslXoauth2 = true;};
+      package = pkgs.isync.override { withCyrusSaslXoauth2 = true; };
     };
     programs.msmtp.enable = true;
 
@@ -322,18 +318,20 @@ in {
       Unit = {
         Description = "mbsync synchronization";
       };
-      Service = let
-        gpgCmds = import ../cli/gpg-commands.nix {
-          inherit pkgs;
-          inherit lib;
+      Service =
+        let
+          gpgCmds = import ../cli/gpg-commands.nix {
+            inherit pkgs;
+            inherit lib;
+          };
+        in
+        {
+          Type = "oneshot";
+          ExecCondition = ''
+            /bin/sh -c "${gpgCmds.isUnlocked}"
+          '';
+          ExecStart = "${mbsync} -a";
         };
-      in {
-        Type = "oneshot";
-        ExecCondition = ''
-          /bin/sh -c "${gpgCmds.isUnlocked}"
-        '';
-        ExecStart = "${mbsync} -a";
-      };
     };
     systemd.user.timers.mbsync = {
       Unit = {
@@ -344,20 +342,21 @@ in {
         OnUnitActiveSec = "5m";
       };
       Install = {
-        WantedBy = ["timers.target"];
+        WantedBy = [ "timers.target" ];
       };
     };
 
     # Run 'createMaildir' after 'linkGeneration'
-    home.activation = let
-      mbsyncAccounts = lib.filter (a: a.mbsync.enable) (lib.attrValues config.accounts.email.accounts);
-    in
-      lib.mkIf (mbsyncAccounts != []) {
-        createMaildir = lib.mkForce (lib.hm.dag.entryAfter ["linkGeneration"] ''
-          run mkdir -m700 -p $VERBOSE_ARG ${
-            lib.concatMapStringsSep " " (a: a.maildir.absPath) mbsyncAccounts
-          }
-        '');
+    home.activation =
+      let
+        mbsyncAccounts = lib.filter (a: a.mbsync.enable) (lib.attrValues config.accounts.email.accounts);
+      in
+      lib.mkIf (mbsyncAccounts != [ ]) {
+        createMaildir = lib.mkForce (
+          lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+            run mkdir -m700 -p $VERBOSE_ARG ${lib.concatMapStringsSep " " (a: a.maildir.absPath) mbsyncAccounts}
+          ''
+        );
       };
   };
 }

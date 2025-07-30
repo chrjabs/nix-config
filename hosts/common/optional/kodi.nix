@@ -4,13 +4,14 @@
   config,
   bootstrap ? false,
   ...
-}: {
+}:
+{
   services.xserver = lib.mkIf (!bootstrap) {
     enable = true;
     desktopManager.kodi = {
       enable = true;
-      package = pkgs.custom.kodi.withPackages (kodiPkgs:
-        with kodiPkgs; [
+      package = pkgs.custom.kodi.withPackages (
+        kodiPkgs: with kodiPkgs; [
           youtube
           netflix
           upnext
@@ -18,7 +19,8 @@
           steam-controller
           mediathekview
           inputstream-adaptive
-        ]);
+        ]
+      );
     };
     displayManager.lightdm.greeter.enable = false;
   };
@@ -51,7 +53,13 @@
   };
 
   networking.firewall = lib.mkIf (!bootstrap) {
-    allowedTCPPorts = [8080 9090];
-    allowedUDPPorts = [8080 9090];
+    allowedTCPPorts = [
+      8080
+      9090
+    ];
+    allowedUDPPorts = [
+      8080
+      9090
+    ];
   };
 }

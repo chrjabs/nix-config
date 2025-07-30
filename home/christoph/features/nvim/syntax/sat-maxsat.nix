@@ -16,7 +16,8 @@ let
     hi def link ${pre}Literal   Identifier
     hi def link ${pre}Delimiter Delimiter
   '';
-in {
+in
+{
   programs.nixvim.filetype.extension = {
     "cnf" = "cnf";
     "wcnf" = "wcnf";
@@ -24,12 +25,11 @@ in {
   };
 
   xdg.configFile = {
-    "nvim/syntax/cnf.vim".text = let
-      pre = "cnf";
-    in
-      /*
-      vim
-      */
+    "nvim/syntax/cnf.vim".text =
+      let
+        pre = "cnf";
+      in
+      # vim
       ''
         ${preamble pre}
 
@@ -42,12 +42,11 @@ in {
         hi def link ${pre}Header    Special
       '';
 
-    "nvim/syntax/wcnf.vim".text = let
-      pre = "wcnf";
-    in
-      /*
-      vim
-      */
+    "nvim/syntax/wcnf.vim".text =
+      let
+        pre = "wcnf";
+      in
+      # vim
       ''
         ${preamble pre}
 
@@ -62,12 +61,11 @@ in {
         hi def link ${pre}Soft      Number
       '';
 
-    "nvim/syntax/mcnf.vim".text = let
-      pre = "mcnf";
-    in
-      /*
-      vim
-      */
+    "nvim/syntax/mcnf.vim".text =
+      let
+        pre = "mcnf";
+      in
+      # vim
       ''
         ${preamble pre}
 

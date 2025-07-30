@@ -42,7 +42,7 @@ python.pkgs.buildPythonApplication rec {
     homepage = "https://gitlab.com/MIAOresearch/VeriPB";
     changelog = "https://gitlab.com/MIAOresearch/VeriPB/-/blob/${src.rev}/CHANGELOG.md";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [chrjabs];
+    maintainers = with lib.maintainers; [ chrjabs ];
     mainProgram = "veripb";
   };
 }

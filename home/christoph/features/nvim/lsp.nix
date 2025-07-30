@@ -41,9 +41,7 @@
 
     # LSP progress notification
     extraConfigLuaPre =
-      /*
-      lua
-      */
+      # lua
       ''
         local progress = vim.defaulttable()
       '';
@@ -51,9 +49,7 @@
       {
         event = "LspProgress";
         callback.__raw =
-          /*
-          lua
-          */
+          # lua
           ''
             function(ev)
               local client = vim.lsp.get_client_by_id(ev.data.client_id)

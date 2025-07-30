@@ -3,13 +3,14 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ../common
   ];
 
   home.packages = with pkgs; [
-    (flameshot.override {enableWlrSupport = true;})
+    (flameshot.override { enableWlrSupport = true; })
     config.monitors.swayLayoutsScript
   ];
 
@@ -48,19 +49,20 @@
         };
       };
 
-      keybindings = let
-        inherit (config.wayland.windowManager.sway.config) modifier;
-        kitty = lib.getExe config.programs.kitty.package;
-        fuzzel = lib.getExe config.programs.fuzzel.package;
-        makoctl = lib.getExe' config.services.mako.package "makoctl";
-        pactl = lib.getExe' pkgs.pulseaudio "pactl";
-        playerctl = lib.getExe pkgs.playerctl;
-        pass-fuzzel = lib.getExe pkgs.pass-fuzzel;
-        joshuto = lib.getExe config.programs.joshuto.package;
-        brightnessctl = lib.getExe pkgs.brightnessctl;
-        swaylock = lib.getExe config.programs.swaylock.package;
-        monitorLayouts = lib.getExe config.monitors.swayLayoutsScript;
-      in
+      keybindings =
+        let
+          inherit (config.wayland.windowManager.sway.config) modifier;
+          kitty = lib.getExe config.programs.kitty.package;
+          fuzzel = lib.getExe config.programs.fuzzel.package;
+          makoctl = lib.getExe' config.services.mako.package "makoctl";
+          pactl = lib.getExe' pkgs.pulseaudio "pactl";
+          playerctl = lib.getExe pkgs.playerctl;
+          pass-fuzzel = lib.getExe pkgs.pass-fuzzel;
+          joshuto = lib.getExe config.programs.joshuto.package;
+          brightnessctl = lib.getExe pkgs.brightnessctl;
+          swaylock = lib.getExe config.programs.swaylock.package;
+          monitorLayouts = lib.getExe config.monitors.swayLayoutsScript;
+        in
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
           "${modifier}+d" = "exec ${fuzzel}";
@@ -85,7 +87,7 @@
           "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10%-";
         };
 
-      bars = [];
+      bars = [ ];
 
       defaultWorkspace = "workspace number 1";
 
@@ -98,30 +100,29 @@
         };
       };
 
-      output = lib.mkIf (config.monitors.layouts.default != null) (builtins.mapAttrs (_: m: {
+      output = lib.mkIf (config.monitors.layouts.default != null) (
+        builtins.mapAttrs (_: m: {
           # somwhat hacky way of getting `disable` to show up if a monitor is not enabled
           disable = lib.mkIf (!m.enabled) "";
-          mode = lib.mkIf (m.mode != null) ("${toString m.mode.x}x${toString m.mode.y}" + lib.optionalString (m.mode.rate != null) "@${toString m.mode.rate}Hz");
+          mode = lib.mkIf (m.mode != null) (
+            "${toString m.mode.x}x${toString m.mode.y}"
+            + lib.optionalString (m.mode.rate != null) "@${toString m.mode.rate}Hz"
+          );
           scale = lib.mkIf (m.scale != null) (toString m.scale);
           position = lib.mkIf (m.position != null) "${toString m.position.x} ${toString m.position.y}";
           transform = lib.mkIf (m.rotation != null) (toString m.rotation);
-        })
-        config.monitors.layouts.default);
+        }) config.monitors.layouts.default
+      );
 
       workspaceOutputAssign = lib.mkIf (config.monitors.layouts.default != null) (
         lib.flatten (
           lib.mapAttrsToList (
-            name: m: (
-              builtins.map (
-                w: {
-                  workspace = w;
-                  output = [name] ++ lib.optionals (m.fallback != null) [m.fallback];
-                }
-              )
-              m.workspaces
-            )
-          )
-          config.monitors.layouts.default
+            name: m:
+            (builtins.map (w: {
+              workspace = w;
+              output = [ name ] ++ lib.optionals (m.fallback != null) [ m.fallback ];
+            }) m.workspaces)
+          ) config.monitors.layouts.default
         )
       );
     };
@@ -129,9 +130,12 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     config.sway = {
-      default = ["wlr" "gtk"];
+      default = [
+        "wlr"
+        "gtk"
+      ];
     };
   };
 }

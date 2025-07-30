@@ -7,7 +7,8 @@ let
     endif
     let b:current_syntax = "${pre}"
   '';
-in {
+in
+{
   programs.nixvim.filetype.extension = {
     "opb" = "opb";
     "mopb" = "opb";
@@ -15,12 +16,11 @@ in {
     "pbp" = "veripb";
   };
 
-  xdg.configFile."nvim/syntax/opb.vim".text = let
-    pre = "opb";
-  in
-    /*
-    vim
-    */
+  xdg.configFile."nvim/syntax/opb.vim".text =
+    let
+      pre = "opb";
+    in
+    # vim
     ''
       ${preamble pre}
       syn match ${pre}Obj "min:"
@@ -37,12 +37,11 @@ in {
       hi def link ${pre}Delimiter Delimiter
     '';
 
-  xdg.configFile."nvim/syntax/veripb.vim".text = let
-    pre = "veripb";
-  in
-    /*
-    vim
-    */
+  xdg.configFile."nvim/syntax/veripb.vim".text =
+    let
+      pre = "veripb";
+    in
+    # vim
     ''
       ${preamble pre}
 

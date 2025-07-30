@@ -1,10 +1,9 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [todoman];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ todoman ];
 
   xdg.configFile."todoman/config.py".text =
-    /*
-    python
-    */
+    # python
     ''
       path = "~/Calendars/nextcloud/*"
       default_list = "Christoph"

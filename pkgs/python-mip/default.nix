@@ -26,5 +26,9 @@ buildPythonPackage rec {
   ];
 
   pyproject = true;
-  build-system = [setuptools setuptools-scm wheel];
+  build-system = [
+    setuptools
+    setuptools-scm
+    wheel
+  ];
 }

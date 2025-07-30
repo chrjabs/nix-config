@@ -25,10 +25,11 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
-    (python3.withPackages (python-pkgs:
-      with python-pkgs; [
+    (python3.withPackages (
+      python-pkgs: with python-pkgs; [
         pybind11
-      ]))
+      ]
+    ))
   ];
 
   patches = [
@@ -39,7 +40,7 @@ stdenv.mkDerivation rec {
     description = "Instance Identification, Feature Extraction, and Problem Transformation";
     homepage = "https://github.com/Udopia/gbdc";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [];
+    maintainers = with lib.maintainers; [ ];
     mainProgram = "gbdc";
     platforms = lib.platforms.all;
   };

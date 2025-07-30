@@ -3,7 +3,8 @@
   config,
   bootstrap,
   ...
-}: {
+}:
+{
   imports =
     [
       ./hardware-configuration.nix

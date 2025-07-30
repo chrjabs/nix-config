@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./global
     ./features/desktop/niri
@@ -28,7 +29,12 @@
           y = 373;
         };
         scale = 1.5;
-        workspaces = ["6" "7" "8" "9"];
+        workspaces = [
+          "6"
+          "7"
+          "8"
+          "9"
+        ];
       };
       "DP-1" = {
         mode = {
@@ -39,11 +45,17 @@
           x = 1707;
           y = 0;
         };
-        workspaces = ["1" "2" "3" "4" "5"];
+        workspaces = [
+          "1"
+          "2"
+          "3"
+          "4"
+          "5"
+        ];
         fallback = "eDP-1";
       };
       "DP-2" = {
-        workspaces = ["10"];
+        workspaces = [ "10" ];
         fallback = "eDP-1";
       };
     };

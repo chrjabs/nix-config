@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.nixvim = {
     # The plugin itself
     plugins.conform-nvim = {
@@ -6,14 +7,14 @@
       enable = true;
       settings = {
         formatters_by_ft = {
-          "*" = ["injected"];
-          lua = ["stylua"];
-          python = ["black"];
-          rust = ["rustfmt"];
-          cpp = ["clang_format"];
-          toml = ["taplo"];
-          nix = ["alejandra"];
-          just = ["just"];
+          "*" = [ "injected" ];
+          lua = [ "stylua" ];
+          python = [ "black" ];
+          rust = [ "rustfmt" ];
+          cpp = [ "clang_format" ];
+          toml = [ "taplo" ];
+          nix = [ "nixfmt" ];
+          just = [ "just" ];
         };
         format_on_save =
           # Lua
@@ -88,7 +89,7 @@
       rustfmt
       clang-tools
       taplo
-      alejandra
+      nixfmt-rfc-style
     ];
   };
 }
