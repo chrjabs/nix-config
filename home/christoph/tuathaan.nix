@@ -1,18 +1,17 @@
 { lib, workMode, ... }:
 {
-  imports =
-    [
-      ./global
-      ./features/desktop/niri
-      ./features/desktop/optional/keepass.nix
-      ./features/desktop/optional/zoom.nix
-      ./features/desktop/optional/bluetui.nix
-      ./features/productivity
-      ./features/rust
-    ]
-    ++ lib.optionals workMode [
-      ./features/desktop/optional/slack.nix
-    ];
+  imports = [
+    ./global
+    ./features/desktop/niri
+    ./features/desktop/optional/keepass.nix
+    ./features/desktop/optional/zoom.nix
+    ./features/desktop/optional/bluetui.nix
+    ./features/productivity
+    ./features/rust
+  ]
+  ++ lib.optionals workMode [
+    ./features/desktop/optional/slack.nix
+  ];
 
   monitors.layouts = {
     # reassigning workspaces to outputs is not possible in sway after start, so

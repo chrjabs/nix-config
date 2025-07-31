@@ -10,14 +10,13 @@
   environment.persistence = {
     "/persist" = {
       enable = true;
-      directories =
-        [
-          "/var/lib/systemd"
-          "/var/lib/nixos"
-          "/var/log"
-        ]
-        ++ lib.optionals config.hardware.bluetooth.enable [ "/var/lib/bluetooth" ]
-        ++ lib.optionals config.programs.regreet.enable [ "/var/lib/regreet" ];
+      directories = [
+        "/var/lib/systemd"
+        "/var/lib/nixos"
+        "/var/log"
+      ]
+      ++ lib.optionals config.hardware.bluetooth.enable [ "/var/lib/bluetooth" ]
+      ++ lib.optionals config.programs.regreet.enable [ "/var/lib/regreet" ];
     };
   };
 

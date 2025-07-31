@@ -89,7 +89,7 @@
       rustfmt
       clang-tools
       taplo
-      nixfmt-rfc-style
+      nixfmt
     ];
   };
 }

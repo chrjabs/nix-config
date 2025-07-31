@@ -47,7 +47,7 @@ in
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
-  modifications = _: prev: {
+  modifications = final: prev: {
     # https://github.com/mdellweg/pass_secret_service/pull/37
     pass-secret-service = addPatches prev.pass-secret-service [ ./pass-secret-service-native.diff ];
 
@@ -60,5 +60,8 @@ in
         stripRoot = false;
       };
     };
+
+    # Make sure to use the home-manager executable from the home-manager input
+    inherit (inputs.home-manager.packages.${final.system}) home-manager;
   };
 }

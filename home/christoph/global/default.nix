@@ -14,7 +14,8 @@
     ./styling.nix
     ../features/cli
     ../features/nvim
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
+  ]
+  ++ (builtins.attrValues outputs.homeManagerModules);
 
   nix = {
     package = lib.mkDefault pkgs.nix;
@@ -44,19 +45,18 @@
     persistence = {
       "/persist/${config.home.homeDirectory}" = {
         defaultDirectoryMethod = "symlink";
-        directories =
-          [
-            "Documents"
-            "Downloads"
-            "Pictures"
-            "Videos"
-            ".local/bin"
-            ".local/share/nix" # trusted settings and repl history
-            ".cache/nix"
-          ]
-          ++ lib.optionals workMode [
-            "Work"
-          ];
+        directories = [
+          "Documents"
+          "Downloads"
+          "Pictures"
+          "Videos"
+          ".local/bin"
+          ".local/share/nix" # trusted settings and repl history
+          ".cache/nix"
+        ]
+        ++ lib.optionals workMode [
+          "Work"
+        ];
         allowOther = true;
       };
     };

@@ -225,14 +225,16 @@
           };
           settings = {
             "browser.startup.homepage" = "about:home";
-          } // common;
+          }
+          // common;
         };
 
         whatsapp = {
           id = 1;
           settings = {
             "browser.startup.homepage" = "https://web.whatsapp.com";
-          } // common;
+          }
+          // common;
         };
 
         ssh-proxy = {
@@ -244,7 +246,8 @@
             "network.proxy.type" = 1;
             "network.proxy.socks" = "localhost";
             "network.proxy.socks_port" = 8080;
-          } // common;
+          }
+          // common;
         };
       };
   };

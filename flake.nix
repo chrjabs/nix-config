@@ -184,6 +184,7 @@
             _module.args.pkgs = import inputs.nixpkgs {
               inherit system;
               config.allowUnfree = true;
+              overlays = builtins.attrValues inputs.self.outputs.overlays;
             };
 
             packages = import ./pkgs { inherit pkgs inputs; };

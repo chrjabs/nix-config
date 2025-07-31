@@ -5,26 +5,25 @@
   ...
 }:
 {
-  imports =
-    [
-      ./hardware-configuration.nix
+  imports = [
+    ./hardware-configuration.nix
 
-      ../common/global
-      ../common/users/christoph
+    ../common/global
+    ../common/users/christoph
 
-      ../common/optional/home.nix
+    ../common/optional/home.nix
 
-      ../common/optional/optin-persistence.nix
-      ../common/optional/greetd.nix
-    ]
-    ++ lib.optionals (!bootstrap) [
-      ../common/optional/quietboot.nix
-      ../common/optional/pipewire.nix
-      ../common/optional/peripherals/ibus.nix
-      ../common/optional/uh-vpn.nix
-      ../common/optional/niri.nix
-      ../common/optional/virtualization.nix
-    ];
+    ../common/optional/optin-persistence.nix
+    ../common/optional/greetd.nix
+  ]
+  ++ lib.optionals (!bootstrap) [
+    ../common/optional/quietboot.nix
+    ../common/optional/pipewire.nix
+    ../common/optional/peripherals/ibus.nix
+    ../common/optional/uh-vpn.nix
+    ../common/optional/niri.nix
+    ../common/optional/virtualization.nix
+  ];
 
   # Systemd boot
   boot.loader.systemd-boot.enable = true;

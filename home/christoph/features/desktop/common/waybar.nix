@@ -73,22 +73,23 @@ in
         margin = "6";
         position = "top";
         mode = "dock";
-        modules-left =
-          [ "custom/menu" ]
-          ++ (lib.optionals swayCfg.enable [
-            "sway/workspaces"
-            "sway/mode"
-          ])
-          ++ (lib.optionals hyprlandCfg.enable [
-            "hyprland/workspaces"
-            "hyprland/submap"
-          ])
-          ++ [
-            "niri/workspaces"
-            "niri/submap"
-            "custom/currentplayer"
-            "custom/player"
-          ];
+        modules-left = [
+          "custom/menu"
+        ]
+        ++ (lib.optionals swayCfg.enable [
+          "sway/workspaces"
+          "sway/mode"
+        ])
+        ++ (lib.optionals hyprlandCfg.enable [
+          "hyprland/workspaces"
+          "hyprland/submap"
+        ])
+        ++ [
+          "niri/workspaces"
+          "niri/submap"
+          "custom/currentplayer"
+          "custom/player"
+        ];
 
         modules-center = [
           "cpu"

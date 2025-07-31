@@ -103,7 +103,8 @@ in
           msmtp.enable = true;
           smtp.host = "mail.jabsserver.net";
           userName = address;
-        } // common;
+        }
+        // common;
 
         family = rec {
           address = "christoph@jabs-family.de";
@@ -151,7 +152,8 @@ in
           msmtp.enable = true;
           smtp.host = "mx2f80.netcup.net";
           userName = address;
-        } // common;
+        }
+        // common;
 
         work = rec {
           primary = workMode;
@@ -216,7 +218,8 @@ in
             tls.useStartTls = true;
           };
           userName = "chrisjab@ad.helsinki.fi";
-        } // common;
+        }
+        // common;
 
         jabsserver = rec {
           address = "admin@jabsserver.net";
