@@ -59,4 +59,6 @@
   };
 
   services.automatic-timezoned.enable = true;
+
+  workMode.enable = true;
 }

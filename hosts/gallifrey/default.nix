@@ -69,4 +69,6 @@
     sopsFile = ./secrets.yaml;
     mode = "0444";
   };
+
+  workMode.enable = true;
 }

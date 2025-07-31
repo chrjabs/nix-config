@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  nixosConfig,
   ...
 }:
 {
@@ -53,11 +54,6 @@
 
           "Mod+Return".action.spawn = kitty;
           "Mod+d".action.spawn = fuzzel;
-          "Mod+s".action.spawn = [
-            "sh"
-            "-c"
-            "specialisation $(specialisation | ${fuzzel} --dmenu)"
-          ];
           "Mod+w".action.spawn = [
             makoctl
             "dismiss"
@@ -191,6 +187,17 @@
             ];
             allow-when-locked = true;
           };
+        }
+        // lib.attrsets.optionalAttrs (nixosConfig != null) {
+          "Mod+s".action.spawn =
+            let
+              specialisation = lib.getExe nixosConfig.specialisationScript;
+            in
+            [
+              "sh"
+              "-c"
+              "${specialisation} $(${specialisation} | ${fuzzel} --dmenu)"
+            ];
         };
 
       hotkey-overlay.skip-at-startup = true;

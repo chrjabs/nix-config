@@ -1,18 +1,14 @@
 {
   pkgs,
   lib,
+  workMode,
   ...
 }:
 {
   recolor-wallpaper = {
     enable = true;
-    theme = lib.mkDefault "gruvbox-material-dark-hard";
-    wallpaper = lib.mkDefault "earth2";
-  };
-
-  specialisation.work.configuration.recolor-wallpaper = {
-    theme = "catppuccin-frappe";
-    wallpaper = "rocket";
+    theme = if workMode then "catppuccin-frappe" else "gruvbox-material-dark-hard";
+    wallpaper = if workMode then "rocket" else "earth2";
   };
 
   stylix = {

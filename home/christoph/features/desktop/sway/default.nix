@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  nixosConfig ? null,
   ...
 }:
 {
@@ -66,7 +67,7 @@
         lib.mkOptionDefault {
           "${modifier}+Return" = "exec ${kitty}";
           "${modifier}+d" = "exec ${fuzzel}";
-          "${modifier}+s" = "exec specialisation $(specialisation | ${fuzzel} --dmenu)";
+          "${modifier}+s" = "exec ${specialisation} $(${specialisation} | ${fuzzel} --dmenu)";
           "${modifier}+w" = "exec ${makoctl} dismiss";
           "${modifier}+Shift+w" = "exec ${makoctl} restore";
           "${modifier}+Shift+s" = "exec ${makoctl} mode -t do-not-disturb";
@@ -85,6 +86,13 @@
           "XF86AudioPrev" = "exec ${playerctl} previous";
           "XF86MonBrightnessUp" = "exec ${brightnessctl} set 10%+";
           "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10%-";
+        }
+        // lib.attrsets.optionalAttrs (nixosConfig != null) {
+          "${modifier}+s" =
+            let
+              specialisation = lib.getExe nixosConfig.specialisationScript;
+            in
+            "exec ${specialisation} $(${specialisation} | ${fuzzel} --dmenu)";
         };
 
       bars = [ ];

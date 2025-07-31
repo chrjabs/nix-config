@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  workMode,
   ...
 }:
 {
@@ -10,7 +11,7 @@
     settings = {
       user = {
         name = "Christoph Jabs";
-        email = lib.mkDefault "contact@christophjabs.info";
+        email = if workMode then "christoph.jabs@helsinki.fi" else "contact@christophjabs.info";
       };
       ui.default-command = "log";
       signing = {
@@ -37,7 +38,4 @@
       ];
     };
   };
-
-  specialisation.work.configuration.programs.jujutsu.settings.user.email =
-    "christoph.jabs@helsinki.fi";
 }

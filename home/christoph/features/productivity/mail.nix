@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  workMode,
   ...
 }:
 let
@@ -56,7 +57,7 @@ in
 
       accounts = {
         personal = rec {
-          primary = lib.mkDefault true;
+          primary = !workMode;
           address = "contact@christophjabs.info";
           passwordCommand = "${pass} ${smtp.host}/${address}";
 
@@ -121,7 +122,7 @@ in
             trash = "Trash";
           };
           neomutt = {
-            enable = lib.mkDefault true;
+            enable = !workMode;
             mailboxName = "==  Family ==";
             extraMailboxes = [
               {
@@ -153,6 +154,7 @@ in
         } // common;
 
         work = rec {
+          primary = workMode;
           address = "christoph.jabs@helsinki.fi";
           passwordCommand = oauth2.work.pwd_cmd;
 
@@ -172,6 +174,7 @@ in
             trash = "Deleted Items";
           };
           neomutt = {
+            enable = workMode;
             mailboxName = "==  Work ==";
             extraMailboxes = [
               {
@@ -226,7 +229,7 @@ in
             expunge = "both";
           };
           neomutt = {
-            enable = lib.mkDefault true;
+            enable = !workMode;
             mailboxName = "==  Jabsserver ==";
             extraMailboxes = [
               {
@@ -292,19 +295,6 @@ in
         #     userName = address;
         #   }
         #   // common;
-      };
-    };
-
-    specialisation.work.configuration.accounts.email = {
-      mainAccountPattern = "{personal,work}";
-      accounts = {
-        personal.primary = false;
-        family.neomutt.enable = false;
-        work = {
-          primary = true;
-          neomutt.enable = true;
-        };
-        jabsserver.neomutt.enable = false;
       };
     };
 

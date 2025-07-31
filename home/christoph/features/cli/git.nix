@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  workMode,
   ...
 }:
 {
@@ -21,7 +22,7 @@
       graph = "log --decorate --oneline --graph";
     };
     userName = "Christoph Jabs";
-    userEmail = lib.mkDefault "contact@christophjabs.info";
+    userEmail = if workMode then "christoph.jabs@helsinki.fi" else "contact@christophjabs.info";
     extraConfig = {
       init.defaultBranch = "main";
       user.signing.key = "217C6A439646D51E";
@@ -56,6 +57,4 @@
   home.packages = with pkgs; [
     git-crypt
   ];
-
-  specialisation.work.configuration.programs.git.userEmail = "christoph.jabs@helsinki.fi";
 }

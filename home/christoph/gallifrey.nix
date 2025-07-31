@@ -1,20 +1,20 @@
-{ ... }:
+{ lib, workMode, ... }:
 {
-  imports = [
-    ./global
-    ./features/desktop/niri
-    ./features/desktop/optional/zoom.nix
-    ./features/desktop/optional/keepass.nix
-    ./features/productivity
-    ./features/rust
-    ./features/homeassistant
+  imports =
+    [
+      ./global
+      ./features/desktop/niri
+      ./features/desktop/optional/zoom.nix
+      ./features/desktop/optional/keepass.nix
+      ./features/productivity
+      ./features/rust
+      ./features/homeassistant
 
-    ./features/desktop/optional/virtualization.nix
-  ];
-
-  specialisation.work.configuration.imports = [
-    ./features/desktop/optional/slack.nix
-  ];
+      ./features/desktop/optional/virtualization.nix
+    ]
+    ++ lib.optionals workMode [
+      ./features/desktop/optional/slack.nix
+    ];
 
   monitors.layouts = {
     default = {

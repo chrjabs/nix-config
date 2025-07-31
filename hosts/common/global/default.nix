@@ -21,7 +21,11 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {
+      inherit inputs outputs;
+      nixosConfig = config;
+    };
+    backupFileExtension = ".bak";
   };
 
   nixpkgs = {

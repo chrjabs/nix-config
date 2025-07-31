@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  nixosConfig,
   ...
 }:
 let
@@ -12,7 +13,6 @@ let
   hasNeovim = config.programs.neovim.enable || config.programs.nixvim.enable;
   hasKitty = config.programs.kitty.enable;
   hasZathura = config.programs.zathura.enable;
-  hasSpecialisationCli = hasPackage "specialisation";
 in
 {
   programs.fish = {
@@ -27,7 +27,7 @@ in
       la = mkIf hasEza "eza -la";
       cat = mkIf hasBat "bat";
 
-      s = mkIf hasSpecialisationCli "specialisation";
+      s = mkIf (nixosConfig != null) "specialisation";
 
       ssh = mkIf hasKitty "kitten ssh";
 

@@ -157,7 +157,11 @@
             homeConfigurations = {
               "christoph@jabsserver" = inputs.home-manager.lib.homeManagerConfiguration {
                 pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-                extraSpecialArgs = { inherit inputs outputs; };
+                extraSpecialArgs = {
+                  inherit inputs outputs;
+                  workMode = false;
+                  nixosConfig = null;
+                };
                 modules = [
                   ./home/christoph/jabsserver
                   ./home/christoph/standalone.nix
