@@ -52,7 +52,7 @@ in
     };
 
     accounts.email = {
-      mainAccountPattern = lib.mkDefault "{personal,family}";
+      mainAccountPattern = if workMode then "{personal,work}" else "{personal,family}";
       maildirBasePath = "Mail";
 
       accounts = {
