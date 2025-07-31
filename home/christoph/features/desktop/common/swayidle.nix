@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  nixosConfig,
   ...
 }:
 let
@@ -30,6 +31,15 @@ let
         inherit resumeCommand timeout;
       }
     ];
+
+  niri-all-outputs = lib.getExe (
+    pkgs.writeShellScriptBin "niri-all-outputs" ''
+      outputs=$(${niri} msg outputs | ${lib.getExe pkgs.gnused} -nE 's/Output .+\((.+)\)$/\1/p')
+      for output in $outputs; do
+        ${niri} msg output $output "$@"
+      done
+    ''
+  );
 in
 {
   options.services.swayidle.lockTime = lib.mkOption {
@@ -65,11 +75,11 @@ in
         }))
       ++
         # Turn off displays (niri)
-        (afterLockTimeout {
+        (lib.optionals (nixosConfig != null && nixosConfig.programs.niri.enable) (afterLockTimeout {
           timeout = 40;
-          command = "${niri} msg 'output * off'";
-          resumeCommand = "${niri} 'output * on'";
-        });
+          command = "${niri-all-outputs} off";
+          resumeCommand = "${niri-all-outputs} on";
+        }));
     # Lock before sleep
     events = [
       {
