@@ -17,6 +17,7 @@
     ./openssh.nix
     ./sops.nix
     ./styling.nix
+    ./tailscale.nix
   ]
   ++ (builtins.attrValues outputs.nixosModules);
 
