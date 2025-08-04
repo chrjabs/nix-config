@@ -53,3 +53,17 @@ Reboot into the newly-installed system.
 If the live ISO runs out of storage space while installing the system, either
 mount a larger tmpfs at `/nix/.rw-store` or install a basic system on the
 machine first and install from there.
+
+### Avendesora
+
+To generate the initial proxmox image, run:
+
+```bash
+nix build .#nixosConfigurations.avendesora.config.system.build.image
+```
+
+After importing the image into Proxmox, mount the drive manually to update the
+SSH host keys for correct secret decryption.
+See
+[here](https://unix.stackexchange.com/questions/688946/mount-lvm-to-recover-data-wrong-fs-type-bad-option-bad-superblock-on)
+for how to mount the LVM drive.

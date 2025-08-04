@@ -182,22 +182,6 @@
         "type": "github"
       }
     },
-    "custom-nixpkgs": {
-      "locked": {
-        "lastModified": 1737967987,
-        "narHash": "sha256-b63/sNdI0IpYV/gKqCZyllnmCNkP9V9lNYNMBOuwBe0=",
-        "owner": "chrjabs",
-        "repo": "nixpkgs",
-        "rev": "b94370444847ac10433d4c34a29106eae30fe5be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chrjabs",
-        "ref": "custom",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "devshell": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
@@ -1759,7 +1743,6 @@
     "root": {
       "inputs": {
         "base16-vivid": "base16-vivid",
-        "custom-nixpkgs": "custom-nixpkgs",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",

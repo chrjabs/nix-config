@@ -6,7 +6,7 @@ keys:
   - &hosts:
     - &phantasia age1kdmc7uwtgnghwyn4uzswdkc4ya3wvgk3egquejthvx99wyd2fpdqg9pkzp
     - &gallifrey age148f0u0ytpveuaq8xgeulnrm6l7fslc8gysk2uaf03tt9ejern3ys9vteg7
-    - &medusa age1rcf425yjzkua5keaktw6s9rkjwx28vgkjm7evtt0m5s3lpyz9p6sr73k6j
+    - &avendesora age1wlclpzlqr9h9827mzzfctualvgtcl3hu4jwskkf7lwpw596yucrs968w3q
     - &tuathaan age1qrvskael2jehwv8yg0f7f6tn5zd3rfez0ne7fzsqn0t5up58k9aqcegsdl
   # Home directories on non-nixos machines
   - &homes:
@@ -17,7 +17,7 @@ creation_rules:
     - age:
       - *phantasia
       - *gallifrey
-      - *medusa
+      - *avendesora
       - *tuathaan
       pgp:
       - *christoph
@@ -25,12 +25,6 @@ creation_rules:
     key_groups:
     - age:
       - *gallifrey
-      pgp:
-      - *christoph
-  - path_regex: hosts/medusa/kodi-secrets.ya?ml$
-    key_groups:
-    - age:
-      - *medusa
       pgp:
       - *christoph
   - path_regex: home/christoph/jabsserver/secrets.ya?ml$

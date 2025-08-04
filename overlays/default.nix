@@ -22,11 +22,6 @@ in
     ) inputs;
   };
 
-  # Adds pkgs.custom == inputs.custom-nixpkgs.legacyPackages.${pkgs.system}
-  custom = final: _: {
-    custom = inputs.custom-nixpkgs.legacyPackages.${final.system};
-  };
-
   # Adds pkgs.nixvim == inputs.nixvim.inputs.nixpkgs.legacyPackages.${pkgs.system}
   nixvim = final: _: {
     nixvim = inputs.nixvim.inputs.nixpkgs.legacyPackages.${final.system};

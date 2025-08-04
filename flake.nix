@@ -21,9 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Custom Nixpkgs
-    custom-nixpkgs.url = "github:chrjabs/nixpkgs/custom";
-
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
 
@@ -99,76 +96,75 @@
         config,
         ...
       }:
+      let
+        outputs = inputs.self.outputs;
+      in
       {
         imports = [
           inputs.flake-parts.flakeModules.easyOverlay
           inputs.treefmt-nix.flakeModule
         ];
 
-        flake =
-          let
-            outputs = inputs.self.outputs;
-          in
-          {
-            # Your custom packages and modifications, exported as overlays
-            overlays = import ./overlays { inherit inputs; };
-            # Reusable nixos modules you might want to export
-            # These are usually stuff you would upstream into nixpkgs
-            nixosModules = import ./modules/nixos;
-            # Reusable home-manager modules you might want to export
-            # These are usually stuff you would upstream into home-manager
-            homeManagerModules = import ./modules/home-manager;
+        flake = {
+          # Your custom packages and modifications, exported as overlays
+          overlays = import ./overlays { inherit inputs; };
+          # Reusable nixos modules you might want to export
+          # These are usually stuff you would upstream into nixpkgs
+          nixosModules = import ./modules/nixos;
+          # Reusable home-manager modules you might want to export
+          # These are usually stuff you would upstream into home-manager
+          homeManagerModules = import ./modules/home-manager;
 
-            # NixOS configuration entrypoint
-            # Available through 'nixos-rebuild --flake .#your-hostname'
-            nixosConfigurations = {
-              phantasia = inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit inputs outputs;
-                  bootstrap = false;
-                };
-                modules = [ ./hosts/phantasia ];
+          # NixOS configuration entrypoint
+          # Available through 'nixos-rebuild --flake .#your-hostname'
+          nixosConfigurations = {
+            phantasia = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs outputs;
+                bootstrap = false;
               };
-              gallifrey = inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit inputs outputs;
-                  bootstrap = false;
-                };
-                modules = [ ./hosts/gallifrey ];
-              };
-              tuathaan = inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit inputs outputs;
-                  bootstrap = false;
-                };
-                modules = [ ./hosts/tuathaan ];
-              };
-              medusa = inputs.nixpkgs.lib.nixosSystem {
-                specialArgs = {
-                  inherit inputs outputs;
-                  bootstrap = false;
-                };
-                modules = [ ./hosts/medusa ];
-              };
+              modules = [ ./hosts/phantasia ];
             };
-
-            # Standalone home-manager configuration entrypoint
-            # Available through 'home-manager --flake .#your-username@your-hostname'
-            homeConfigurations = {
-              "christoph@jabsserver" = inputs.home-manager.lib.homeManagerConfiguration {
-                pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-                extraSpecialArgs = {
-                  inherit inputs outputs;
-                  workMode = false;
-                  nixosConfig = null;
-                };
-                modules = [
-                  ./home/christoph/jabsserver
-                  ./home/christoph/standalone.nix
-                ];
+            gallifrey = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs outputs;
+                bootstrap = false;
               };
+              modules = [ ./hosts/gallifrey ];
+            };
+            tuathaan = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs outputs;
+                bootstrap = false;
+              };
+              modules = [ ./hosts/tuathaan ];
+            };
+            avendesora = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs outputs;
+                bootstrap = false;
+              };
+              modules = [ ./hosts/avendesora ];
             };
           };
+
+          # Standalone home-manager configuration entrypoint
+          # Available through 'home-manager --flake .#your-username@your-hostname'
+          homeConfigurations = {
+            "christoph@jabsserver" = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+              extraSpecialArgs = {
+                inherit inputs outputs;
+                workMode = false;
+                nixosConfig = null;
+              };
+              modules = [
+                ./home/christoph/jabsserver
+                ./home/christoph/standalone.nix
+              ];
+            };
+          };
+        };
 
         systems = [
           "x86_64-linux"
