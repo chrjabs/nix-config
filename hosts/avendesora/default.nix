@@ -14,6 +14,9 @@
     ../common/users/christoph
 
     ../common/optional/home.nix
+    ../common/optional/nginx.nix
+
+    ./services
 
     (modulesPath + "/virtualisation/proxmox-image.nix")
   ];

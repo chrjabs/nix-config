@@ -11,10 +11,12 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.nixvim.nixosModules.nixvim
     inputs.impermanence.nixosModules.impermanence
+    ./acme.nix
     ./fish.nix
     ./locale.nix
     ./nix.nix
     ./openssh.nix
+    ./prometheus-node-exporter.nix
     ./sops.nix
     ./styling.nix
     ./tailscale.nix
