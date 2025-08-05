@@ -41,12 +41,13 @@
         description = "Git mirroring service";
         unitConfig.ConditionUser = cfg.user;
         serviceConfig.Type = "oneshot";
+        unitConfig.X-StopOnRemoval = false;
         startAt = cfg.dates;
         after = [ "network-online.target" ];
         wants = [ "network-online.target" ];
 
         path = with pkgs; [
-          git
+          gitMinimal
         ];
 
         script = ''
@@ -59,10 +60,12 @@
 
           for repo in "''${!remotes[@]}"; do
             if [ -d "$repo" ]; then
+              echo "Updating $repo"
               pushd "$repo"
               git remote update
               popd
             else
+              echo "Initializing $repo from ''${remotes[$repo]}"
               git clone --mirror -- "''${remotes[$repo]}" "$repo"
             fi
           done
