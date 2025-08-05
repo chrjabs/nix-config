@@ -15,13 +15,11 @@
         "@wheel"
       ];
     };
-  };
-
-  programs.nh = {
-    enable = true;
-    clean = {
-      enable = true;
-      extraArgs = "--keep-since 90d --keep 3";
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      # Keep the last 3 generations
+      options = "--delete-older-than +3";
     };
   };
 }

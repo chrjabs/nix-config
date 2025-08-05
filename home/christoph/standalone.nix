@@ -24,14 +24,15 @@
         "@wheel"
       ];
     };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      # Keep the last 3 generations
+      options = "--delete-older-than +3";
+    };
   };
   nixpkgs = {
     overlays = builtins.attrValues outputs.overlays ++ [ inputs.starship-jj.overlays.default ];
     config.allowUnfree = true;
-  };
-
-  programs.nh.clean = {
-    enable = true;
-    extraArgs = "--keep-since 90d --keep 3";
   };
 }

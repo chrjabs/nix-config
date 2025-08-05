@@ -34,6 +34,7 @@
   programs = {
     home-manager.enable = true;
     git.enable = true;
+    nh.enable = true;
   };
 
   home = {
