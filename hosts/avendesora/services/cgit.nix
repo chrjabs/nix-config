@@ -13,6 +13,10 @@
           desc = "The RustSAT repository, mirrored from github:chrjabs/rustsat";
           path = "/srv/git/rustsat";
         };
+        scuttle = {
+          desc = "The scuttle repository, mirrored from github:chrjabs/scuttle";
+          path = "/srv/git/scuttle";
+        };
       };
       settings = {
         root-title = "Git (Jabsserver)";
