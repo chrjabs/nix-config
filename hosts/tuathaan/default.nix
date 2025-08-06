@@ -11,6 +11,7 @@
     ../common/global
     ../common/users/christoph
 
+    ../common/optional/systemd-boot.nix
     ../common/optional/wireless.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix
@@ -24,12 +25,14 @@
     ../common/optional/niri.nix
   ];
 
-  # Systemd boot
-  boot.loader.systemd-boot.enable = true;
-
   networking.hostName = "tuathaan";
 
   system.stateVersion = "25.05";
+
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "i686-linux"
+  ];
 
   greetd.custom = {
     autoLogin = {

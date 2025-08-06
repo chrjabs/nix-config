@@ -13,6 +13,7 @@
 
     ../common/optional/home.nix
 
+    ../common/optional/systemd-boot.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/greetd.nix
   ]
@@ -25,12 +26,14 @@
     ../common/optional/virtualization.nix
   ];
 
-  # Systemd boot
-  boot.loader.systemd-boot.enable = true;
-
   networking.hostName = "gallifrey";
 
   system.stateVersion = "25.05";
+
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "i686-linux"
+  ];
 
   greetd.custom = {
     autoLogin = {
