@@ -236,19 +236,6 @@
           }
           // common;
         };
-
-        ssh-proxy = {
-          id = 2;
-          settings = {
-            "browser.startup.homepage" = "about:home";
-
-            # Proxy
-            "network.proxy.type" = 1;
-            "network.proxy.socks" = "localhost";
-            "network.proxy.socks_port" = 8080;
-          }
-          // common;
-        };
       };
   };
 

@@ -39,16 +39,6 @@ in
         hostname = "portmapper.jabsserver.net";
         user = "root";
       };
-      jabsserver = {
-        hostname = "jabsserver.net";
-        proxyJump = "vps.jabsserver";
-      };
-      jabsserver-tunnel = lib.hm.dag.entryBefore [ "jabsserver" ] (
-        {
-          dynamicForwards = [ { port = 8080; } ];
-        }
-        // jabsserver
-      );
     }
     // lib.optionalAttrs workMode {
       uh = lib.hm.dag.entryBefore [ "melkki" "melkinkari" "turso" "turso01" "turso02" "turso03" ] {
