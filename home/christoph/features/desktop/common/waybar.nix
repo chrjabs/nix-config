@@ -5,6 +5,7 @@
   ...
 }:
 let
+  gpgCmds = import ../../cli/gpg-commands.nix { inherit pkgs config lib; };
   commonDeps = with pkgs; [
     coreutils
     gnugrep
@@ -101,6 +102,8 @@ in
 
         modules-right = [
           "tray"
+          "custom/sync-status"
+          "custom/gpg-status"
           "custom/rfkill"
           "custom/dnd"
           "network"
@@ -186,48 +189,141 @@ in
             Down: {bandwidthDownBits}'';
         };
         "custom/menu" = {
-          interval = 1;
-          return-type = "json";
-          exec = mkScriptJson {
-            deps = lib.optional hyprlandCfg.enable hyprlandCfg.package;
-            text = "";
-            tooltip = ''$(grep PRETTY_NAME /etc/os-release | cut -d '"' -f2)'';
-            class =
-              let
-                isFullScreen =
-                  if hyprlandCfg.enable then "hyprctl activewindow -j | jq -e '.fullscreen' &>/dev/null" else "false";
-              in
-              "$(if ${isFullScreen}; then echo fullscreen; fi)";
+          format = "";
+          on-click = mkScript {
+            script = ''
+              systemctl --user restart waybar
+              echo "$USER@$HOSTNAME"
+            '';
           };
         };
         "custom/unread-mail" = {
-          interval = 5;
+          interval = 10;
           return-type = "json";
           exec = mkScriptJson {
             deps = [
               pkgs.findutils
-              pkgs.procps
+              pkgs.gawk
             ];
             script = ''
-              count=$(find ~/Mail/${config.accounts.email.mainAccountPattern}/Inbox/new -type f | wc -l)
-              if pgrep mbsync &>/dev/null; then
-                status="syncing"
+              inbox_count="$(find ~/Mail/${config.accounts.email.mainAccountPattern}/Inbox/new -type f | cut -d / -f5 | uniq -c | awk '{$1=$1};1')"
+              if [ -z "$inbox_count" ]; then
+                status="read"
+                inbox_count="No new mail!"
               else
-                if [ "$count" == "0" ]; then
-                  status="read"
-                else
-                  status="unread"
-                fi
+                status="unread"
               fi
             '';
-            text = "$count";
+            tooltip = "$inbox_count";
             alt = "$status";
           };
-          format = "{icon}  ({})";
+          format = "{icon}";
           format-icons = {
             "read" = "󰇯";
             "unread" = "󰇮";
-            "syncing" = "󰁪";
+          };
+          on-click = mkScript {
+            deps = [ pkgs.handlr-regex ];
+            script = "handlr launch x-scheme-handler/mailto";
+          };
+        };
+        "custom/next-event" = {
+          interval = 10;
+          return-type = "json";
+          exec = mkScriptJson {
+            deps = [
+              config.programs.khal.package
+            ];
+            script = ''
+              events="$(khal list now tomorrow --json title --json start-time | jq '.[] | "\(."start-time") \(.title)"' -r)"
+              count="$(printf "%s" "$events" | grep -c "^" || true)"
+              if [ "$count" == 0 ]; then
+                status="no-event"
+                events="No events!"
+              else
+                if test -n "$(khal list now 10m --json title --json start-time | jq '.[] | select(."start-time" != "") | "\(.title)"' -r)"; then
+                  status="has-close-event"
+                else
+                  status="has-event"
+                fi
+              fi
+            '';
+            alt = "$status";
+            tooltip = "$events";
+          };
+          format = "{icon}";
+          format-icons = {
+            has-event = "󰃭";
+            has-close-event = "󰨱";
+            no-event = "󰃮";
+          };
+          on-click = mkScript {
+            deps = [ pkgs.handlr-regex ];
+            script = "handlr launch text/calendar";
+          };
+        };
+        "custom/gpg-status" = {
+          interval = 3;
+          return-type = "json";
+          exec = mkScriptJson {
+            script = ''
+              if ${gpgCmds.isUnlocked}; then
+                status="unlocked"
+                tooltip="GPG is unlocked"
+              else
+                status="locked"
+                tooltip="GPG is locked"
+              fi
+            '';
+            alt = "$status";
+            tooltip = "$tooltip";
+          };
+          on-click = mkScript {
+            script = ''if ${gpgCmds.isUnlocked}; then ${gpgCmds.lock}; else ${gpgCmds.unlock}; fi'';
+          };
+          format = "{icon}";
+          format-icons = {
+            locked = "󰌾";
+            unlocked = "󰿆";
+          };
+        };
+        "custom/sync-status" = {
+          interval = 3;
+          return-type = "json";
+          exec-if = gpgCmds.isUnlocked;
+          exec = mkScriptJson {
+            script = ''
+              results="$(systemctl --user show mbsync.service vdirsyncer.service --property Id,Result,ActiveState)"
+              last_sync="$(date --date="$(systemctl --user show mbsync.timer vdirsyncer.timer --property LastTriggerUSec --value | head -1)" +%H:%M)"
+              if grep -q ActiveState=activating <<< "$results"; then
+                tooltip="Syncing calendars and mail"
+                status="activating"
+              elif grep -q Result=exit-code <<< "$results"; then
+                tooltip="Failed to sync calendars and mail"
+                status="failed"
+              elif grep -q Result=exec-condition <<< "$results"; then
+                tooltip="Sync is paused as GPG key is not available"
+                status="condition"
+              elif [ "$(grep -c Result=success <<< "$results")" == 2 ]; then
+                tooltip="Calendars and mail are synced"
+                status="success"
+              else
+                tooltip="Unknown sync state"
+                status="unknown"
+              fi
+              tooltip+=$'\n'"Last sync: $last_sync"
+            '';
+            tooltip = "$tooltip";
+            alt = "$status";
+          };
+          on-click = mkScript { script = "systemctl --user start mbsync.service vdirsyncer.service"; };
+          format = "{icon}";
+          format-icons = {
+            activating = "󰘿";
+            failed = "󰧠";
+            condition = "󱇱";
+            success = "󰅠";
+            unknown = "󰨹";
           };
         };
         "custom/currentplayer" = {
@@ -346,8 +442,8 @@ in
         }
 
         #clock {
-          padding-right: 1em;
-          padding-left: 1em;
+          padding-right: 0.7em;
+          padding-left: 0.7em;
           border-radius: 0.5em;
         }
 
@@ -357,11 +453,11 @@ in
           margin-right: 0;
           border-radius: 0.5em;
         }
-        #custom-hostname {
-          padding-right: 1em;
-          padding-left: 1em;
-          margin-left: 0;
-          border-radius: 0.5em;
+        #custom-unread-mail {
+          padding-right: 0.7em
+        }
+        #custom-sync-status {
+          padding-right: 0.5em
         }
         #custom-currentplayer {
           padding-right: 0;
