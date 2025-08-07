@@ -27,6 +27,12 @@ creation_rules:
       - *gallifrey
       pgp:
       - *christoph
+  - path_regex: hosts/terangreal/secrets.ya?ml$
+    key_groups:
+    - age:
+      - *terangreal
+      pgp:
+      - *christoph
   - path_regex: home/christoph/jabsserver/secrets.ya?ml$
     key_groups:
     - age:

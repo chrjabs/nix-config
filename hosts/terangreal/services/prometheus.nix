@@ -42,6 +42,18 @@ in
           ];
         }
         {
+          job_name = "nginxlog";
+          scheme = "https";
+          metrics_path = "/log-metrics";
+          static_configs = [
+            {
+              targets = [
+                "terangreal.jabsserver.net"
+              ];
+            }
+          ];
+        }
+        {
           job_name = "hosts";
           scheme = "http";
           static_configs = map (hostname: {

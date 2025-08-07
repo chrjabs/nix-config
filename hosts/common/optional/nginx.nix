@@ -15,13 +15,17 @@ in
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       clientMaxBodySize = "300m";
+      statusPage = true;
 
       virtualHosts."${hostName}.jabsserver.net" = {
         default = true;
         forceSSL = true;
         enableACME = true;
-        locations."/metrics" = {
-          proxyPass = "http://localhost:${toString config.services.prometheus.exporters.nginxlog.port}";
+        locations = {
+          "/metrics".proxyPass =
+            "http://localhost:${toString config.services.prometheus.exporters.nginx.port}";
+          "/log-metrics".proxyPass =
+            "http://localhost:${toString config.services.prometheus.exporters.nginxlog.port}";
         };
       };
     };
@@ -29,6 +33,7 @@ in
     prometheus.exporters.nginxlog = {
       enable = true;
       group = "nginx";
+      metricsEndpoint = "/log-metrics";
       settings.namespaces = [
         {
           name = "filelogger";
@@ -36,6 +41,11 @@ in
           format = "$remote_addr - $remote_user [$time_local] \"$request\" $status $body_bytes_sent \"$http_referer\" \"$http_user_agent\"";
         }
       ];
+    };
+
+    prometheus.exporters.nginx = {
+      enable = true;
+      group = "nginx";
     };
 
     uwsgi = {
