@@ -5,4 +5,5 @@
   monitors = import ./monitors.nix;
   pass-secret-service = import ./pass-secret-service.nix;
   recolor-wallpaper = import ./recolor-wallpaper.nix;
+  oama = import ./oama.nix;
 }

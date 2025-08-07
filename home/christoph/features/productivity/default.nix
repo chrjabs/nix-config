@@ -7,6 +7,7 @@
 
     ./mail.nix
     ./neomutt.nix
+    ./oama.nix
 
     # Pass feature is required
     ../pass

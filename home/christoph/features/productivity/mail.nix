@@ -7,7 +7,7 @@
 }:
 let
   pass = lib.getExe config.programs.password-store.package;
-  oauth2 = import ./oauth2.nix { inherit pkgs config lib; };
+  oama = lib.getExe config.programs.oama.package;
 
   common = rec {
     realName = "Christoph Jabs";
@@ -36,15 +36,7 @@ in
   };
 
   config = {
-    home = {
-      persistence."/persist/${config.home.homeDirectory}".directories = [ "Mail" ];
-
-      packages = [
-        oauth2.mutt_oauth2
-        oauth2.work.authorize
-        # oauth2.gmail.authorize
-      ];
-    };
+    home.persistence."/persist/${config.home.homeDirectory}".directories = [ "Mail" ];
 
     accounts.email = {
       mainAccountPattern = if workMode then "{personal,work}" else "{personal,family}";
@@ -153,16 +145,14 @@ in
         work = rec {
           primary = workMode;
           address = "christoph.jabs@helsinki.fi";
-          passwordCommand = oauth2.work.pwd_cmd;
+          passwordCommand = "${oama} access ${address}";
 
           imap.host = "outlook.office365.com";
           mbsync = {
             enable = true;
             create = "maildir";
             expunge = "both";
-            extraConfig.account = {
-              AuthMechs = "XOAUTH2";
-            };
+            extraConfig.account.AuthMechs = "XOAUTH2";
           };
           folders = {
             inbox = "Inbox";
@@ -203,9 +193,7 @@ in
 
           msmtp = {
             enable = true;
-            extraConfig = {
-              auth = "xoauth2";
-            };
+            extraConfig.auth = "xoauth2";
           };
           smtp = {
             host = "smtp.office365.com";
@@ -243,56 +231,6 @@ in
 
           realName = "Jabsserver Admin";
         };
-
-        # gmail =
-        #   rec {
-        #     address = "christoph.jabs@gmail.com";
-        #     passwordCommand = oauth2.gmail.pwd_cmd;
-        #
-        #     imap.host = "imap.gmail.com";
-        #     mbsync = {
-        #       enable = true;
-        #       create = "maildir";
-        #       expunge = "both";
-        #       extraConfig.account = {
-        #         AuthMechs = "XOAUTH2";
-        #       };
-        #     };
-        #     folders = {
-        #       inbox = "Inbox";
-        #       drafts = "Drafts";
-        #       sent = "Sent";
-        #       trash = "Deleted Messages";
-        #     };
-        #     neomutt = {
-        #       enable = true;
-        #       mailboxName = "GMail - Inbox";
-        #       extraMailboxes = [
-        #         {
-        #           mailbox = "Drafts";
-        #           name = "GMail - Drafts";
-        #         }
-        #         {
-        #           mailbox = "Unwanted";
-        #           name = "GMail - Junk";
-        #         }
-        #         {
-        #           mailbox = "Deleted Messages";
-        #           name = "Work - Deleted";
-        #         }
-        #       ];
-        #     };
-        #
-        #     msmtp = {
-        #       enable = true;
-        #       extraConfig = {
-        #         auth = "xoauth2";
-        #       };
-        #     };
-        #     smtp.host = "smtp.gmail.com";
-        #     userName = address;
-        #   }
-        #   // common;
       };
     };
 

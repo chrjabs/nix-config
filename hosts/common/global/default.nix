@@ -29,7 +29,7 @@
       inherit inputs outputs;
       nixosConfig = config;
     };
-    backupFileExtension = ".bak";
+    backupFileExtension = "bak";
   };
 
   nixpkgs = {
