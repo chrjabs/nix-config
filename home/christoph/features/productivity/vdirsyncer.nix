@@ -90,10 +90,7 @@ in
     };
     Service =
       let
-        gpgCmds = import ../cli/gpg-commands.nix {
-          inherit pkgs;
-          inherit lib;
-        };
+        gpgCmds = import ../cli/gpg-commands.nix { inherit pkgs config lib; };
       in
       {
         Type = "oneshot";
