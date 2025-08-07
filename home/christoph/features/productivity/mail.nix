@@ -6,13 +6,8 @@
   ...
 }:
 let
-  mbsync = lib.getExe config.programs.mbsync.package;
   pass = lib.getExe config.programs.password-store.package;
-  oauth2 = import ./oauth2.nix {
-    inherit pkgs;
-    inherit lib;
-    inherit config;
-  };
+  oauth2 = import ./oauth2.nix { inherit pkgs config lib; };
 
   common = rec {
     realName = "Christoph Jabs";
@@ -307,46 +302,25 @@ in
     };
     programs.msmtp.enable = true;
 
-    systemd.user.services.mbsync = {
-      Unit = {
-        Description = "mbsync synchronization";
-      };
-      Service =
-        let
-          gpgCmds = import ../cli/gpg-commands.nix { inherit pkgs config lib; };
-        in
-        {
-          Type = "oneshot";
-          ExecCondition = ''
-            /bin/sh -c "${gpgCmds.isUnlocked}"
-          '';
-          ExecStart = "${mbsync} -a";
-        };
-    };
-    systemd.user.timers.mbsync = {
-      Unit = {
-        Description = "Automatic mbsync synchronization";
-      };
-      Timer = {
-        OnBootSec = "30";
-        OnUnitActiveSec = "5m";
-      };
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
+    services.mbsync = {
+      enable = true;
+      package = config.programs.mbsync.package;
+      preExec = ''
+        ${pkgs.coreutils}/bin/mkdir -m700 -p ${
+          lib.concatStringsSep " " (
+            lib.mapAttrsToList (_: v: v.maildir.absPath) config.accounts.email.accounts
+          )
+        }
+      '';
     };
 
-    # Run 'createMaildir' after 'linkGeneration'
-    home.activation =
+    # Only run if gpg is unlocked
+    systemd.user.services.mbsync.Service.ExecCondition =
       let
-        mbsyncAccounts = lib.filter (a: a.mbsync.enable) (lib.attrValues config.accounts.email.accounts);
+        gpgCmds = import ../cli/gpg-commands.nix { inherit pkgs config lib; };
       in
-      lib.mkIf (mbsyncAccounts != [ ]) {
-        createMaildir = lib.mkForce (
-          lib.hm.dag.entryAfter [ "linkGeneration" ] ''
-            run mkdir -m700 -p $VERBOSE_ARG ${lib.concatMapStringsSep " " (a: a.maildir.absPath) mbsyncAccounts}
-          ''
-        );
-      };
+      ''
+        /bin/sh -c "${gpgCmds.isUnlocked}"
+      '';
   };
 }
