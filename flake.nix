@@ -118,6 +118,7 @@
           # NixOS configuration entrypoint
           # Available through 'nixos-rebuild --flake .#your-hostname'
           nixosConfigurations = {
+            # Desktop
             gallifrey = inputs.nixpkgs.lib.nixosSystem {
               specialArgs = {
                 inherit inputs outputs;
@@ -125,6 +126,7 @@
               };
               modules = [ ./hosts/gallifrey ];
             };
+            # Laptop
             tuathaan = inputs.nixpkgs.lib.nixosSystem {
               specialArgs = {
                 inherit inputs outputs;
@@ -132,6 +134,15 @@
               };
               modules = [ ./hosts/tuathaan ];
             };
+            # Hetzner cloud VPS
+            terangreal = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs outputs;
+                bootstrap = true;
+              };
+              modules = [ ./hosts/terangreal ];
+            };
+            # Homeserver VM
             avendesora = inputs.nixpkgs.lib.nixosSystem {
               specialArgs = {
                 inherit inputs outputs;
@@ -161,6 +172,7 @@
 
         systems = [
           "x86_64-linux"
+          "aarch64-linux"
         ];
 
         perSystem =
