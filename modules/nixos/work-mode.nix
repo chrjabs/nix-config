@@ -14,10 +14,12 @@ in
       workMode = false;
     };
 
-    specialisation.work.configuration = lib.mkIf config.workMode.enable {
-      # Specialisation recognition for nh
-      environment.etc."specialisation".text = "work";
-      home-manager.extraSpecialArgs.workMode = true;
+    specialisation = lib.mkIf config.workMode.enable {
+      work.configuration = {
+        # Specialisation recognition for nh
+        environment.etc."specialisation".text = "work";
+        home-manager.extraSpecialArgs.workMode = true;
+      };
     };
   };
 }
