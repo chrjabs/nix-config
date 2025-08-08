@@ -15,4 +15,14 @@
   home.persistence."/persist/${config.home.homeDirectory}".directories = [
     ".local/share/khal"
   ];
+
+  # Set as default calendar handler
+  xdg.mimeApps = {
+    associations.added = {
+      "text/calendar" = "khal.desktop";
+    };
+    defaultApplications = {
+      "text/calendar" = "khal.desktop";
+    };
+  };
 }

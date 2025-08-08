@@ -98,6 +98,7 @@ in
           "memory"
           "clock"
           "custom/unread-mail"
+          "custom/next-event"
         ];
 
         modules-right = [
@@ -453,7 +454,7 @@ in
           margin-right: 0;
           border-radius: 0.5em;
         }
-        #custom-unread-mail {
+        #custom-next-event {
           padding-right: 0.7em
         }
         #custom-sync-status {
