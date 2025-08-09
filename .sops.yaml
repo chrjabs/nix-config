@@ -7,6 +7,7 @@ keys:
     - &gallifrey age148f0u0ytpveuaq8xgeulnrm6l7fslc8gysk2uaf03tt9ejern3ys9vteg7
     - &avendesora age1wlclpzlqr9h9827mzzfctualvgtcl3hu4jwskkf7lwpw596yucrs968w3q
     - &tuathaan age1qrvskael2jehwv8yg0f7f6tn5zd3rfez0ne7fzsqn0t5up58k9aqcegsdl
+    - &terangreal age13j53dhruvlkzmshunl62dy0skwk0528sschu38p809euajxwtc4sdj7lp4
   # Home directories on non-nixos machines
   - &homes:
     - &jabsserver age1e332tl8qsuwpwp4xcqry9ktvdr3wdnqsmwmvgykme4w0463gs47s8aafe9
@@ -17,6 +18,7 @@ creation_rules:
       - *gallifrey
       - *avendesora
       - *tuathaan
+      - *terangreal
       pgp:
       - *christoph
   - path_regex: hosts/gallifrey/secrets.ya?ml$
