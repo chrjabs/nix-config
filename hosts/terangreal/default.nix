@@ -14,6 +14,9 @@
     ../common/optional/systemd-boot.nix
     ../common/optional/nginx.nix
     ../common/optional/optin-persistence.nix
+    ../common/optional/tailscale-exit-node.nix
+
+    ./services
   ];
 
   networking = {
