@@ -31,27 +31,20 @@ in
           static_configs = [ { targets = [ "metrics.jabsserver.net" ]; } ];
         }
         {
+          job_name = "nextcloud";
+          scheme = "http";
+          static_configs = [ { targets = [ "jabsserver:9205" ]; } ];
+        }
+        {
           job_name = "nginx";
           scheme = "https";
-          static_configs = [
-            {
-              targets = [
-                "terangreal.jabsserver.net"
-              ];
-            }
-          ];
+          static_configs = [ { targets = [ "terangreal.jabsserver.net" ]; } ];
         }
         {
           job_name = "nginxlog";
           scheme = "https";
           metrics_path = "/log-metrics";
-          static_configs = [
-            {
-              targets = [
-                "terangreal.jabsserver.net"
-              ];
-            }
-          ];
+          static_configs = [ { targets = [ "terangreal.jabsserver.net" ]; } ];
         }
         {
           job_name = "hosts";
