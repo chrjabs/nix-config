@@ -5,7 +5,14 @@
   ...
 }:
 let
-  hosts = lib.attrNames outputs.nixosConfigurations;
+  hosts =
+    lib.attrNames outputs.nixosConfigurations
+    ++
+    # extra non-nixos hostss
+    [
+      "jabsserver"
+      "backupserver"
+    ];
 in
 {
   services = {
@@ -14,9 +21,25 @@ in
       globalConfig.scrape_interval = "30s";
       scrapeConfigs = [
         {
+          job_name = "headscale";
+          scheme = "https";
+          static_configs = [ { targets = [ "tailscale.jabsserver.net" ]; } ];
+        }
+        {
           job_name = "prometheus";
           scheme = "https";
           static_configs = [ { targets = [ "metrics.jabsserver.net" ]; } ];
+        }
+        {
+          job_name = "nginx";
+          scheme = "https";
+          static_configs = [
+            {
+              targets = [
+                "terangreal.jabsserver.net"
+              ];
+            }
+          ];
         }
         {
           job_name = "hosts";

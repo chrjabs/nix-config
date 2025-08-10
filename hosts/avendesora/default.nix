@@ -13,7 +13,6 @@
 
     ../common/optional/systemd-boot.nix
     ../common/optional/home.nix
-    ../common/optional/nginx.nix
 
     ./services
 

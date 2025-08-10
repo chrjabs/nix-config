@@ -5,5 +5,6 @@
     ./git-mirror.nix
     ./git-remote.nix
     ./headscale.nix
+    ./prometheus.nix
   ];
 }
