@@ -21,7 +21,9 @@
       shell = "${pkgs.bash}/bin/bash";
       group = "git";
       packages = [ pkgs.git ];
-      openssh.authorizedKeys.keys = config.users.users.christoph.openssh.authorizedKeys.keys;
+      openssh.authorizedKeys.keys = config.users.users.christoph.openssh.authorizedKeys.keys ++ [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO+zRuUJvg7xWtipSGh8jjk1j4tGi+Ayyjz6W6Acx90l christoph@phone"
+      ];
     };
     groups.git = { };
   };
