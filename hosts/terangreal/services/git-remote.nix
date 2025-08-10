@@ -4,18 +4,11 @@
   ...
 }:
 {
-  environment.persistence = {
-    "/persist".directories = [ "/srv/git" ];
-  };
-
   services.gitDaemon = {
     enable = true;
     basePath = "/srv/git";
     exportAll = true;
-    repositories = [
-      "/srv/git/nix-config"
-      "/srv/git/rustsat"
-    ];
+    repositories = map (n: "/srv/git/${n}") (builtins.attrNames config.services.gitMirror.repos);
   };
   networking.firewall.allowedTCPPorts = [ config.services.gitDaemon.port ];
 
