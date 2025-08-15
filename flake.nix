@@ -12,7 +12,9 @@
 
   inputs = {
     # Nix ecosystem
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # temporary override until https://github.com/NixOS/nixpkgs/pull/434377 is merged
+    nixpkgs.url = "github:spencerjanssen/nixpkgs/github-runner-node24";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
