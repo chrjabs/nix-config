@@ -5,10 +5,10 @@
       sopsFile = ../../secrets.yaml;
       owner = "grafana";
     };
-    # grafana-mail-password = {
-    #   sopsFile = ../../secrets.yaml;
-    #   owner = "grafana";
-    # };
+    grafana-mail-password = {
+      sopsFile = ../../secrets.yaml;
+      owner = "grafana";
+    };
   };
 
   services = {
@@ -24,13 +24,13 @@
           cookie_secure = true;
         };
         "auth.anonymous".enabled = true;
-        # smtp = rec {
-        #   enabled = true;
-        #   host = "mail.jabsserver.net:465";
-        #   from_address = user;
-        #   user = config.mailserver.loginAccounts."grafana@jabsserver.net".name;
-        #   password = "$__file{${config.sops.secrets.grafana-mail-password.path}}";
-        # };
+        smtp = rec {
+          enabled = true;
+          host = "mail.jabsserver.net:465";
+          from_address = user;
+          user = config.mailserver.loginAccounts."no-reply@dash.jabsserver.net".name;
+          password = "$__file{${config.sops.secrets.grafana-mail-password.path}}";
+        };
       };
       provision = {
         enable = true;

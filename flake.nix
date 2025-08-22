@@ -88,6 +88,12 @@
       url = "github:tinted-theming/base16-vivid";
       flake = false;
     };
+
+    # Mailserver
+    nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

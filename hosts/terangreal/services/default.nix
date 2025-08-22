@@ -7,6 +7,7 @@
     ./git-remote.nix
     ./grafana
     ./headscale.nix
+    ./mail.nix
     ./prometheus.nix
   ];
 }

@@ -222,6 +222,10 @@ in
                 mailbox = "Trash";
                 name = "  Trash";
               }
+              {
+                mailbox = "omv";
+                name = "  OMV";
+              }
             ];
           };
 
