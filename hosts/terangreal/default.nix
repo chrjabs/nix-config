@@ -15,6 +15,7 @@
     ../common/optional/nginx.nix
     ../common/optional/optin-persistence.nix
     ../common/optional/tailscale-exit-node.nix
+    ../common/optional/fail2ban.nix
 
     ./services
   ];
