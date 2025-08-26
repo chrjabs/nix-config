@@ -4,4 +4,5 @@
   workMode = import ./work-mode.nix;
   specialisationScript = import ./specialisation-script.nix;
   gitMirror = import ./git-mirror.nix;
+  vhostDefaults = import ./vhost-defaults.nix;
 }

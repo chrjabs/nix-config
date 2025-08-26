@@ -94,6 +94,12 @@
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # AI robots information for crawler blocking
+    ai-robots-txt = {
+      url = "github:ai-robots-txt/ai.robots.txt";
+      flake = false;
+    };
   };
 
   outputs =

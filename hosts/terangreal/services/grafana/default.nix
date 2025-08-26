@@ -58,7 +58,6 @@
           port = config.services.grafana.settings.server.http_port;
         in
         {
-          forceSSL = true;
           enableACME = true;
           locations."/".proxyPass = "http://localhost:${toString port}";
         };

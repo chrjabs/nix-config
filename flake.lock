@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "ai-robots-txt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755219702,
+        "narHash": "sha256-O6lNee+hYsXDrWLkkSfFM+9Ukh74F5IyUtg2h0utX9A=",
+        "owner": "ai-robots-txt",
+        "repo": "ai.robots.txt",
+        "rev": "cf073d49f27d8f424553333e9019c5cb0ff718c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ai-robots-txt",
+        "repo": "ai.robots.txt",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -1862,6 +1878,7 @@
     },
     "root": {
       "inputs": {
+        "ai-robots-txt": "ai-robots-txt",
         "base16-vivid": "base16-vivid",
         "disko": "disko",
         "firefox-addons": "firefox-addons",

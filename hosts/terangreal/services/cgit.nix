@@ -20,11 +20,6 @@
       };
     };
 
-    nginx.virtualHosts = {
-      "git.jabsserver.net" = {
-        forceSSL = true;
-        enableACME = true;
-      };
-    };
+    nginx.virtualHosts."git.jabsserver.net".enableACME = true;
   };
 }

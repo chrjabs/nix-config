@@ -140,7 +140,6 @@
   services.nginx.virtualHosts =
     let
       redir = to: {
-        forceSSL = true;
         enableACME = true;
         locations."/".return = "302 https://${to}$request_uri";
       };

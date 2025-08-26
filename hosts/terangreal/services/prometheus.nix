@@ -75,7 +75,6 @@ in
 
     nginx.virtualHosts = {
       "metrics.jabsserver.net" = {
-        forceSSL = true;
         enableACME = true;
         locations."/".proxyPass = "http://localhost:${toString config.services.prometheus.port}";
       };

@@ -1,6 +1,5 @@
 let
   files = {
-    forceSSL = true;
     enableACME = true;
     locations."/".root = "/srv/files/christophjabs";
   };

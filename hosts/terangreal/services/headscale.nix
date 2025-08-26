@@ -41,7 +41,6 @@ in
 
     nginx.virtualHosts = {
       "tailscale.jabsserver.net" = {
-        forceSSL = true;
         enableACME = true;
         locations = {
           "/" = {

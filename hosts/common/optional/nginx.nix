@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  inputs,
   ...
 }:
 let
@@ -17,9 +18,19 @@ in
       clientMaxBodySize = "300m";
       statusPage = true;
 
+      virtualHostDefaults = {
+        forceSSL = true;
+        blockAgents = {
+          enable = true;
+          method = "return 444";
+          robotsTxt.enable = true;
+        };
+      };
+
+      virtualHosts.localhost.forceSSL = lib.mkForce false;
+
       virtualHosts."${hostName}.jabsserver.net" = {
         default = true;
-        forceSSL = true;
         enableACME = true;
         locations = {
           "/metrics".proxyPass =
