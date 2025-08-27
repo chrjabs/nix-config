@@ -7,6 +7,7 @@
     ./git-remote.nix
     ./grafana
     ./headscale.nix
+    ./hydra
     ./mail.nix
     ./prometheus.nix
     ./reverse-proxy.nix
