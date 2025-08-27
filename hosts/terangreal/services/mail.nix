@@ -146,6 +146,7 @@
     in
     {
       "autoconfig.christophjabs.info" = redir "autoconfig.jabsserver.net";
+      "autodiscover.christophjabs.info" = redir "autoconfig.jabsserver.net";
     };
 
   environment.persistence = {
