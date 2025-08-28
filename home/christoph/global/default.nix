@@ -10,12 +10,12 @@
 {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     ./styling.nix
     ../features/cli
     ../features/nvim
   ]
-  ++ (builtins.attrValues outputs.homeManagerModules);
+  ++ (builtins.attrValues outputs.homeModules);
 
   nix = {
     package = lib.mkDefault pkgs.nix;

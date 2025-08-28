@@ -51,13 +51,11 @@
   powerManagement.enable = true;
   services.tlp.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
-  services.logind = {
+  services.logind.settings.Login = {
     # Don't shutdown on power button press
-    powerKey = "ignore";
+    HandlePowerKey = "ignore";
     # Give swaylock a bit more time to lock before suspend
-    extraConfig = ''
-      InhibitDelayMaxSec=10
-    '';
+    InhibitDelayMaxSec = 10;
   };
 
   services.automatic-timezoned.enable = true;

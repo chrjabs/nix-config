@@ -15,8 +15,11 @@ in
 {
   programs.ssh = {
     enable = true;
-    userKnownHostsFile = "~/.ssh/known_hosts.d/hosts";
+    enableDefaultConfig = false;
     matchBlocks = rec {
+      "*" = {
+        userKnownHostsFile = "~/.ssh/known_hosts.d/hosts";
+      };
       own = {
         host = lib.concatStringsSep " " hostnames;
         forwardAgent = true;

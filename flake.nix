@@ -12,9 +12,7 @@
 
   inputs = {
     # Nix ecosystem
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # temporary override until https://github.com/NixOS/nixpkgs/pull/434377 is merged
-    nixpkgs.url = "github:spencerjanssen/nixpkgs/github-runner-node24";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
@@ -127,7 +125,7 @@
           nixosModules = import ./modules/nixos;
           # Reusable home-manager modules you might want to export
           # These are usually stuff you would upstream into home-manager
-          homeManagerModules = import ./modules/home-manager;
+          homeModules = import ./modules/home-manager;
 
           # NixOS configuration entrypoint
           # Available through 'nixos-rebuild --flake .#your-hostname'
