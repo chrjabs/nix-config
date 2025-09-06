@@ -26,7 +26,7 @@
     };
     gc = {
       automatic = true;
-      frequency = "weekly";
+      dates = "weekly";
       # Keep the last 3 generations
       options = "--delete-older-than +3";
     };

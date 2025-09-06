@@ -7,7 +7,7 @@
 {
   imports = [
     ../global
-    inputs.sops-nix.homeModules.sops
+    inputs.sops-nix.homeManagerModules.sops
   ];
 
   home = {
