@@ -71,6 +71,7 @@
     sopsFile = ./secrets.yaml;
     mode = "0444";
   };
+  home-manager.extraSpecialArgs.haApiToken = config.sops.secrets.ha-api-token.path;
 
   workMode.enable = true;
 }

@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  haApiToken,
   ...
 }:
 {
@@ -8,7 +9,7 @@
     let
       lamp = pkgs.writeShellScriptBin "lamp" ''
         ${lib.getExe pkgs.curl} \
-          -H "Authorization: Bearer $(cat /run/secrets/ha-api-token)" \
+          -H "Authorization: Bearer $(cat ${haApiToken})" \
           -H "Content-Type: application/json" \
           -d '{"entity_id": "light.desk_lamp_christoph_light", "brightness_pct": '"$1"'}' \
           -s -o /dev/null \
