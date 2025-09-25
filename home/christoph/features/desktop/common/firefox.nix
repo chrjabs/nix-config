@@ -144,10 +144,13 @@
               "bing".metaData.hidden = true;
             };
           };
-          extensions.packages = with pkgs.inputs.firefox-addons; [
-            ublock-origin
-            browserpass
-          ];
+          extensions = {
+            force = true;
+            packages = with pkgs.inputs.firefox-addons; [
+              ublock-origin
+              browserpass
+            ];
+          };
           bookmarks = {
             force = true;
             settings = [
@@ -231,6 +234,7 @@
 
         whatsapp = {
           id = 1;
+          extensions.force = true;
           settings = {
             "browser.startup.homepage" = "https://web.whatsapp.com";
           }
@@ -239,7 +243,13 @@
       };
   };
 
-  stylix.targets.firefox.profileNames = [ "christoph" ];
+  stylix.targets.firefox = {
+    profileNames = [
+      "christoph"
+      "whatsapp"
+    ];
+    colorTheme.enable = true;
+  };
 
   home = {
     persistence = {
