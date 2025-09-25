@@ -209,7 +209,7 @@
               {
                 name = "dblp search";
                 keyword = "dblp";
-                url = "https://dblp.org/search?q=%s";
+                url = "https://dblp.uni-trier.de/search?q=%s";
               }
               {
                 name = "google scholar search";
