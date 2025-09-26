@@ -8,7 +8,6 @@
           # Lua
           ''
             function(client, bufnr)
-              local ret = _M.lspOnAttach(client, bufnr)
               local map = vim.keymap.set
               map("n", "<leader>ca", function()
                 vim.cmd.RustLsp("codeAction")
@@ -22,18 +21,13 @@
               map("n", "<ctrl>wd", function()
                 vim.cmd.RustLsp({'renderDiagnostic', 'current'})
               end, { desc = "render diagnostic" })
-              return ret
             end
           '';
-        #default_settings = {
-        #  rust-analyzer = {
-        #    check = {
-        #      command = "clippy";
-        #      extraArgs = ["--no-deps"];
-        #    };
-        #    checkOnSave = true;
-        #  };
-        #};
+        default_settings = {
+          rust-analyzer = {
+            cargo.targetDir = true;
+          };
+        };
       };
     };
     crates.enable = true;
