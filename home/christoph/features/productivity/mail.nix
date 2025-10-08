@@ -12,7 +12,7 @@ let
   common = rec {
     realName = "Christoph Jabs";
     gpg = {
-      key = "1017 77DD 58F9 4B40 5E6E  585C 217C 6A43 9646 D51E";
+      key = "47D6 1FEB CD86 F3EC D2E3  D68A 83D0 74F3 48B2 FD9D";
       signByDefault = true;
     };
     signature = {
