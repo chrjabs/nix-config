@@ -17,7 +17,13 @@ in
           base_domain = "vpn.jabsserver.net";
           magic_dns = true;
           nameservers.global = [ "9.9.9.9" ];
-          extra_records = [ ];
+          extra_records = [
+            {
+              name = "rumah.vpn.jabsserver.net";
+              type = "A";
+              value = "192.168.1.43";
+            }
+          ];
         };
         server_url = "https://tailscale.jabsserver.net";
         metrics_listen_addr = "127.0.0.1:8095";
