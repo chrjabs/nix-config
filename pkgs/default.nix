@@ -13,10 +13,7 @@ rec {
   pass-fuzzel = pkgs.callPackage ./pass-fuzzel { };
 
   # Personal set(s) of typically needed latex packages
-  latex = {
-    default = pkgs.callPackage ./latex { };
-    lipics = pkgs.callPackage ./latex/lipics.nix { };
-  };
+  latex = pkgs.callPackage ./latex { };
 
   # Behring WING
   wing-edit = pkgs.callPackage ./wing-edit { };

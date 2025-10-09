@@ -1,5 +1,4 @@
-{ pkgs }:
-with pkgs;
+{ texlive }:
 (texlive.combine {
   inherit (texlive)
     scheme-small
@@ -39,4 +38,7 @@ with pkgs;
     xmpincl
     xstring
     ;
-})
+}).overrideAttrs
+  {
+    pname = "latex-lipics";
+  }

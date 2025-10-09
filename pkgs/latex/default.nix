@@ -1,5 +1,4 @@
-{ pkgs }:
-with pkgs;
+{ texlive, callPackage }:
 (texlive.combine {
   inherit (texlive)
     scheme-small
@@ -28,4 +27,10 @@ with pkgs;
     tikzfill
     trimspaces
     ;
-})
+}).overrideAttrs
+  (oldAttrs: {
+    pname = "latex-default";
+    passthru = oldAttrs.passthru // {
+      lipics = callPackage ./lipics.nix { };
+    };
+  })
