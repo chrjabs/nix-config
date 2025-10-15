@@ -121,7 +121,7 @@
           "Mod+BracketLeft".action = consume-or-expel-window-left;
           "Mod+BracketRight".action = consume-or-expel-window-right;
           "Mod+Comma".action = focus-monitor-next;
-          "Mod+Ctrl+s".action = screenshot-window;
+          "Mod+Ctrl+s".action = screenshot;
           # Media keys
           "XF86AudioMute" = {
             action.spawn = [
