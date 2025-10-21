@@ -20,7 +20,7 @@
           atool = lib.getExe pkgs.atool;
           unrar = lib.getExe pkgs.unrar;
           _7z = lib.getExe pkgs._7zz;
-          pdftotext = lib.getExe' pkgs.poppler_utils "pdftotext";
+          pdftotext = lib.getExe' pkgs.poppler-utils "pdftotext";
           odt2txt = lib.getExe pkgs.odt2txt;
           xlsx2csv = lib.getExe pkgs.xlsx2csv;
           pandoc = lib.getExe pkgs.pandoc;
