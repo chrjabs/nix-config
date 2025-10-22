@@ -20,7 +20,7 @@ in
 
     shellAbbrs = rec {
       n = "nix";
-      nd = "nix develop -c $SHELL";
+      nd = "nom develop -c $SHELL";
 
       ls = mkIf hasEza "eza";
       ll = mkIf hasEza "eza -l";
