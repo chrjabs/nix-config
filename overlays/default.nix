@@ -15,8 +15,8 @@ in
     inputs = builtins.mapAttrs (
       _: flake:
       let
-        legacyPackages = (flake.legacyPackages or { }).${final.system} or { };
-        packages = (flake.packages or { }).${final.system} or { };
+        legacyPackages = (flake.legacyPackages or { }).${final.stdenv.hostPlatform.system} or { };
+        packages = (flake.packages or { }).${final.stdenv.hostPlatform.system} or { };
       in
       if legacyPackages != { } then legacyPackages else packages
     ) inputs;
@@ -24,7 +24,7 @@ in
 
   # Adds pkgs.nixvim == inputs.nixvim.inputs.nixpkgs.legacyPackages.${pkgs.system}
   nixvim = final: _: {
-    nixvim = inputs.nixvim.inputs.nixpkgs.legacyPackages.${final.system};
+    nixvim = inputs.nixvim.inputs.nixpkgs.legacyPackages.${final.stdenv.hostPlatform.system};
   };
 
   # This one brings our custom packages from the 'pkgs' directory
@@ -36,7 +36,7 @@ in
     };
 
   plymouth-theme = final: _: {
-    inherit (inputs.misterio.packages.${final.system}) plymouth-spinner-monochrome;
+    inherit (inputs.misterio.packages.${final.stdenv.hostPlatform.system}) plymouth-spinner-monochrome;
   };
 
   # This one contains whatever you want to overlay
@@ -57,6 +57,6 @@ in
     };
 
     # Make sure to use the home-manager executable from the home-manager input
-    inherit (inputs.home-manager.packages.${final.system}) home-manager;
+    inherit (inputs.home-manager.packages.${final.stdenv.hostPlatform.system}) home-manager;
   };
 }
