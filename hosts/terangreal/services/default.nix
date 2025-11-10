@@ -9,5 +9,6 @@
     ./headscale.nix
     ./mail.nix
     ./prometheus.nix
+    ./shortener.nix
   ];
 }
