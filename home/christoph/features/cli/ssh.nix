@@ -17,10 +17,6 @@ in
   programs.ssh = {
     enable = true;
 
-    # FIXME: Workaround for kitty ssh until OpenSSH 10.2 lands
-    # https://github.com/kovidgoyal/kitty/issues/9078#issuecomment-3478749417
-    package = lib.mkForce pkgs.openssh_10_2;
-
     enableDefaultConfig = false;
     matchBlocks = rec {
       "*" = {
