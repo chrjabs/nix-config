@@ -1,4 +1,5 @@
 {
   imports = [
+    ./subnet-router.nix
   ];
 }
