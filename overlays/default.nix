@@ -58,5 +58,21 @@ in
 
     # Make sure to use the home-manager executable from the home-manager input
     inherit (inputs.home-manager.packages.${final.stdenv.hostPlatform.system}) home-manager;
+
+    # https://github.com/NixOS/nixpkgs/pull/477421
+    programmer-calculator = prev.programmer-calculator.overrideAttrs rec {
+      version = "3.0-unstable-2025-11-06";
+      src = prev.fetchFromGitHub {
+        owner = "alt-romes";
+        repo = "programmer-calculator";
+        rev = "153272c50b2491ddf25dfbfcf228a08a3b3ace69";
+        sha256 = "sha256-24OYG3tVxcc/1i9HRrzW/jPY41KnKkugLziWnG1wQIw=";
+      };
+      installPhase = ''
+        runHook preInstall
+        install -Dm 555 bin/pcalc -t "$out/bin"
+        runHook postInstall
+      '';
+    };
   };
 }
