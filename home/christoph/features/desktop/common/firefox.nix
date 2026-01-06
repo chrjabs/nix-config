@@ -187,7 +187,7 @@
               {
                 name = "Todoist";
                 keyword = "td";
-                url = "https://firefox.todoist.com/app/upcoming#";
+                url = "https://app.todoist.com/app/upcoming";
               }
               {
                 name = "Nix Packages";
