@@ -13,7 +13,7 @@
   home = {
     homeDirectory = "/tank/home/${config.home.username}";
 
-    persistence."/persist/${config.home.homeDirectory}".enable = false;
+    persistence."/persist".enable = false;
 
     sessionVariables.NH_FLAKE = "github:chrjabs/nix-config";
 

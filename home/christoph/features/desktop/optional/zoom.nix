@@ -6,7 +6,7 @@
 {
   home.packages = with pkgs; [ zoom-us ];
 
-  home.persistence."/persist/${config.home.homeDirectory}" = {
+  home.persistence."/persist" = {
     files = [
       ".config/zoom.conf"
       ".config/zoomus.conf"

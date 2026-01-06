@@ -8,7 +8,7 @@ let
   pass = lib.getExe config.programs.password-store.package;
 in
 {
-  home.persistence."/persist/${config.home.homeDirectory}".directories = [
+  home.persistence."/persist".directories = [
     "Calendars"
     "Contacts"
     ".local/share/vdirsyncer"

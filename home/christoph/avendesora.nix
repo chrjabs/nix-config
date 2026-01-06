@@ -4,5 +4,5 @@
     ./global
   ];
 
-  home.persistence."/persist/${config.home.homeDirectory}".enable = false;
+  home.persistence."/persist".enable = false;
 }

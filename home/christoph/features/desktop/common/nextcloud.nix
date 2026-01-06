@@ -88,11 +88,8 @@
     ].venv/
   '';
 
-  home.persistence."/persist/${config.home.homeDirectory}".directories = [
-    {
-      directory = ".config/Nextcloud";
-      method = "bindfs";
-    }
+  home.persistence."/persist".directories = [
+    ".config/Nextcloud"
     "Cloud"
   ];
 }

@@ -10,5 +10,5 @@
   ];
 
   # TODO: figure out whether we can persist less
-  home.persistence."/persist/${config.home.homeDirectory}".directories = [ ".config/Slack" ];
+  home.persistence."/persist".directories = [ ".config/Slack" ];
 }

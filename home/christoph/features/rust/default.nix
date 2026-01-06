@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  home.persistence."/persist/${config.home.homeDirectory}" = {
+  home.persistence."/persist" = {
     directories = [
       ".rustup"
       ".cargo"

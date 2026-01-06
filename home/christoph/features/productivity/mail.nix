@@ -36,7 +36,7 @@ in
   };
 
   config = {
-    home.persistence."/persist/${config.home.homeDirectory}".directories = [ "Mail" ];
+    home.persistence."/persist".directories = [ "Mail" ];
 
     accounts.email = {
       mainAccountPattern = if workMode then "{personal,work}" else "{personal,family}";

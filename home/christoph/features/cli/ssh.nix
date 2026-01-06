@@ -76,7 +76,7 @@ in
   };
 
   home.persistence = {
-    "/persist/${config.home.homeDirectory}".directories = [
+    "/persist".directories = [
       ".ssh/known_hosts.d"
     ];
   };

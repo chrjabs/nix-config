@@ -9,7 +9,6 @@
 }:
 {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.nixvim.homeModules.nixvim
     ./styling.nix
     ../features/cli
@@ -44,8 +43,7 @@
     sessionVariables.NH_FLAKE = lib.mkDefault "$HOME/Documents/nix-config";
 
     persistence = {
-      "/persist/${config.home.homeDirectory}" = {
-        defaultDirectoryMethod = "symlink";
+      "/persist" = {
         directories = [
           "Documents"
           "Downloads"
@@ -58,7 +56,6 @@
         ++ lib.optionals workMode [
           "Work"
         ];
-        allowOther = true;
       };
     };
   };
