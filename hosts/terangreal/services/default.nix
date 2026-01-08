@@ -9,6 +9,7 @@
     ./headscale.nix
     ./mail.nix
     ./prometheus.nix
+    ./reverse-proxy.nix
     ./shortener.nix
   ];
 }
