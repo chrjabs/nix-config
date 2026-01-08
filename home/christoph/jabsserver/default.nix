@@ -47,6 +47,6 @@
   };
 
   # No signing
-  programs.git.extraConfig.commit.gpgSign = false;
+  programs.git.settings.commit.gpgSign = false;
   programs.jujutsu.settings.git.sign-on-push = false;
 }
