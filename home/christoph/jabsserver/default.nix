@@ -15,7 +15,7 @@
 
     persistence."/persist/${config.home.homeDirectory}".enable = false;
 
-    sessionVariables.NH_FLAKE = "$HOME/nix-config";
+    sessionVariables.NH_FLAKE = "github:chrjabs/nix-config";
 
     packages =
       let
