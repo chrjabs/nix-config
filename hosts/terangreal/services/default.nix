@@ -11,5 +11,6 @@
     ./prometheus.nix
     ./reverse-proxy.nix
     ./shortener.nix
+    ./uptime-kuma.nix
   ];
 }
