@@ -81,15 +81,9 @@ in
           resumeCommand = "${niri-all-outputs} on";
         }));
     # Lock before sleep
-    events = [
-      {
-        event = "before-sleep";
-        command = "${swaylock} --daemonize";
-      }
-      {
-        event = "lock";
-        command = "${swaylock} --daemonize --grace 15";
-      }
-    ];
+    events = {
+      before-sleep = "${swaylock} --daemonize";
+      lock = "${swaylock} --daemonize --grace 15";
+    };
   };
 }
