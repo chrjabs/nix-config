@@ -26,5 +26,6 @@ in
     "photos.jabsserver.net" = basicReverseProxy "http://photoprism:2342" "";
     "finances.jabsserver.net" = basicReverseProxy "http://firefly:8080" "";
     "keziaolive.jabsserver.net" = basicReverseProxy "http://keziaolive" "";
+    "files.keziaolive.com" = basicReverseProxy "http://keziaolive" "";
   };
 }
