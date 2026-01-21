@@ -18,8 +18,6 @@
 
     homeDirectory = "/tank/home/${config.home.username}";
 
-    sessionVariables.NH_FLAKE = "github:chrjabs/nix-config";
-
     packages =
       let
         dcmp = pkgs.writeShellScriptBin "dcmp" ''
