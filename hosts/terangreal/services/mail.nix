@@ -108,7 +108,8 @@
     package = pkgs.roundcube.withPlugins (p: [ p.carddav ]);
     hostName = "mail.jabsserver.net";
     extraConfig = ''
-      $config['smtp_host'] = "tls://${hostName}:587";
+      $config['imap_host'] = "ssl://${config.mailserver.fqdn}";
+      $config['smtp_host'] = "ssl://${config.mailserver.fqdn}";
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
       $config['plugins'] = [ "carddav" ];
