@@ -26,7 +26,7 @@
       "tracking.jabsserver.net"
     ];
     useFsLayout = true;
-    certificateScheme = "acme-nginx";
+    x509.useACMEHost = config.mailserver.fqdn;
     localDnsResolver = false;
     loginAccounts =
       let
