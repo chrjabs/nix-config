@@ -18,6 +18,10 @@
         root-desc = "This is a cgit mirror for some of my projects. You might want to check them out on github (github.com/chrjabs) instead.";
         enable-http-clone = true;
       };
+      gitHttpBackend = {
+        enable = true;
+        checkExportOkFiles = false;
+      };
     };
 
     nginx.virtualHosts."git.jabsserver.net".enableACME = true;
