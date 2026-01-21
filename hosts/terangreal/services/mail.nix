@@ -24,6 +24,7 @@
       "finances.jabsserver.net"
       "omv.jabsserver.net"
       "tracking.jabsserver.net"
+      "keziaolive.com"
     ];
     useFsLayout = true;
     x509.useACMEHost = config.mailserver.fqdn;
@@ -76,6 +77,9 @@
         auto = "subscribe";
         specialUse = "Trash";
       };
+    };
+    forwards = {
+      "contact@keziaolive.com" = "kezia.k.olive@jyu.fi";
     };
     # When setting up check that /srv is persisted and directories exist!
     mailDirectory = "/srv/mail/vmail";
