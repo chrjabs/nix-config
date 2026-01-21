@@ -62,4 +62,6 @@
   wayland.windowManager.sway.extraOptions = [
     "--unsupported-gpu"
   ];
+
+  home.sessionVariables.NH_FLAKE = "$HOME/Documents/nix-config";
 }

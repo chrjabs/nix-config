@@ -40,7 +40,7 @@
     username = lib.mkDefault "christoph";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
     stateVersion = lib.mkDefault "24.05";
-    sessionVariables.NH_FLAKE = lib.mkDefault "$HOME/Documents/nix-config";
+    sessionVariables.NH_FLAKE = lib.mkDefault "github:chrjabs/nix-config";
 
     persistence = {
       "/persist" = {

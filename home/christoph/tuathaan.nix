@@ -61,4 +61,6 @@
   };
 
   services.swayidle.lockTime = 8 * 60; # 8 min
+
+  home.sessionVariables.NH_FLAKE = "$HOME/Documents/nix-config";
 }
