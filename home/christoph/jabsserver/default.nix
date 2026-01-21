@@ -1,19 +1,22 @@
 {
+  lib,
   pkgs,
   inputs,
   config,
+  outputs,
   ...
 }:
 {
   imports = [
     ../global
     inputs.sops-nix.homeManagerModules.sops
+    ../../../modules/home-manager/dummy-impermanence.nix
   ];
 
   home = {
-    homeDirectory = "/tank/home/${config.home.username}";
+    stateVersion = "25.11";
 
-    persistence."/persist".enable = false;
+    homeDirectory = "/tank/home/${config.home.username}";
 
     sessionVariables.NH_FLAKE = "github:chrjabs/nix-config";
 
