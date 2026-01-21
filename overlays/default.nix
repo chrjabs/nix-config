@@ -58,5 +58,10 @@ in
 
     # Make sure to use the home-manager executable from the home-manager input
     inherit (inputs.home-manager.packages.${final.stdenv.hostPlatform.system}) home-manager;
+
+    # Remove once https://github.com/NixOS/nixpkgs/pull/482335 is merged
+    cgit-pink = prev.cgit-pink.overrideAttrs {
+      env.NIX_CFLAGS_COMPILE = "-std=gnu17";
+    };
   };
 }
