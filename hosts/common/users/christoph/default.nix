@@ -20,7 +20,7 @@ in
       "video"
       "wheel"
       "fuse"
-      "network"
+      "wpa_supplicant"
     ];
 
     openssh.authorizedKeys.keys = lib.splitString "\n" (
@@ -36,9 +36,9 @@ in
     neededForUsers = true;
   };
 
-  home-manager.users.christoph = lib.mkIf (
-    !bootstrap
-  ) (import ../../../../home/christoph/${config.networking.hostName}.nix);
+  home-manager.users.christoph = lib.mkIf (!bootstrap) (
+    import ../../../../home/christoph/${config.networking.hostName}.nix
+  );
 
   security.pam.services = lib.mkIf (!bootstrap) {
     swaylock = { };

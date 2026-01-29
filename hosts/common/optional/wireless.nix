@@ -41,9 +41,7 @@
     };
 
     # Imperative
+    userControlled = true;
     allowAuxiliaryImperativeNetworks = true;
   };
-
-  # Ensure group exists
-  users.groups.network = { };
 }
