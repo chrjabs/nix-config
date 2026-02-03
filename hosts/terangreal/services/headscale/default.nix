@@ -8,7 +8,7 @@ in
 {
   sops.secrets = {
     headscale-pocket-id-client-secret = {
-      sopsFile = ../secrets.yaml;
+      sopsFile = ../../secrets.yaml;
       owner = config.services.headscale.user;
     };
   };
@@ -55,6 +55,7 @@ in
             method = "S256";
           };
         };
+        policy.path = ./policy.json;
       };
     };
 

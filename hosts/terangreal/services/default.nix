@@ -6,7 +6,7 @@
     ./git-mirror.nix
     ./git-remote.nix
     ./grafana
-    ./headscale.nix
+    ./headscale
     ./mail.nix
     ./pocket-id.nix
     ./prometheus.nix

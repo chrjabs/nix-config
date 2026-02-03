@@ -1,0 +1,69 @@
+{
+  "groups": {
+    "group:admin": [
+      "christoph@",
+      "admin@"
+    ],
+    "group:users": [
+      "christoph@"
+    ]
+  },
+  "tagOwners": {
+    "tag:reverse-proxy": [
+      "docker@"
+    ],
+    "tag:server": [
+      "group:admin"
+    ]
+  },
+  "hosts": {
+    "terangreal.internal": "100.64.0.6/32"
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": [
+        "group:admin"
+      ],
+      "dst": [
+        "tag:server:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "tag:server"
+      ],
+      "dst": [
+        "tag:server:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "group:users"
+      ],
+      "dst": [
+        "autogroup:internet:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "terangreal.internal"
+      ],
+      "dst": [
+        "tag:reverse-proxy:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "autogroup:member"
+      ],
+      "dst": [
+        "autogroup:self:*"
+      ]
+    }
+  ]
+}
