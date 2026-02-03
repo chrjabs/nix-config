@@ -22,6 +22,7 @@
       "cloud.jabsserver.net"
       "dash.jabsserver.net"
       "finances.jabsserver.net"
+      "id.jabsserver.net"
       "omv.jabsserver.net"
       "tracking.jabsserver.net"
       "keziaolive.com"
@@ -54,6 +55,7 @@
       // (no-reply "cloud")
       // (if config.services.grafana.enable then (no-reply "dash") else { })
       // (no-reply "finances")
+      // (no-reply "id")
       // (no-reply "omv")
       // (no-reply "tracking");
     mailboxes = {
@@ -101,6 +103,7 @@
     (hashed-pw "christoph")
     // (hashed-pw "jabsserver-admin")
     // (hashed-pw "dash")
+    // (hashed-pw "id")
     // (hashed-pw "omv")
     // (hashed-pw "finances")
     // (hashed-pw "cloud")

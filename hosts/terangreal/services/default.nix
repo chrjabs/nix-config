@@ -8,6 +8,7 @@
     ./grafana
     ./headscale.nix
     ./mail.nix
+    ./pocket-id.nix
     ./prometheus.nix
     ./reverse-proxy.nix
     ./shortener.nix

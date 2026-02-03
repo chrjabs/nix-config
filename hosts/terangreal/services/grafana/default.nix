@@ -31,6 +31,7 @@
           user = config.mailserver.loginAccounts."no-reply@dash.jabsserver.net".name;
           password = "$__file{${config.sops.secrets.grafana-mail-password.path}}";
         };
+        server.root_url = "https://dash.jabsserver.net";
       };
       provision = {
         enable = true;
