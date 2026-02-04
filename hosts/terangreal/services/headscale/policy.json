@@ -53,6 +53,15 @@
         "terangreal.internal"
       ],
       "dst": [
+        "christoph@:9100"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "terangreal.internal"
+      ],
+      "dst": [
         "tag:reverse-proxy:*"
       ]
     },
