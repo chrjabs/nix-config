@@ -5,6 +5,10 @@
       sopsFile = ../../secrets.yaml;
       owner = "grafana";
     };
+    grafana-pocket-id-client-secret = {
+      sopsFile = ../../secrets.yaml;
+      owner = "grafana";
+    };
     grafana-mail-password = {
       sopsFile = ../../secrets.yaml;
       owner = "grafana";
@@ -23,7 +27,23 @@
           admin_password = "$__file{${config.sops.secrets.grafana-christoph-password.path}}";
           cookie_secure = true;
         };
-        "auth.anonymous".enabled = true;
+        auth.oauth_allow_insecure_email_lookup = true;
+        "auth.basic".eanbled = false;
+        "auth.generic_oauth" = {
+          enabled = true;
+          name = "Pocket ID";
+          client_id = "d9aae002-3f5c-4d41-8f29-fd5f04743e07";
+          client_secret = "$__file{${config.sops.secrets.grafana-pocket-id-client-secret.path}}";
+          auth_url = "https://id.jabsserver.net/authorize";
+          token_url = "https://id.jabsserver.net/api/oidc/token";
+          api_url = "https://id.jabsserver.net/api/oidc/userinfo";
+          allow_sign_up = false;
+          auth_style = "AutoDetect";
+          scopes = "openid,email,profile";
+          email_attribute_name = "email:primary";
+          skip_org_role_sync = true;
+          use_pkce = true;
+        };
         smtp = rec {
           enabled = true;
           host = "mail.jabsserver.net:465";
