@@ -15,11 +15,13 @@
         "@wheel"
       ];
     };
-    gc = {
-      automatic = true;
+  };
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep 3 --no-gcroots";
       dates = "weekly";
-      # Keep the last 3 generations
-      options = "--delete-older-than +3";
     };
   };
 }
