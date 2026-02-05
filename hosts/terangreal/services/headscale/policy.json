@@ -17,7 +17,9 @@
     ]
   },
   "hosts": {
-    "terangreal.internal": "100.64.0.6/32"
+    "terangreal.internal": "100.64.0.6/32",
+    "gallifrey.internal": "100.64.0.9/32",
+    "rumah.internal": "100.64.0.10/32"
   },
   "acls": [
     {
@@ -63,6 +65,15 @@
       ],
       "dst": [
         "tag:reverse-proxy:*"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
+        "gallifrey.internal"
+      ],
+      "dst": [
+        "rumah.internal:8123"
       ]
     },
     {
