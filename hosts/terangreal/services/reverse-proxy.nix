@@ -23,7 +23,7 @@ in
       proxy_set_header Connection $connection_upgrade;
     '';
     "paper.jabsserver.net" = basicReverseProxy "http://paperless:8000" "";
-    "photos.jabsserver.net" = basicReverseProxy "http://photoprism:2342" "";
+    "photos.jabsserver.net" = basicReverseProxy "http://immich:2283" "";
     "finances.jabsserver.net" = basicReverseProxy "http://firefly:8080" "";
     "keziaolive.jabsserver.net" = basicReverseProxy "http://keziaolive" "";
     "files.keziaolive.com" = basicReverseProxy "http://keziaolive" "";
