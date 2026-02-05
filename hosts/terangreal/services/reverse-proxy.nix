@@ -27,5 +27,12 @@ in
     "finances.jabsserver.net" = basicReverseProxy "http://firefly:8080" "";
     "keziaolive.jabsserver.net" = basicReverseProxy "http://keziaolive" "";
     "files.keziaolive.com" = basicReverseProxy "http://keziaolive" "";
+    "cloud.jabsserver.net" = basicReverseProxy "http://nextcloud" ''
+      client_max_body_size 10G;
+      proxy_request_buffering off;
+      proxy_connect_timeout 600;
+      proxy_send_timeout 600;
+      proxy_read_timeout 600;
+    '';
   };
 }
