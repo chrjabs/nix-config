@@ -22,7 +22,13 @@
     };
 
     # Impermanence
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
 
     # Home manager
     home-manager = {
@@ -37,7 +43,13 @@
     };
 
     # NixVim
-    nixvim.url = "github:nix-community/nixvim";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        # intentionally not following nixpkgs here
+      };
+    };
 
     # SopsNix
     sops-nix = {
@@ -48,7 +60,10 @@
     # Stylix
     stylix = {
       url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     # Firefox Addons
@@ -60,13 +75,10 @@
     # xremap
     xremap = {
       url = "github:xremap/nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Using plymouth theme from here
-    misterio = {
-      url = "github:Misterio77/nix-config";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     # Niri compositor
@@ -78,7 +90,10 @@
     # Starship JJ plugin
     starship-jj = {
       url = "gitlab:lanastara_foss/starship-jj";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+
     };
 
     # Stylix LS_COLORS theming through vivid

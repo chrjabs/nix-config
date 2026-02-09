@@ -20,4 +20,7 @@ rec {
 
   # Jack Mixer
   jack-mixer = pkgs.callPackage ./jack-mixer { };
+
+  # Plymouth spinner copied from misterio77/nix-config
+  plymouth-spinner-monochrome = pkgs.callPackage ./plymouth-spinner-monochrome { };
 }
