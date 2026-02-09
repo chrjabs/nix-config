@@ -1,15 +1,22 @@
 let
-  files = {
+  christophjabs = {
     enableACME = true;
     locations."/".root = "/srv/files/christophjabs";
+  };
+  jabsserver = {
+    enableACME = true;
+    locations."/".root = "/srv/files/jabsserver";
   };
 in
 {
   services.nginx.virtualHosts = {
-    "media.christophjabs.info" = files;
-    "m.christophjabs.info" = files;
-    "files.christophjabs.info" = files;
-    "f.christophjabs.info" = files;
+    "media.christophjabs.info" = christophjabs;
+    "m.christophjabs.info" = christophjabs;
+    "files.christophjabs.info" = christophjabs;
+    "f.christophjabs.info" = christophjabs;
+    "files.jabsserver.net" = jabsserver;
+    "f.jabsserver.net" = jabsserver;
+    "www.jabsserver.net" = jabsserver;
   };
 
   environment.persistence = {
