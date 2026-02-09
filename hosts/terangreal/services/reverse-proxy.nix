@@ -24,12 +24,12 @@ in
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection $connection_upgrade;
     '';
-    "paper.jabsserver.net" = basicReverseProxy "http://100.64.0.5:8000" "";
-    "photos.jabsserver.net" = basicReverseProxy "http://100.64.0.11:2283" "";
-    "finances.jabsserver.net" = basicReverseProxy "http://100.64.0.2:8080" "";
-    "keziaolive.jabsserver.net" = basicReverseProxy "http://100.64.0.8" "";
-    "files.keziaolive.com" = basicReverseProxy "http://100.64.0.8" "";
-    "cloud.jabsserver.net" = basicReverseProxy "http://100.64.0.12" ''
+    "paper.jabsserver.net" = basicReverseProxy "http://100.64.0.3:8000" "";
+    "photos.jabsserver.net" = basicReverseProxy "http://100.64.0.3:2283" "";
+    "finances.jabsserver.net" = basicReverseProxy "http://100.64.0.3:8080" "";
+    "keziaolive.jabsserver.net" = basicReverseProxy "http://100.64.0.3:8082" "";
+    "files.keziaolive.com" = basicReverseProxy "http://100.64.0.3:8082" "";
+    "cloud.jabsserver.net" = basicReverseProxy "http://100.64.0.3:8081" ''
       client_max_body_size 10G;
       proxy_request_buffering off;
       proxy_connect_timeout 600;

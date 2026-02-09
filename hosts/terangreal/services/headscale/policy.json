@@ -9,9 +9,6 @@
     ]
   },
   "tagOwners": {
-    "tag:reverse-proxy": [
-      "docker@"
-    ],
     "tag:server": [
       "group:admin"
     ]
@@ -56,15 +53,6 @@
       ],
       "dst": [
         "christoph@:9100"
-      ]
-    },
-    {
-      "action": "accept",
-      "src": [
-        "terangreal.internal"
-      ],
-      "dst": [
-        "tag:reverse-proxy:*"
       ]
     },
     {
