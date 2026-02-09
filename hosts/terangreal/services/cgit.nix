@@ -8,7 +8,6 @@
   services = {
     cgit."git.jabsserver.net" = {
       enable = true;
-      package = pkgs.cgit-pink;
       repos = lib.attrsets.mapAttrs (name: remote: {
         desc = "${name} mirror from ${remote}";
         path = "/srv/git/${name}";
