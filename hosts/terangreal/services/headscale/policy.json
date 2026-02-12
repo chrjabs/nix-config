@@ -58,6 +58,15 @@
     {
       "action": "accept",
       "src": [
+        "terangreal.internal"
+      ],
+      "dst": [
+        "rumah.internal:8123"
+      ]
+    },
+    {
+      "action": "accept",
+      "src": [
         "gallifrey.internal"
       ],
       "dst": [
