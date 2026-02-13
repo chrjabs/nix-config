@@ -35,6 +35,8 @@
           SMTP_USER = email;
           EMAIL_VERIFICATION_ENABLED = true;
           EMAIL_LOGIN_NOTIFICATION_ENABLED = true;
+          EMAIL_ONE_TIME_ACCESS_AS_ADMIN_ENABLED = true;
+          ALLOW_OWN_ACCOUNT_EDIT = false;
         };
       credentials = {
         ENCRYPTION_KEY = config.sops.secrets.pocket-id-encryption-key.path;
