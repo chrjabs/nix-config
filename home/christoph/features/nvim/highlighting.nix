@@ -9,6 +9,7 @@
         make
         markdown
         nix
+        nu
         regex
         toml
         vim
