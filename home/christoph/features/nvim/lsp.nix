@@ -1,54 +1,21 @@
+{ lib, ... }:
 {
-  programs.nixvim = {
-    plugins.lsp = {
-      enable = true;
-      inlayHints = true;
-      keymaps.lspBuf = {
-        gD = {
-          action = "declaration";
-          desc = "go to declaration";
-        };
-        gd = {
-          action = "definition";
-          desc = "go to definition";
-        };
-        gi = {
-          action = "implementation";
-          desc = "go to implementation";
-        };
-        gr = {
-          action = "references";
-          desc = "show references";
-        };
-        "<leader>sh" = {
-          action = "signature_help";
-          desc = "show signature help";
-        };
-        "<leader>D" = {
-          action = "type_definition";
-          desc = "got to type definition";
-        };
-        "<leader>ca" = {
-          action = "code_action";
-          desc = "code action";
-        };
-        "<leader>r" = {
-          action = "rename";
-          desc = "rename element";
-        };
-      };
-    };
+  plugins.lsp = {
+    enable = true;
+    inlayHints = true;
+  };
 
-    # LSP progress notification
-    extraConfigLuaPre =
-      # lua
-      ''
-        local progress = vim.defaulttable()
-      '';
-    autoCmd = [
-      {
-        event = "LspProgress";
-        callback.__raw =
+  # LSP progress notification
+  extraConfigLuaPre =
+    # lua
+    ''
+      local progress = vim.defaulttable()
+    '';
+  autoCmd = [
+    {
+      event = "LspProgress";
+      callback =
+        lib.nixvim.mkRaw
           # lua
           ''
             function(ev)
@@ -90,7 +57,61 @@
               })
             end
           '';
-      }
-    ];
-  };
+    }
+  ];
+  lsp.keymaps = [
+    {
+      key = "gD";
+      lspBufAction = "declaration";
+      options.desc = "go to declaration";
+    }
+    {
+      key = "gd";
+      lspBufAction = "definition";
+      options.desc = "go to definition";
+    }
+    {
+      key = "gi";
+      lspBufAction = "implementation";
+      options.desc = "go to implementation";
+    }
+    {
+      key = "gr";
+      lspBufAction = "references";
+      options.desc = "show references";
+    }
+    {
+      key = "<leader>sh";
+      lspBufAction = "signature_help";
+      options.desc = "show signature help";
+    }
+    {
+      key = "<leader>D";
+      lspBufAction = "type_definition";
+      options.desc = "got to type definition";
+    }
+    {
+      key = "<leader>ca";
+      lspBufAction = "code_action";
+      options.desc = "code action";
+    }
+    {
+      key = "<leader>r";
+      lspBufAction = "rename";
+      options.desc = "rename element";
+    }
+    # Search
+    {
+      key = "<leader>ss";
+      action = lib.nixvim.mkRaw "function() Snacks.picker.lsp_symbols() end";
+      mode = "n";
+      options.desc = "LSP symbols";
+    }
+    {
+      key = "<leader>sd";
+      action = lib.nixvim.mkRaw "function() Snacks.picker.diagnostics() end";
+      mode = "n";
+      options.desc = "Diagnostics";
+    }
+  ];
 }

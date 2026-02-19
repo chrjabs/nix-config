@@ -19,7 +19,7 @@ in
     package = lib.mkOption {
       readOnly = true;
       type = lib.types.package;
-      default = pkgs.oama.overrideAttrs (old: {
+      default = pkgs.oama.overrideAttrs (_old: {
         nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
         postInstall = ''
           wrapProgram $out/bin/oama \

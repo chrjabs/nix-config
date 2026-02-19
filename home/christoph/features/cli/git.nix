@@ -30,13 +30,10 @@
           user.signing.key = "217C6A439646D51E";
           commit.gpgSign = lib.mkDefault true;
           gpg.program = "${config.programs.gpg.package}/bin/gpg2";
-          "credential \"https://git.overleaf.com\"" =
-            let
-            in
-            {
-              username = "git";
-              helper = passCredentialHelper "git.overleaf.com/chrjabs";
-            };
+          "credential \"https://git.overleaf.com\"" = {
+            username = "git";
+            helper = passCredentialHelper "git.overleaf.com/chrjabs";
+          };
 
           merge.conflictStyle = "zdiff3";
           commit.verbose = true;

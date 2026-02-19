@@ -71,14 +71,16 @@ in
 
         syn match ${pre}Delimiter "${delimiter}"
         syn match ${pre}Literal "${literal}" contained nextgroup=mcnfLiteral,mcnfDelimiter skipwhite
+        syn match ${pre}Index "\d*" contained nextgroup=mcnfWeight skipwhite
         syn match ${pre}Weight "\d*" contained nextgroup=mcnfLiteral skipwhite
         syn match ${pre}Hard "${hard}" nextgroup=mcnfLiteral skipwhite
-        syn match ${pre}Soft "^o" nextgroup=mcnfWeight
+        syn match ${pre}Soft "^o" nextgroup=mcnfIndex skipwhite
         syn match ${pre}Comment "${comment}"
 
         ${assignHi pre}
         hi def link preHard      Keyword
         hi def link preSoft      Keyword
+        hi def link preIndex     Number
         hi def link preWeight    Number
       '';
   };

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 let
   basicReverseProxy = proxyPass: extraConfig: {
     enableACME = true;

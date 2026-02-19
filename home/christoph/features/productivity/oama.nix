@@ -1,7 +1,4 @@
 { config, ... }:
-let
-  pass = "${config.programs.password-store.package}/bin/pass";
-in
 {
   programs.oama = {
     enable = true;

@@ -280,7 +280,7 @@ in
             tooltip = "$tooltip";
           };
           on-click = mkScript {
-            script = ''if ${gpgCmds.isUnlocked}; then ${gpgCmds.lock}; else ${gpgCmds.unlock}; fi'';
+            script = "if ${gpgCmds.isUnlocked}; then ${gpgCmds.lock}; else ${gpgCmds.unlock}; fi";
           };
           format = "{icon}";
           format-icons = {

@@ -1,7 +1,6 @@
 # This file is only loaded in home-manager standalone mode
 {
   lib,
-  config,
   inputs,
   outputs,
   ...

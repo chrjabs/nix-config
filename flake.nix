@@ -120,7 +120,6 @@
     # https://flake.parts/module-arguments.html
     flake-parts.lib.mkFlake { inherit inputs; } (
       {
-        config,
         ...
       }:
       let
@@ -244,6 +243,8 @@
                     "**/*secrets.yaml"
                   ];
                 };
+                # Sorting lists
+                keep-sorted.enable = true;
               };
             };
           };

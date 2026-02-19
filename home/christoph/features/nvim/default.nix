@@ -1,24 +1,26 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
-    ./browsing.nix
-    ./codelldb.nix
-    ./completion.nix
-    ./cpp.nix
-    ./debugging.nix
-    ./formatting.nix
-    ./highlighting.nix
-    ./latex.nix
-    ./lsp.nix
-    ./rust.nix
-    ./terminal.nix
-    ./tmux.nix
-    ./ui.nix
-
     ./syntax
   ];
 
   programs.nixvim = {
+    imports = [
+      # keep-sorted start
+      ./browsing.nix
+      ./codelldb.nix
+      ./completion.nix
+      ./cpp.nix
+      ./debugging.nix
+      ./formatting.nix
+      ./highlighting.nix
+      ./latex.nix
+      ./lsp.nix
+      ./rust.nix
+      ./ui.nix
+      # keep-sorted end
+    ];
+
     enable = true;
     defaultEditor = true;
     vimdiffAlias = true;
@@ -92,4 +94,11 @@
       ];
     };
   };
+
+  # With codelldb on the path, the rustaceanvim plugin automatically detects it
+  home.packages =
+    let
+      codelldb = pkgs.vscode-extensions.vadimcn.vscode-lldb.adapter;
+    in
+    [ codelldb ];
 }

@@ -1,5 +1,5 @@
 {
-  programs.nixvim.plugins = {
+  plugins = {
     # Automatic configuration of CMake projects
     cmake-tools.enable = true;
     # Language server

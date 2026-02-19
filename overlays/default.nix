@@ -22,11 +22,6 @@ in
     ) inputs;
   };
 
-  # Adds pkgs.nixvim == inputs.nixvim.inputs.nixpkgs.legacyPackages.${pkgs.system}
-  nixvim = final: _: {
-    nixvim = inputs.nixvim.inputs.nixpkgs.legacyPackages.${final.stdenv.hostPlatform.system};
-  };
-
   # This one brings our custom packages from the 'pkgs' directory
   additions =
     final: _prev:

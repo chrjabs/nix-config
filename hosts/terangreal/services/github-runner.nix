@@ -2,7 +2,7 @@
 {
   services.github-runners =
     let
-      common = name: {
+      common = _name: {
         enable = true;
         ephemeral = true;
         url = "https://github.com/chrjabs/rustsat";
