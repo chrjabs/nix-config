@@ -36,5 +36,6 @@ in
       proxy_send_timeout 600;
       proxy_read_timeout 600;
     '';
+    "office.jabsserver.net" = basicReverseProxy "http://100.64.0.3:9980" "";
   };
 }
