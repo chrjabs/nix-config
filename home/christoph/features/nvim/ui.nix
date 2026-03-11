@@ -55,6 +55,26 @@
 
   keymaps = [
     {
+      action = ":wincmd h<CR>";
+      key = "<C-h>";
+      options.silent = true;
+    }
+    {
+      action = ":wincmd l<CR>";
+      key = "<C-l>";
+      options.silent = true;
+    }
+    {
+      action = ":wincmd j<CR>";
+      key = "<C-j>";
+      options.silent = true;
+    }
+    {
+      action = ":wincmd k<CR>";
+      key = "<C-k>";
+      options.silent = true;
+    }
+    {
       key = "<leader>b";
       action = "<CMD>enew<CR>";
       mode = "n";
