@@ -69,6 +69,10 @@ in
                 name = "  Archive";
               }
               {
+                mailbox = "github";
+                name = "  GitHub";
+              }
+              {
                 mailbox = "Drafts";
                 name = "  Drafts";
               }
