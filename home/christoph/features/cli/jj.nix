@@ -36,6 +36,15 @@
           };
         }
       ];
+      aliases = {
+        push = [
+          "util"
+          "exec"
+          "--"
+          (lib.getExe pkgs.jj-pre-push)
+          "push"
+        ];
+      };
     };
   };
 }
