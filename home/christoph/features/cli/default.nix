@@ -13,6 +13,7 @@
     ./jj.nix
     ./joshuto.nix
     ./newsboat.nix
+    ./nextest.nix
     ./nushell
     ./ssh.nix
     ./starship
