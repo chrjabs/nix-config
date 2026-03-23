@@ -169,10 +169,6 @@ in
             mailboxName = "==  Work ==";
             extraMailboxes = [
               {
-                mailbox = "GitHub";
-                name = "  GitHub";
-              }
-              {
                 mailbox = "Archive";
                 name = "  Archive";
               }
