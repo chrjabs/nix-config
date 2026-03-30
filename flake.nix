@@ -16,6 +16,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    import-tree.url = "github:vic/import-tree";
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -115,139 +117,5 @@
     };
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    # https://flake.parts/module-arguments.html
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      {
-        ...
-      }:
-      let
-        outputs = inputs.self.outputs;
-      in
-      {
-        imports = [
-          inputs.flake-parts.flakeModules.easyOverlay
-          inputs.treefmt-nix.flakeModule
-        ];
-
-        flake = {
-          # Your custom packages and modifications, exported as overlays
-          overlays = import ./overlays { inherit inputs; };
-          # Reusable nixos modules you might want to export
-          # These are usually stuff you would upstream into nixpkgs
-          nixosModules = import ./modules/nixos;
-          # Reusable home-manager modules you might want to export
-          # These are usually stuff you would upstream into home-manager
-          homeModules = import ./modules/home-manager;
-
-          # NixOS configuration entrypoint
-          # Available through 'nixos-rebuild --flake .#your-hostname'
-          nixosConfigurations = {
-            # Desktop
-            gallifrey = inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs outputs;
-                bootstrap = false;
-              };
-              modules = [ ./hosts/gallifrey ];
-            };
-            # Laptop
-            tuathaan = inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs outputs;
-                bootstrap = false;
-              };
-              modules = [ ./hosts/tuathaan ];
-            };
-            # Hetzner cloud VPS
-            terangreal = inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs outputs;
-                bootstrap = false;
-              };
-              modules = [ ./hosts/terangreal ];
-            };
-            # Homeserver VM
-            avendesora = inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs outputs;
-                bootstrap = false;
-              };
-              modules = [ ./hosts/avendesora ];
-            };
-          };
-
-          # Standalone home-manager configuration entrypoint
-          # Available through 'home-manager --flake .#your-username@your-hostname'
-          homeConfigurations = {
-            "christoph@jabsserver" = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-              extraSpecialArgs = {
-                inherit inputs outputs;
-                workMode = false;
-                nixosConfig = null;
-              };
-              modules = [
-                ./home/christoph/jabsserver
-                ./home/christoph/standalone.nix
-              ];
-            };
-          };
-        };
-
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
-
-        perSystem =
-          {
-            system,
-            pkgs,
-            ...
-          }:
-          {
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-              overlays = builtins.attrValues inputs.self.outputs.overlays;
-            };
-
-            packages = import ./pkgs { inherit pkgs inputs; };
-            devShells = import ./shell.nix { inherit pkgs; };
-
-            treefmt = {
-              settings = {
-                global.on-unmatched = "error";
-                formatter.shellcheck.options = [ "--shell=bash" ];
-              };
-              programs = {
-                # Nix
-                deadnix.enable = true;
-                nixfmt.enable = true;
-                # Shell
-                shellcheck = {
-                  enable = true;
-                  excludes = [ ".envrc" ];
-                };
-                shfmt.enable = true;
-                # TOML
-                taplo.enable = true;
-                # YAML
-                actionlint.enable = true;
-                yamlfmt = {
-                  enable = true;
-                  excludes = [
-                    ".sops.yaml"
-                    "**/*secrets.yaml"
-                  ];
-                };
-                # Sorting lists
-                keep-sorted.enable = true;
-              };
-            };
-          };
-      }
-    );
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
