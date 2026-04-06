@@ -37,5 +37,14 @@ in
       proxy_read_timeout 600;
     '';
     "office.jabsserver.net" = basicReverseProxy "http://100.64.0.3:9980" "";
+    "aio-cloud.jabsserver.net" = basicReverseProxy "http://100.64.0.3:11000" ''
+      client_max_body_size 0;
+      client_body_buffer_size 512k;
+      proxy_buffering off;
+      proxy_request_buffering off;
+      proxy_connect_timeout 600;
+      proxy_send_timeout 600;
+      proxy_read_timeout 86400s;
+    '';
   };
 }
