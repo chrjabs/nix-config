@@ -26,7 +26,7 @@
       NIX_CONFIG = "extra-experimental-features = nix-command flakes";
       nativeBuildInputs = with pkgs; [
         nh
-        nix
+        lix
         home-manager
         git
 

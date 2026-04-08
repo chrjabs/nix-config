@@ -17,7 +17,7 @@
   ++ (builtins.attrValues outputs.homeModules);
 
   nix = {
-    package = lib.mkDefault pkgs.nix;
+    package = lib.mkDefault pkgs.lixPackageSets.stable.lix;
     settings = {
       experimental-features = [
         "nix-command"
