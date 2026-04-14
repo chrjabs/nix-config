@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   workMode,
   ...
 }:
@@ -38,6 +39,8 @@
       size = 24;
     };
   };
+
+  gtk.gtk4.theme = config.gtk.theme;
 
   # LS_COLORS theming
   home.sessionVariables.LS_COLORS =

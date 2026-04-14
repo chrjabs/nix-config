@@ -26,7 +26,7 @@
       "tracking.jabsserver.net"
       "keziaolive.com"
     ];
-    useFsLayout = true;
+    useFSLayout = true;
     x509.useACMEHost = config.mailserver.fqdn;
     localDnsResolver = false;
     loginAccounts =

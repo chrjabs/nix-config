@@ -27,9 +27,8 @@
             email = if workMode then "christoph.jabs@helsinki.fi" else "contact@christophjabs.info";
           };
           init.defaultBranch = "main";
-          user.signing.key = "217C6A439646D51E";
           commit.gpgSign = lib.mkDefault true;
-          gpg.program = "${config.programs.gpg.package}/bin/gpg2";
+          gpg.program = lib.getExe' config.programs.gpg.package "gpg2";
           "credential \"https://git.overleaf.com\"" = {
             username = "git";
             helper = passCredentialHelper "git.overleaf.com/chrjabs";
@@ -52,6 +51,10 @@
               smudge = "tmp=$(mktemp); ${sqlite} $tmp; cat $tmp; rm $tmp";
             };
         };
+      signing = {
+        key = "217C6A439646D51E";
+        format = "openpgp";
+      };
       lfs.enable = true;
       ignores = [
         "**/.ropeproject/"
